@@ -2,17 +2,21 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="src/externalLibraries/jbullet.jar" sourcepath="src/externalLibraries/bulletSrc.zip">
+	<classpathentry kind="lib" path="src/externalLibraries/lwjgl/lwjgl.jar" sourcepath="src/externalLibraries/lwjgl/src.zip">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/game-engine/src/externalLibraries/bulletJavadoc.zip!/javadoc"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/game-engine/src/externalLibraries/lwjgl/javadoc.zip!/"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="game-engine/src/externalLibraries/lwjgl/native"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/externalLibraries/lwjgl.jar" sourcepath="src/externalLibraries/src.zip">
+	<classpathentry kind="lib" path="src/externalLibraries/jBullet/jbullet.jar" sourcepath="src/externalLibraries/jBullet/src.zip">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/game-engine/src/externalLibraries/javadoc.zip!/"/>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="game-engine/src/externalLibraries/native"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/game-engine/src/externalLibraries/jBullet/javadoc.zip!/javadoc"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/externalLibraries/slick-util.jar"/>
+	<classpathentry kind="lib" path="src/externalLibraries/slick/slick-util.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://slick.ninjacave.com/javadoc-util/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
