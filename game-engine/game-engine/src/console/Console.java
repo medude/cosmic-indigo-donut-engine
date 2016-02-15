@@ -1,10 +1,16 @@
 package console;
 
-import coreFunctions.CoreConsole;
 import dataTypes.ProcessType;
 import messageBus.Message;
+import services.console.CoreConsole;
 
 public class Console extends ProcessType {
+	private static CoreConsole console;
+	
+	public Console(CoreConsole consoleType){
+		console=consoleType;
+	}
+	
 	@Override
 	public void update(){
 		
@@ -12,7 +18,7 @@ public class Console extends ProcessType {
 	
 	@Override
 	public void reciveMessage(Message message){
-		CoreConsole.log(message.getId());
+		console.log(message.getId());
 		
 		if(message.getId()==10){
 			update();

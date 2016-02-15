@@ -1,10 +1,6 @@
-package coreFunctions.window;
+package services.window;
 
 public abstract class CoreWindow {
-	public  CoreWindow(){
-		
-	}
-	
 	public abstract void init();
 	
 	public abstract void refresh(long id);

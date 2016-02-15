@@ -2,3 +2,6 @@
 /io/
 /window/
 /main/
+/console/
+/messageBus/
+/services/

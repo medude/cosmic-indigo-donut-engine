@@ -1,4 +1,4 @@
-package coreFunctions.window;
+package services.window;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -34,7 +34,6 @@ public class GLFWWindow extends CoreWindow {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		GLFW.glfwPollEvents();
 	}
-	
 	
 	@Override
 	public boolean isOpen(long id) {

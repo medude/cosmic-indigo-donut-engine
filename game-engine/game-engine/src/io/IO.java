@@ -2,7 +2,7 @@ package io;
 
 import dataTypes.ProcessType;
 import messageBus.Message;
-import window.Window;
+import services.window.Window;
 
 public class IO extends ProcessType {
 	

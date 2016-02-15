@@ -1,13 +1,13 @@
-package window;
+package services.window;
 
-import coreFunctions.window.CoreWindow;
+import services.Services;
 
 public class Window {
 	private static CoreWindow window;
 	private static long id;
 	
-	public static void create(CoreWindow windowType){
-		window=windowType;
+	public static void create(){
+		window=Services.getWindow();
 		window.init();
 		id=window.create("Game");
 	}

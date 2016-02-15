@@ -1,7 +1,7 @@
 package main;
 
-import coreFunctions.window.GLFWWindow;
-import window.Window;
+import services.Services;
+import services.window.Window;
 
 public class Main {
 	public static void main(String[] args){
@@ -10,7 +10,8 @@ public class Main {
 	}
 	
 	public void run(){
-		Window.create(new GLFWWindow());
+		Services.init();
+		Window.create();
 		
 		while(Window.isOpen()){
 			Window.refresh();
