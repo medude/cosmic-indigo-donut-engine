@@ -2,13 +2,14 @@ package console;
 
 import dataTypes.ProcessType;
 import messageBus.Message;
+import services.Services;
 import services.console.CoreConsole;
 
 public class Console extends ProcessType {
 	private static CoreConsole console;
 	
-	public Console(CoreConsole consoleType){
-		console=consoleType;
+	public Console(){
+		console=Services.getConsole();
 	}
 	
 	@Override
