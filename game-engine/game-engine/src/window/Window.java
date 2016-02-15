@@ -1,27 +1,32 @@
 package window;
 
-import coreFunctions.CoreWindow;
+import coreFunctions.window.CoreWindow;
 
 public class Window {
+	private static CoreWindow window;
 	private static long id;
 	
-	public static long create(){
-		CoreWindow.init();
-		id=CoreWindow.create();
-		return id;
+	public static void create(CoreWindow windowType){
+		window=windowType;
+		window.init();
+		id=window.create("Game");
 	}
 	
-	public static long create(String title){
-		CoreWindow.init();
-		id=CoreWindow.create(title);
-		return id;
+	public static void create(String title, CoreWindow windowType){
+		window=windowType;
+		window.init();
+		id=window.create(title);
 	}
 	
 	public static void refresh(){
-		CoreWindow.refresh(id);
+		window.refresh(id);
 	}
 	
 	public static boolean isOpen(){
-		return CoreWindow.isOpen(id);
+		return window.isOpen(id);
+	}
+	
+	public static void close(){
+		window.close(id);
 	}
 }

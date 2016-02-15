@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import console.Console;
-import coreFunctions.ConsoleOut;
+import coreFunctions.CoreConsole;
 import io.IO;
 
 public class MessageBus {
@@ -23,7 +23,7 @@ public class MessageBus {
 		console.reciveMessage(message);
 		messages.remove(0);
 		for(Message message1:messages){
-			ConsoleOut.log(String.valueOf(message1.getId()));
+			CoreConsole.log(String.valueOf(message1.getId()));
 		}
 	}
 	

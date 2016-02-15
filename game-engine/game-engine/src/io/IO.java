@@ -1,12 +1,10 @@
 package io;
 
-import coreFunctions.CoreWindow;
 import dataTypes.ProcessType;
 import messageBus.Message;
 import window.Window;
 
 public class IO extends ProcessType {
-	private static long window=0;
 	
 	@Override
 	public void update(){
@@ -29,15 +27,10 @@ public class IO extends ProcessType {
 			update();
 			break;
 		case 11:
-			window=Window.create("Test");
-			//Window.create(message.getsData()[0]);
+			//Window.create("Test");
 			break;
 		case 12:
-			CoreWindow.close(window);
+			Window.close();
 		}
-	}
-	
-	public static long getWindow(){
-		return window;
 	}
 }

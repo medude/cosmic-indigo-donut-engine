@@ -10,7 +10,7 @@ public class ErrorHandler {
 		throwable.printStackTrace(errorThing);
 		String error=errorS.toString();
 		
-		ConsoleOut.error("Error\n"+error+"\n\nSorry for the inconvinience!");
+		CoreConsole.error("Error!\n"+error+"\n\nSorry for the inconvinience!");
 		
 		System.exit(-1);
 	}
@@ -22,16 +22,16 @@ public class ErrorHandler {
 		String error=errorS.toString();
 		
 		if(doShowError){
-			ConsoleOut.error(message+error);
+			CoreConsole.error(message+error);
 		}else{
-			ConsoleOut.error(message);
+			CoreConsole.error(message);
 		}
 		
 		System.exit(-1);
 	}
 	
 	public static void handle(String message){
-		ConsoleOut.error(message);
+		CoreConsole.error(message);
 		
 		System.exit(-1);
 	}

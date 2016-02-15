@@ -1,5 +1,6 @@
 package console;
 
+import coreFunctions.CoreConsole;
 import dataTypes.ProcessType;
 import messageBus.Message;
 
@@ -11,7 +12,7 @@ public class Console extends ProcessType {
 	
 	@Override
 	public void reciveMessage(Message message){
-		System.out.println(message.getId());
+		CoreConsole.log(message.getId());
 		
 		if(message.getId()==10){
 			update();

@@ -1,7 +1,6 @@
 package main;
 
-import messageBus.Message;
-import messageBus.MessageBus;
+import coreFunctions.window.GLFWWindow;
 import window.Window;
 
 public class Main {
@@ -11,21 +10,10 @@ public class Main {
 	}
 	
 	public void run(){
-		Message update=new Message(10);
-		MessageBus.post(new Message(11, new String[] {"Test Window"}));
-		MessageBus.send();
+		Window.create(new GLFWWindow());
 		
 		while(Window.isOpen()){
-			MessageBus.post(update);
-			while(MessageBus.isNotEmpty()){
-				MessageBus.send();
-			}
+			Window.refresh();
 		}
-		
-		MessageBus.post(new Message(12));
-		while(MessageBus.isNotEmpty()){
-			MessageBus.send();
-		}
-	
 	}
 }
