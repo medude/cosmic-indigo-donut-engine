@@ -1,10 +1,11 @@
 package services.loader;
 
-import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,20 +14,21 @@ import services.Services;
 
 public class JavaLoader extends CoreLoader {
 	File file;
-    DataInputStream read;
-    BufferedInputStream stream;
+	DataInputStream stream;
+	BufferedReader read;
 
 	@Override
 	public TextFile loadFile(String path){
 		try{
 			file=new File("res/"+path);
-			stream=new BufferedInputStream(new FileInputStream(file));
-			read=new DataInputStream(stream);
+			stream=new DataInputStream(new FileInputStream(file));
+			read=new BufferedReader(new InputStreamReader(stream));
 			
 			List<String> lines=new ArrayList<String>();
+			String line;
 			
-			while(read.available()>0){
-				
+			while((line=read.readLine())!=null){
+				lines.add(line);
 			}
 			
 			String[] lineList=new String[lines.size()];
