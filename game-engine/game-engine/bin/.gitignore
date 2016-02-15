@@ -1,1 +1,10 @@
+/coreFunctions/
+/io/
 /window/
+/main/
+/console/
+/messageBus/
+/services/
+/loader/
+/dataTypes/
+/thing/
