@@ -1,4 +1,4 @@
-package services.loader;
+package services.fileLoader;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -12,7 +12,7 @@ import java.util.List;
 import dataTypes.TextFile;
 import services.Services;
 
-public class JavaLoader extends CoreLoader {
+public class JavaFileLoader extends CoreFileLoader {
 	File file;
 	DataInputStream stream;
 	BufferedReader read;

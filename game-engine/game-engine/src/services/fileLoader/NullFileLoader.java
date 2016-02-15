@@ -1,8 +1,8 @@
-package services.loader;
+package services.fileLoader;
 
 import dataTypes.TextFile;
 
-public class NullLoader extends CoreLoader {
+public class NullFileLoader extends CoreFileLoader {
 	@Override
 	public TextFile loadFile(String path){
 		return null;

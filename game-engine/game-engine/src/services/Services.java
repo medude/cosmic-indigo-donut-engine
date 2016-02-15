@@ -6,9 +6,9 @@ import services.console.NullConsole;
 import services.errorHandler.CoreErrorHandler;
 import services.errorHandler.JavaErrorHandler;
 import services.errorHandler.NullErrorHandler;
-import services.loader.CoreLoader;
-import services.loader.JavaLoader;
-import services.loader.NullLoader;
+import services.fileLoader.CoreFileLoader;
+import services.fileLoader.JavaFileLoader;
+import services.fileLoader.NullFileLoader;
 import services.window.CoreWindow;
 import services.window.GLFWWindow;
 import services.window.NullWindow;
@@ -24,8 +24,8 @@ public class Services {
 		windows[0]=new GLFWWindow();
 		windows[1]=new NullWindow();
 		
-		loaders[0]=new JavaLoader();
-		loaders[1]=new NullLoader();
+		loaders[0]=new JavaFileLoader();
+		loaders[1]=new NullFileLoader();
 	}
 	
 	//////////////////////////////////
@@ -58,9 +58,9 @@ public class Services {
 	//////////////////////////////////
 	//Loaders                       //
 	//////////////////////////////////
-	private static CoreLoader[] loaders=new CoreLoader[2];
+	private static CoreFileLoader[] loaders=new CoreFileLoader[2];
 	
-	public static CoreLoader getLoader(){
+	public static CoreFileLoader getLoader(){
 	return loaders[0];
 	}
 }
