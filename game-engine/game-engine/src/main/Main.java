@@ -1,8 +1,8 @@
 package main;
 
-import dataTypes.TextFile;
 import services.Services;
 import services.window.Window;
+import thing.ModelData;
 
 public class Main {
 	public static void main(String[] args){
@@ -13,12 +13,15 @@ public class Main {
 	public void run(){
 		Services.init();
 		Window.create();
-		TextFile file=Services.getLoader().loadFile("test.txt");
 		
-		Services.getConsole().log(file.getLines());
+		ModelData model=Services.getOBJLoader().parse("bunny.obj");
+		Services.getRenderer().add(model);
 		
 		while(Window.isOpen()){
+			Services.getRenderer().render();
 			Window.refresh();
 		}
+		
+		Services.cleanup();
 	}
 }

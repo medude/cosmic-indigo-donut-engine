@@ -12,4 +12,10 @@ public class NullConsole extends CoreConsole {
 
 	@Override
 	public void error(Object message){}
+
+	@Override
+	public void warn(String message){}
+
+	@Override
+	public void warn(Object message){}
 }

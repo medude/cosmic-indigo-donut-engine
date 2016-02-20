@@ -1,10 +1,5 @@
-/coreFunctions/
-/io/
-/window/
-/main/
-/console/
-/messageBus/
-/services/
-/loader/
-/dataTypes/
+/externalLibraries/
 /thing/
+/services/
+/main/
+/math/

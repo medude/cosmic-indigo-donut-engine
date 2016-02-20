@@ -9,9 +9,19 @@ import services.errorHandler.NullErrorHandler;
 import services.fileLoader.CoreFileLoader;
 import services.fileLoader.JavaFileLoader;
 import services.fileLoader.NullFileLoader;
+import services.objLoader.CoreOBJLoader;
+import services.objLoader.NullObjLoader;
+import services.objLoader.OObjLoader;
+import services.renderer.CoreRenderer;
+import services.renderer.NullRenderer;
+import services.renderer.OpenGLRenderer;
+import services.shaders.CoreShader;
+import services.shaders.GLSLShader;
+import services.shaders.NullShader;
 import services.window.CoreWindow;
 import services.window.GLFWWindow;
 import services.window.NullWindow;
+import thing.ModelData;
 
 public class Services {
 	public static void init(){
@@ -26,6 +36,20 @@ public class Services {
 		
 		loaders[0]=new JavaFileLoader();
 		loaders[1]=new NullFileLoader();
+		
+		objLoaders[0]=new OObjLoader();
+		objLoaders[1]=new NullObjLoader();
+		
+		renderers[0]=new OpenGLRenderer();
+		renderers[1]=new NullRenderer();
+		
+		shaders[0]=new GLSLShader();
+		shaders[1]=new NullShader();
+	}
+	
+	public static void cleanup(){
+		ModelData data=new ModelData(new float[0]);
+		data.cleanup();
 	}
 	
 	//////////////////////////////////
@@ -61,6 +85,33 @@ public class Services {
 	private static CoreFileLoader[] loaders=new CoreFileLoader[2];
 	
 	public static CoreFileLoader getLoader(){
-	return loaders[0];
+		return loaders[0];
+	}
+	
+	//////////////////////////////////
+	//OBJ Loaders                   //
+	//////////////////////////////////
+	private static CoreOBJLoader[] objLoaders=new CoreOBJLoader[2];
+	
+	public static CoreOBJLoader getOBJLoader(){
+		return objLoaders[0];
+	}
+	
+	//////////////////////////////////
+	//Renderer                      //
+	//////////////////////////////////
+	private static CoreRenderer[] renderers=new CoreRenderer[2];
+	
+	public static CoreRenderer getRenderer(){
+		return renderers[0];
+	}
+	
+	//////////////////////////////////
+	//Shader                        //
+	//////////////////////////////////
+	private static CoreShader[] shaders=new CoreShader[2];
+	
+	public static CoreShader getShaders(){
+		return shaders[0];
 	}
 }
