@@ -38,6 +38,6 @@ public class OObjLoader extends CoreOBJLoader {
 			verticies[i*9+8]=faceList.get(i).vertices.get(2).v.z;
 		}
 		
-		return new ModelData(verticies);
+		return new ModelData(verticies, new byte[0]);
 	}
 }

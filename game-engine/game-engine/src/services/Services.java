@@ -48,8 +48,10 @@ public class Services {
 	}
 	
 	public static void cleanup(){
-		ModelData data=new ModelData(new float[0]);
+		ModelData data=new ModelData(new float[0], new byte[0]);
 		data.cleanup();
+		
+		getShader().cleanup();
 	}
 	
 	//////////////////////////////////
@@ -111,7 +113,7 @@ public class Services {
 	//////////////////////////////////
 	private static CoreShader[] shaders=new CoreShader[2];
 	
-	public static CoreShader getShaders(){
+	public static CoreShader getShader(){
 		return shaders[0];
 	}
 }

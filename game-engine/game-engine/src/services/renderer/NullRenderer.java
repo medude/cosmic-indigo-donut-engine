@@ -1,12 +1,11 @@
 package services.renderer;
 
-import thing.ModelData;
+import thing.Thing;
 
 public class NullRenderer extends CoreRenderer {
-
-	@Override
-	public void add(ModelData data){}
-
 	@Override
 	public void render(){}
+
+	@Override
+	public void add(Thing thing){}
 }

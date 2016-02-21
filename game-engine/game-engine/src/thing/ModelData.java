@@ -1,5 +1,6 @@
 package thing;
 
+import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,67 +15,37 @@ public class ModelData {
 	private static List<Integer> vaos=new ArrayList<Integer>();
 	private static List<Integer> vbos=new ArrayList<Integer>();
 	
-	private int vaoID;
-	private List<Integer> vboIDs=new ArrayList<Integer>();
+	private int vaoID=0;
+	private int indiciesID=0;
 	
-	private float[] positions;
+	private float[] positions={};
+	private byte[] indicies={};
 	private float[] normals={};
 	private float[] uv={};
 	
 	private int vertexCount;
 	
-	public ModelData(float[] positions){
-		this.positions=positions;
-		this.vertexCount=positions.length;
-		
-		FloatBuffer positionsBuffer=storeInBuffer(positions);
-		
-		//Create VAO
-		createVAO();
-		
-		//Make a VBO, load data, and store it into the VAO
-		createVBO();
-		loadBuffer(positionsBuffer);
-		vboToVAO(0);
-		
-		//Unbind all
-		unbindVBO();
-		unbindVAO();
+	public ModelData(float[] positions, byte[] indicies){
+		create(positions, indicies, normals, uv);
 	}
 	
-	public ModelData(float[] positions, float[] normals){
-		this.positions=positions;
-		this.vertexCount=positions.length;
-		this.normals=normals;
-		
-		FloatBuffer positionsBuffer=storeInBuffer(positions);
-		FloatBuffer normalsBuffer=storeInBuffer(normals);
-		
-		//Create VAO
-		createVAO();
-		
-		//Make a VBO, load data, and store it into the VAO
-		createVBO();
-		loadBuffer(positionsBuffer);
-		vboToVAO(0);
-		
-		//Make a VBO, load data, and store it into the VAO
-		createVBO();
-		loadBuffer(normalsBuffer);
-		vboToVAO(1);
-		
-		//Unbind all
-		unbindVBO();
-		unbindVAO();
+	public ModelData(float[] positions, byte[] indicies, float[] normals){
+		create(positions, indicies, normals, uv);
 	}
 	
-	public ModelData(float[] positions, float[] normals, float[] uv){
+	public ModelData(float[] positions, byte[] indicies, float[] normals, float[] uv){
+		create(positions, indicies, normals, uv);
+	}
+	
+	private void create(float[] positions, byte[] indicies, float[] normals, float[] uv){
 		this.positions=positions;
-		this.vertexCount=positions.length;
+		this.indicies=indicies;
+		this.vertexCount=indicies.length;
 		this.normals=normals;
 		this.uv=uv;
 		
 		FloatBuffer positionsBuffer=storeInBuffer(positions);
+		ByteBuffer indiciesBuffer=storeInBuffer(indicies);
 		FloatBuffer normalsBuffer=storeInBuffer(normals);
 		FloatBuffer uvBuffer=storeInBuffer(uv);
 		
@@ -99,6 +70,11 @@ public class ModelData {
 		//Unbind all
 		unbindVBO();
 		unbindVAO();
+		
+		//Make a VBO, load data
+		createIndiciesVBO();
+		loadBuffer(indiciesBuffer);
+		unbindIndiciesVBO();
 	}
 	
 	public float[] getPositions(){
@@ -113,10 +89,10 @@ public class ModelData {
 		return uv;
 	}
 	
-	public int getID(){
-		return vaoID;
+	public byte[] getIndicies(){
+		return indicies;
 	}
-	
+
 	public int getVertexCount(){
 		return vertexCount;
 	}
@@ -134,21 +110,33 @@ public class ModelData {
 		}
 	}
 	
+	public int getIndiciesID() {
+		return indiciesID;
+	}
+	
+	public int getVAOID(){
+		return vaoID;
+	}
+	
 	private FloatBuffer storeInBuffer(float[] array){
-		FloatBuffer verticesBuffer = BufferUtils.createFloatBuffer(array.length);
-		verticesBuffer.put(array);
-		verticesBuffer.flip();
-		return verticesBuffer;
+		FloatBuffer buffer=BufferUtils.createFloatBuffer(array.length);
+		buffer.put(array);
+		buffer.flip();
+		return buffer;
+	}
+	
+	private ByteBuffer storeInBuffer(byte[] array){
+		ByteBuffer buffer=BufferUtils.createByteBuffer(array.length);
+		buffer.put(array);
+		buffer.flip();
+		return buffer;
 	}
 	
 	private void createVAO(){
-		vaoID=vaos.size();
-		vaos.add(GL30.glGenVertexArrays());
-		bindVAO();
-	}
-	
-	private void bindVAO(){
-		GL30.glBindVertexArray(vaos.get(vaoID));
+		vaoID=GL30.glGenVertexArrays();
+		GL30.glBindVertexArray(vaoID);
+		vaos.add(vaoID);
+		
 	}
 	
 	private void unbindVAO(){
@@ -156,22 +144,32 @@ public class ModelData {
 	}
 	
 	private void createVBO(){
-		int index=vboIDs.size();
-		vboIDs.add(vbos.size());
-		vbos.add(GL15.glGenBuffers());
-		bindVBO(index);
+		int vboID=GL15.glGenBuffers();
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboID);
+		vbos.add(vboID);
 	}
 	
-	private void bindVBO(int index){
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboIDs.get(index));
+	private void createIndiciesVBO(){
+		int vboID=GL15.glGenBuffers();
+		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, vboID);
+		vbos.add(vboID);
+		this.indiciesID=vboID;
 	}
 	
 	private void unbindVBO(){
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 	}
 	
+	private void unbindIndiciesVBO(){
+		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+	
 	private void loadBuffer(FloatBuffer buffer){
 		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
+	}
+	
+	private void loadBuffer(ByteBuffer buffer){
+		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
 	}
 	
 	private void vboToVAO(int index){

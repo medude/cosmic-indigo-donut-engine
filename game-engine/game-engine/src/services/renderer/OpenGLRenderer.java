@@ -4,38 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-import services.Services;
 import thing.ModelData;
+import thing.Thing;
 
 public class OpenGLRenderer extends CoreRenderer {
-	private List<ModelData> datas=new ArrayList<ModelData>();
+	private List<Thing> things=new ArrayList<Thing>();
 	
 	@Override
-	public void add(ModelData data){
-		datas.add(data);
+	public void add(Thing thing){
+		things.add(thing);
 	}
 
 	@Override
 	public void render(){
-		int shader=Services.getShaders().load("shader");
-		
-		for(ModelData data:datas){
-			GL30.glBindVertexArray(data.getID());
+		for(Thing thing:things){
+			ModelData data=thing.getData();
+			
+			GL20.glUseProgram(thing.getShader());
+			
+			GL30.glBindVertexArray(data.getVAOID());
 			GL20.glEnableVertexAttribArray(0);
 			
-			GL20.glUseProgram(shader);
-			GL20.glBindAttribLocation(shader, 0, "in_Position");
+			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, data.getIndiciesID());
 			 
-			GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, data.getVertexCount());
-			
-			GL20.glUseProgram(shader);
+			// Draw the vertices
+			GL11.glDrawElements(GL11.GL_TRIANGLES, data.getVertexCount(), GL11.GL_UNSIGNED_BYTE, 0);
 			
 			GL20.glDisableVertexAttribArray(0);
+			
+			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+			
 			GL30.glBindVertexArray(0);
+			
+			GL20.glUseProgram(0);
 		}
 	}
-
 }

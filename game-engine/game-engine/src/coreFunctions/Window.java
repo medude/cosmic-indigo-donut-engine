@@ -1,6 +1,7 @@
-package services.window;
+package coreFunctions;
 
 import services.Services;
+import services.window.CoreWindow;
 
 public class Window {
 	private static CoreWindow window;
@@ -12,8 +13,8 @@ public class Window {
 		id=window.create("Game");
 	}
 	
-	public static void create(String title, CoreWindow windowType){
-		window=windowType;
+	public static void create(String title){
+		window=Services.getWindow();
 		window.init();
 		id=window.create(title);
 	}
