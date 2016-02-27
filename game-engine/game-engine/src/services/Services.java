@@ -25,11 +25,11 @@ import thing.ModelData;
 
 public class Services {
 	public static void init(){
-		errorHandlers[0]=new JavaErrorHandler();
-		errorHandlers[1]=new NullErrorHandler();
-		
 		consoles[0]=new JavaConsole();
 		consoles[1]=new NullConsole();
+		
+		errorHandlers[0]=new JavaErrorHandler();
+		errorHandlers[1]=new NullErrorHandler();
 		
 		windows[0]=new GLFWWindow();
 		windows[1]=new NullWindow();
@@ -52,6 +52,7 @@ public class Services {
 		data.cleanup();
 		
 		getShader().cleanup();
+		getLoader().cleanup();
 	}
 	
 	//////////////////////////////////

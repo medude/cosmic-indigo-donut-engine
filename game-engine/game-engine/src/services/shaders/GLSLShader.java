@@ -9,6 +9,7 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
+import dataTypes.Shader;
 import services.Services;
 
 public class GLSLShader extends CoreShader {
@@ -16,7 +17,7 @@ public class GLSLShader extends CoreShader {
 	private List<Integer> programs=new ArrayList<Integer>();
 	
 	@Override
-	public int load(String path){
+	public Shader load(String path){
 		int vertex=0;
 		int fragment=0;
 		
@@ -35,13 +36,50 @@ public class GLSLShader extends CoreShader {
 		GL20.glAttachShader(program, fragment);
 		
 		GL20.glBindAttribLocation(program, 0, "in_Position");
+		GL20.glBindAttribLocation(program, 2, "in_UV");
 		
 		GL20.glLinkProgram(program);
 		GL20.glValidateProgram(program);
 		
 		programs.add(program);
 		
-		return program;
+		return new Shader(program);
+	}
+	
+	@Override
+	public Shader load(String path, String[] variables) {
+		int vertex=0;
+		int fragment=0;
+		
+		path="res/shaders/"+path;
+		
+		//Vertex shader
+		vertex=createShader(path+".vert", GL20.GL_VERTEX_SHADER);
+		
+		//Fragment shader
+		fragment=createShader(path+".frag", GL20.GL_FRAGMENT_SHADER);
+		
+		//Program
+		int program=GL20.glCreateProgram();
+		
+		GL20.glAttachShader(program, vertex);
+		GL20.glAttachShader(program, fragment);
+		
+		GL20.glBindAttribLocation(program, 0, "in_Position");
+		GL20.glBindAttribLocation(program, 2, "in_UV");
+		
+		GL20.glLinkProgram(program);
+		GL20.glValidateProgram(program);
+		
+		Shader shader=new Shader(program);
+		
+		for(String variable:variables){
+			loadVariable(variable, shader, 0);
+		}
+		
+		programs.add(program);
+		
+		return shader;
 	}
 	
 	@Override
@@ -56,6 +94,13 @@ public class GLSLShader extends CoreShader {
 			GL20.glDeleteShader(shaders.get(2*i+1));
 			GL20.glDeleteProgram(programs.get(i));
 		}
+	}
+	
+	@Override
+	public void loadVariable(String name, Shader shader, float value){
+		int location=GL20.glGetUniformLocation(shader.getID(), name);
+		
+		GL20.glUniform1f(location, value);
 	}
 	
 	private int createShader(String path, int type){
@@ -87,4 +132,6 @@ public class GLSLShader extends CoreShader {
 		
 		return shader;
 	}
+
+	
 }

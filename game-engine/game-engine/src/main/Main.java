@@ -1,6 +1,8 @@
 package main;
 
 import coreFunctions.Window;
+import dataTypes.Shader;
+import dataTypes.Texture;
 import services.Services;
 import thing.ModelData;
 import thing.Thing;
@@ -20,6 +22,13 @@ public class Main {
 	        2, 3, 0
 	};
 	
+	float[] uv={
+			0,0,
+			0,1,
+			1,1,
+			1,0
+	};
+	
 	public static void main(String[] args){
 		Main game=new Main();
 		game.run();
@@ -29,10 +38,11 @@ public class Main {
 		Services.init();
 		Window.create();
 		
-		ModelData rectangle=new ModelData(vertices, indices);
-		int shader=Services.getShader().load("shader");
+		ModelData rectangle=new ModelData(vertices, indices, new float[0], uv);
+		Shader shader=Services.getShader().load("shader");
+		Texture texture=Services.getLoader().loadImage("test");
 		
-		Thing thing=new Thing(shader, rectangle);
+		Thing thing=new Thing(shader, rectangle, texture);
 		
 		Services.getRenderer().add(thing);
 		

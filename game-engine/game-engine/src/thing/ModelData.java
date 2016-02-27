@@ -65,7 +65,7 @@ public class ModelData {
 		//Make a VBO, load data, and store it into the VAO
 		createVBO();
 		loadBuffer(uvBuffer);
-		vboToVAO(2);
+		vboToVAO(2, 2);
 		
 		//Unbind all
 		unbindVBO();
@@ -174,6 +174,10 @@ public class ModelData {
 	
 	private void vboToVAO(int index){
 		GL20.glVertexAttribPointer(index, 3, GL11.GL_FLOAT, false, 0, 0);
+	}
+	
+	private void vboToVAO(int index, int size){
+		GL20.glVertexAttribPointer(index, size, GL11.GL_FLOAT, false, 0, 0);
 	}
 	
 	private void deleteVBO(int id){
