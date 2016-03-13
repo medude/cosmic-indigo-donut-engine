@@ -1,6 +1,7 @@
 /externalLibraries/
 /main/
 /math/
+/obj/
 /scene/
 /services/
-/thing/
+/dataTypes/

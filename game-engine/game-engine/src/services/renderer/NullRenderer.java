@@ -1,6 +1,6 @@
 package services.renderer;
 
-import thing.Thing;
+import dataTypes.Thing;
 
 public class NullRenderer extends CoreRenderer {
 	@Override

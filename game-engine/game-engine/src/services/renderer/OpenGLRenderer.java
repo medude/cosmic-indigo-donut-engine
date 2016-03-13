@@ -9,8 +9,8 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-import thing.ModelData;
-import thing.Thing;
+import dataTypes.ModelData;
+import dataTypes.Thing;
 
 public class OpenGLRenderer extends CoreRenderer {
 	private List<Thing> things=new ArrayList<Thing>();

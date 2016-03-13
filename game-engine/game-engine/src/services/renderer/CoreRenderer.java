@@ -1,6 +1,6 @@
 package services.renderer;
 
-import thing.Thing;
+import dataTypes.Thing;
 
 public abstract class CoreRenderer {
 	public abstract void add(Thing thing);

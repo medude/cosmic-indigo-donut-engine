@@ -1,11 +1,11 @@
 package main;
 
 import coreFunctions.Window;
+import dataTypes.ModelData;
 import dataTypes.Shader;
 import dataTypes.Texture;
+import dataTypes.Thing;
 import services.Services;
-import thing.ModelData;
-import thing.Thing;
 
 public class Main {
 	float[] vertices = {
@@ -15,7 +15,7 @@ public class Main {
 	        0.5f, 0.5f, 0f  // Right left       ID: 3
 	};
 	
-	byte[] indices = {
+	int[] indices = {
 	        // Left bottom triangle
 	        0, 1, 2,
 	        // Right top triangle

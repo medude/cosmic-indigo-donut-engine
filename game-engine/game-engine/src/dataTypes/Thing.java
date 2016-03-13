@@ -1,7 +1,4 @@
-package thing;
-
-import dataTypes.Shader;
-import dataTypes.Texture;
+package dataTypes;
 
 public class Thing {
 	private ModelData data;

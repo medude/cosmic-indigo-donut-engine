@@ -1,5 +1,6 @@
 package services;
 
+import dataTypes.ModelData;
 import services.console.CoreConsole;
 import services.console.JavaConsole;
 import services.console.NullConsole;
@@ -10,8 +11,8 @@ import services.fileLoader.CoreFileLoader;
 import services.fileLoader.JavaFileLoader;
 import services.fileLoader.NullFileLoader;
 import services.objLoader.CoreOBJLoader;
+import services.objLoader.HomemadeObjLoader;
 import services.objLoader.NullObjLoader;
-import services.objLoader.OObjLoader;
 import services.renderer.CoreRenderer;
 import services.renderer.NullRenderer;
 import services.renderer.OpenGLRenderer;
@@ -21,7 +22,6 @@ import services.shaders.NullShader;
 import services.window.CoreWindow;
 import services.window.GLFWWindow;
 import services.window.NullWindow;
-import thing.ModelData;
 
 public class Services {
 	public static void init(){
@@ -37,7 +37,7 @@ public class Services {
 		loaders[0]=new JavaFileLoader();
 		loaders[1]=new NullFileLoader();
 		
-		objLoaders[0]=new OObjLoader();
+		objLoaders[0]=new HomemadeObjLoader();
 		objLoaders[1]=new NullObjLoader();
 		
 		renderers[0]=new OpenGLRenderer();
@@ -48,7 +48,7 @@ public class Services {
 	}
 	
 	public static void cleanup(){
-		ModelData data=new ModelData(new float[0], new byte[0]);
+		ModelData data=new ModelData(new float[0], new int[0]);
 		data.cleanup();
 		
 		getShader().cleanup();
