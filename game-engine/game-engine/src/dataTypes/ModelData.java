@@ -20,25 +20,25 @@ public class ModelData {
 	private int indiciesID=0;
 	
 	private float[] positions={};
-	private int[] indicies={};
+	private byte[] indicies={};
 	private float[] normals={};
 	private float[] uv={};
 	
 	private int vertexCount;
 	
-	public ModelData(float[] positions, int[] indicies){
+	public ModelData(float[] positions, byte[] indicies){
 		create(positions, indicies, normals, uv);
 	}
 	
-	public ModelData(float[] positions, int[] indicies, float[] normals){
+	public ModelData(float[] positions, byte[] indicies, float[] normals){
 		create(positions, indicies, normals, uv);
 	}
 	
-	public ModelData(float[] positions, int[] indicies, float[] normals, float[] uv){
+	public ModelData(float[] positions, byte[] indicies, float[] normals, float[] uv){
 		create(positions, indicies, normals, uv);
 	}
 	
-	private void create(float[] positions, int[] indicies, float[] normals, float[] uv){
+	private void create(float[] positions, byte[] indicies, float[] normals, float[] uv){
 		this.positions=positions;
 		this.indicies=indicies;
 		this.vertexCount=indicies.length;
@@ -46,7 +46,7 @@ public class ModelData {
 		this.uv=uv;
 		
 		FloatBuffer positionsBuffer=storeInBuffer(positions);
-		IntBuffer indiciesBuffer=storeInBuffer(indicies);
+		ByteBuffer indiciesBuffer=storeInBuffer(indicies);
 		FloatBuffer normalsBuffer=storeInBuffer(normals);
 		FloatBuffer uvBuffer=storeInBuffer(uv);
 		
@@ -90,7 +90,7 @@ public class ModelData {
 		return uv;
 	}
 	
-	public int[] getIndicies(){
+	public byte[] getIndicies(){
 		return indicies;
 	}
 
@@ -176,7 +176,7 @@ public class ModelData {
 		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, indiciesBuffer, GL15.GL_STATIC_DRAW);
 	}
 	
-	private void loadBuffer(IntBuffer buffer){
+	private void loadBuffer(ByteBuffer buffer){
 		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
 	}
 	

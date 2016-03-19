@@ -16,6 +16,7 @@ import services.objLoader.NullObjLoader;
 import services.renderer.CoreRenderer;
 import services.renderer.NullRenderer;
 import services.renderer.OpenGLRenderer;
+import services.renderer.OpenGLRenderer;
 import services.shaders.CoreShader;
 import services.shaders.GLSLShader;
 import services.shaders.NullShader;
@@ -48,7 +49,7 @@ public class Services {
 	}
 	
 	public static void cleanup(){
-		ModelData data=new ModelData(new float[0], new int[0]);
+		ModelData data=new ModelData(new float[0], new byte[0]);
 		data.cleanup();
 		
 		getShader().cleanup();

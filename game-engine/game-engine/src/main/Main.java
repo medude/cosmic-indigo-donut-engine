@@ -15,18 +15,11 @@ public class Main {
 	        0.5f, 0.5f, 0f  // Right left       ID: 3
 	};
 	
-	int[] indices = {
+	byte[] indices = {
 	        // Left bottom triangle
 	        0, 1, 2,
 	        // Right top triangle
 	        2, 3, 0
-	};
-	
-	float[] uv={
-			0,0,
-			0,1,
-			1,1,
-			1,0
 	};
 	
 	public static void main(String[] args){
@@ -36,12 +29,15 @@ public class Main {
 	
 	public void run(){
 		Services.init();
-		Window.create();
+		Window.create("Test 123");
 		
-		ModelData rectangle=new ModelData(vertices, indices, new float[0], uv);
+		//ModelData rectangle=new ModelData(vertices, indices, new float[0], uv);
+		ModelData rectangle=new ModelData(vertices, indices);
+		//ModelData rectangle=Services.getOBJLoader().parse("stall");
 		Shader shader=Services.getShader().load("shader");
 		Texture texture=Services.getLoader().loadImage("test");
 		
+		//Thing thing=new Thing(shader, rectangle, texture);
 		Thing thing=new Thing(shader, rectangle, texture);
 		
 		Services.getRenderer().add(thing);

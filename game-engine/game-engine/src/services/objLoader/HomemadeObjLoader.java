@@ -30,11 +30,11 @@ public class HomemadeObjLoader extends CoreOBJLoader {
 		List<Vector3> verticies=new ArrayList<Vector3>();
 		List<Vector2> UV=new ArrayList<Vector2>();
 		List<Vector3> normals=new ArrayList<Vector3>();
-		List<Integer> indicies=new ArrayList<Integer>();
+		List<Byte> indicies=new ArrayList<Byte>();
 		float[] vertArray=null;
 		float[] UVArray=null;
 		float[] normalsArray=null;
-		int[] indiciesArray=null;
+		byte[] indiciesArray=null;
 		
 		try{
 			while(true){
@@ -79,7 +79,7 @@ public class HomemadeObjLoader extends CoreOBJLoader {
 		}
 		
 		vertArray=new float[verticies.size()*3];
-		indiciesArray=new int[indicies.size()];
+		indiciesArray=new byte[indicies.size()];
 		
 		int vertexPointer=0;
 		for(Vector3 vertex:verticies){
@@ -92,7 +92,8 @@ public class HomemadeObjLoader extends CoreOBJLoader {
 			indiciesArray[i]=indicies.get(i);
 		}
 		
-		return new ModelData(vertArray, indiciesArray, normalsArray, UVArray);
+		//return new ModelData(vertArray, indiciesArray, normalsArray, UVArray);
+		return new ModelData(vertArray, indiciesArray);
 	}
 
 	public static ModelData loadObjModel(String filename, boolean isParsed){
@@ -109,17 +110,17 @@ public class HomemadeObjLoader extends CoreOBJLoader {
 		List<Vector3> verticies=new ArrayList<Vector3>();
 		List<Vector2> UV=new ArrayList<Vector2>();
 		List<Vector3> normals=new ArrayList<Vector3>();
-		List<Integer> indicies=new ArrayList<Integer>();
+		List<Byte> indicies=new ArrayList<Byte>();
 		float[] vertArray=null;
 		float[] UVArray=null;
 		float[] normalsArray=null;
-		int[] indiciesArray=null;
+		byte[] indiciesArray=null;
 		
 		try{
 			line=reader.readLine();
 			String[] currentLine=line.split("/");
 			for(int i=1; i<currentLine.length; i++){
-				indicies.add(Integer.parseInt(currentLine[i]));
+				indicies.add((byte) Integer.parseInt(currentLine[i]));
 			}
 			
 			line=reader.readLine();
@@ -156,7 +157,7 @@ public class HomemadeObjLoader extends CoreOBJLoader {
 		}
 		
 		vertArray=new float[verticies.size()*3];
-		indiciesArray=new int[indicies.size()];
+		indiciesArray=new byte[indicies.size()];
 		
 		int vertexPointer=0;
 		for(Vector3 vertex:verticies){
@@ -173,8 +174,8 @@ public class HomemadeObjLoader extends CoreOBJLoader {
 		return null;
 	}
 	
-	private static void processVertex(String[] vertexData, List<Integer> indicies, List<Vector2> UV, List<Vector3> normals, float[] textureArray, float[] normalArray){
-		int currentVertexPointer=Integer.parseInt(vertexData[0])-1;
+	private static void processVertex(String[] vertexData, List<Byte> indicies, List<Vector2> UV, List<Vector3> normals, float[] textureArray, float[] normalArray){
+		byte currentVertexPointer=(byte) (Byte.parseByte(vertexData[0])-1);
 		indicies.add(currentVertexPointer);
 		Vector2 currentTex=UV.get(Integer.parseInt(vertexData[1])-1);
 		textureArray[currentVertexPointer*2]=currentTex.x;
