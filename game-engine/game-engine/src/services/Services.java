@@ -49,7 +49,7 @@ public class Services {
 	}
 	
 	public static void cleanup(){
-		ModelData data=new ModelData(new float[0], new byte[0]);
+		ModelData data=new ModelData(new float[0], new short[0]);
 		data.cleanup();
 		
 		getShader().cleanup();

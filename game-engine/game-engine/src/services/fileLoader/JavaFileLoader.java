@@ -94,7 +94,7 @@ public class JavaFileLoader extends CoreFileLoader {
 		// whatever OpenGL method you want, for example:
 		
 		int textureID=GL11.glGenTextures(); //Generate texture ID
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID); //Bind texture ID
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID); //Bind texture ID#
 		
 		//Setup wrap mode
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
