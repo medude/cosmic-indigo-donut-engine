@@ -9,8 +9,9 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import components.Thing;
+import components.types.TextureComponent;
 import dataTypes.ModelData;
-import dataTypes.Thing;
 import services.Services;
 public class OpenGLRenderer extends CoreRenderer {
 	private List<Thing> things=new ArrayList<Thing>();
@@ -34,7 +35,7 @@ public class OpenGLRenderer extends CoreRenderer {
 			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, data.getIndiciesID());
 			
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, thing.getTexture().getID());
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((TextureComponent) thing.getComponent("TextureComponent")).getTexture().getID());
 			
 			// Draw the vertices
 			GL11.glDrawElements(GL11.GL_TRIANGLES, data.getVertexCount(), GL11.GL_UNSIGNED_BYTE, 0);

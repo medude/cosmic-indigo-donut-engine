@@ -1,6 +1,6 @@
 package scene;
 
-import dataTypes.Thing;
+import components.Thing;
 
 public class ObjectNode extends Node {
 	private Thing thing=null;

@@ -12,4 +12,10 @@ public class Vector3 {
 		this.y=y;
 		this.z=z;
 	}
+	
+	public Vector3(float all){
+		this.x=all;
+		this.y=all;
+		this.z=all;
+	}
 }
