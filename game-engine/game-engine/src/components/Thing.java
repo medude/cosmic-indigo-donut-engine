@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Thing {
 	private int id;
-	private HashMap<String, Component> components;
+	private HashMap<String, Component> components=new HashMap<String, Component>();
 	
 	public Thing(int id){
 		this.id=id;
@@ -14,12 +14,16 @@ public class Thing {
 		return id;
 	}
 	
+	public void editComponent(String name){
+		
+	}
+	
 	public void addComponent(Component component){
 		components.put(component.getName(), component);
 	}
 	
 	public Component getComponent(String name){
-	return components.get(name);
+		return components.get(name);
 	}
 	
 	public boolean isComponent(String name){

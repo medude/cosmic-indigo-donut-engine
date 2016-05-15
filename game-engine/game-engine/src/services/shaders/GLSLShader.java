@@ -3,18 +3,23 @@ package services.shaders;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
 import dataTypes.Shader;
+import math.Matrix4;
 import services.Services;
 
 public class GLSLShader extends CoreShader {
 	private List<Integer> shaders=new ArrayList<Integer>();
 	private List<Integer> programs=new ArrayList<Integer>();
+	
+	private FloatBuffer buffer=BufferUtils.createFloatBuffer(16);
 	
 	@Override
 	public Shader load(String path){
@@ -103,6 +108,16 @@ public class GLSLShader extends CoreShader {
 		GL20.glUniform1f(location, value);
 	}
 	
+	@Override
+	public void loadVariable(String name, Shader shader, Matrix4 value){
+		int location=GL20.glGetUniformLocation(shader.getID(), name);
+		
+		value.store(buffer);
+		buffer.flip();
+		
+		GL20.glUniformMatrix4fv(location, false, buffer);
+	}
+	
 	private int createShader(String path, int type){
 		StringBuilder shaderSource=new StringBuilder();
 		
@@ -132,6 +147,4 @@ public class GLSLShader extends CoreShader {
 		
 		return shader;
 	}
-
-	
 }

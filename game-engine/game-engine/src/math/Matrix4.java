@@ -1,5 +1,7 @@
 package math;
 
+import java.nio.FloatBuffer;
+
 public class Matrix4 {
 	
 	
@@ -100,6 +102,25 @@ public class Matrix4 {
 		this.m31=0.0f;
 		this.m32=0.0f;
 		this.m33=1.0f;
+	}
+	
+	public void store(FloatBuffer buf) {
+		buf.put(m00);
+		buf.put(m01);
+		buf.put(m02);
+		buf.put(m03);
+		buf.put(m10);
+		buf.put(m11);
+		buf.put(m12);
+		buf.put(m13);
+		buf.put(m20);
+		buf.put(m21);
+		buf.put(m22);
+		buf.put(m23);
+		buf.put(m30);
+		buf.put(m31);
+		buf.put(m32);
+		buf.put(m33);
 	}
 	
 	public Matrix4(float m00, float m10, float m20, float m30, float m01, float m11, float m21, float m31, float m02,

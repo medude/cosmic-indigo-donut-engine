@@ -2,6 +2,8 @@ package main;
 
 import components.Thing;
 import components.ThingManager;
+import components.types.ModelComponent;
+import components.types.ShaderComponent;
 import components.types.TextureComponent;
 import coreFunctions.Window;
 import dataTypes.ModelData;
@@ -21,10 +23,12 @@ public class Main {
 		
 		ModelData rectangle=Services.getOBJLoader().parse("stall");
 		Shader shader=Services.getShader().load("shader");
-		Texture texture=Services.getLoader().loadImage("test");
+		Texture texture=Services.getLoader().loadImage("stallTexture");
 		
 		Thing thing=ThingManager.makeThing();
-		thing.addComponent(new TextureComponent(ThingManager.getComponentID(), texture));
+		thing.addComponent(new TextureComponent(texture));
+		thing.addComponent(new ModelComponent(rectangle));
+		thing.addComponent(new ShaderComponent(shader));
 		
 		Services.getRenderer().add(thing);
 		

@@ -1,7 +1,7 @@
 package math;
 
 public class TransformationMatrix {
-	public Matrix4 create(Vector3 translation, Vector3 rotation, float scale){
+	public static Matrix4 create(Vector3 translation, Vector3 rotation, float scale){
 		Matrix4 matrix=new Matrix4();
 		matrix.translate(translation);
 		matrix.rotate(rotation.x, Nums.X_AXIS);

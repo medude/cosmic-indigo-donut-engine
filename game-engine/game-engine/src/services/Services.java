@@ -16,7 +16,6 @@ import services.objLoader.NullObjLoader;
 import services.renderer.CoreRenderer;
 import services.renderer.NullRenderer;
 import services.renderer.OpenGLRenderer;
-import services.renderer.OpenGLRenderer;
 import services.shaders.CoreShader;
 import services.shaders.GLSLShader;
 import services.shaders.NullShader;
@@ -34,6 +33,8 @@ public class Services {
 		
 		windows[0]=new GLFWWindow();
 		windows[1]=new NullWindow();
+		
+		windows[0].init();
 		
 		loaders[0]=new JavaFileLoader();
 		loaders[1]=new NullFileLoader();

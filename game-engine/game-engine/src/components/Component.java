@@ -4,8 +4,8 @@ public abstract class Component {
 	private int id;
 	private String name;
 	
-	public Component(int id, String name){
-		this.id=id;
+	public Component(String name){
+		this.id=ThingManager.getComponentID();
 		this.name=name;
 	}
 	

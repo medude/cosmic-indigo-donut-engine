@@ -6,8 +6,8 @@ import dataTypes.Texture;
 public class TextureComponent extends Component {
 	private Texture texture;
 	
-	public TextureComponent(int id, Texture texture){
-		super(id, "TextureComponent");
+	public TextureComponent(Texture texture){
+		super("TextureComponent");
 		this.texture=texture;
 	}
 	
