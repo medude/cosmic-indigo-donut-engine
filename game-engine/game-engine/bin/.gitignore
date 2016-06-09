@@ -1,4 +1,5 @@
+/console/
+/io/
+/loader/
+/messageBus/
 /window/
-/coreFunctions/
-/dataTypes/
-/main/
