@@ -22,10 +22,7 @@ public class Main {
 			Services.init();
 			Window.create("Test \"Game\"");
 			
-			ModelData rectangle=Services.getOBJLoader().parse("Plane");
-			//float[] verticies={0.5f, 0.5f, -0.5f, 0.5f, -0.5f, 0.5f, -0.5f, 0.5f};
-			//short[] indicies={0, 1, 2, 3};
-			//ModelData rectangle=new ModelData(verticies, indicies, new float[0], new float[0]);
+			ModelData rectangle=Services.getOBJLoader().parse("stall");
 			Shader shader=Services.getShader().load("shader");
 			Texture texture=Services.getLoader().loadImage("stallTexture");
 			

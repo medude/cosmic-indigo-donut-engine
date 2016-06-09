@@ -74,7 +74,6 @@ public class GLFWWindow extends CoreWindow {
 				GLFW.glfwShowWindow(window);
 				
 				GL.createCapabilities();
-				GL11.glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 				
 				return window;
 	}

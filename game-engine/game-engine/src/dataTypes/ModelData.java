@@ -1,7 +1,7 @@
 package dataTypes;
 
 import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,25 +19,25 @@ public class ModelData {
 	private int indiciesID=0;
 	
 	private float[] positions={};
-	private short[] indicies={};
+	private int[] indicies={};
 	private float[] normals={};
 	private float[] uv={};
 	
 	private int vertexCount;
 	
-	public ModelData(float[] positions, short[] indicies){
+	public ModelData(float[] positions, int[] indicies){
 		create(positions, indicies, normals, uv);
 	}
 	
-	public ModelData(float[] positions, short[] indicies, float[] normals){
+	public ModelData(float[] positions, int[] indicies, float[] normals){
 		create(positions, indicies, normals, uv);
 	}
 	
-	public ModelData(float[] positions, short[] indicies, float[] normals, float[] uv){
+	public ModelData(float[] positions, int[] indicies, float[] normals, float[] uv){
 		create(positions, indicies, normals, uv);
 	}
-	
-	private void create(float[] positions, short[] indicies, float[] normals, float[] uv){
+
+	private void create(float[] positions, int[] indicies, float[] normals, float[] uv){
 		this.positions=positions;
 		this.indicies=indicies;
 		this.vertexCount=indicies.length;
@@ -45,7 +45,7 @@ public class ModelData {
 		this.uv=uv;
 		
 		FloatBuffer positionsBuffer=storeInBuffer(positions);
-		ShortBuffer indiciesBuffer=storeInBuffer(indicies);
+		IntBuffer indiciesBuffer=storeInBuffer(indicies);
 		FloatBuffer normalsBuffer=storeInBuffer(normals);
 		FloatBuffer uvBuffer=storeInBuffer(uv);
 		
@@ -89,7 +89,7 @@ public class ModelData {
 		return uv;
 	}
 	
-	public short[] getIndicies(){
+	public int[] getIndicies(){
 		return indicies;
 	}
 
@@ -125,8 +125,8 @@ public class ModelData {
 		return buffer;
 	}
 	
-	private ShortBuffer storeInBuffer(short[] array){
-		ShortBuffer buffer=BufferUtils.createShortBuffer(array.length);
+	private IntBuffer storeInBuffer(int[] array){
+		IntBuffer buffer=BufferUtils.createIntBuffer(array.length);
 		buffer.put(array);
 		buffer.flip();
 		return buffer;
@@ -168,7 +168,7 @@ public class ModelData {
 		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, indiciesBuffer, GL15.GL_STATIC_DRAW);
 	}
 	
-	private void loadBuffer(ShortBuffer buffer){
+	private void loadBuffer(IntBuffer buffer){
 		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
 	}
 	
