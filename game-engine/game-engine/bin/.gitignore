@@ -1,5 +1,17 @@
+<<<<<<< HEAD
 /console/
 /io/
 /loader/
 /messageBus/
+=======
+/coreFunctions/
+/io/
+>>>>>>> branch 'master' of https://github.com/medude/cosmic-indigo-game-engine.git
 /window/
+/main/
+/console/
+/messageBus/
+/services/
+/loader/
+/dataTypes/
+/thing/

@@ -1,8 +1,8 @@
 package main;
 
-import messageBus.Message;
-import messageBus.MessageBus;
-import window.Window;
+import dataTypes.TextFile;
+import services.Services;
+import services.window.Window;
 
 public class Main {
 	public static void main(String[] args){
@@ -11,21 +11,14 @@ public class Main {
 	}
 	
 	public void run(){
-		Message update=new Message(10);
-		MessageBus.post(new Message(11, new String[] {"Test Window"}));
-		MessageBus.send();
+		Services.init();
+		Window.create();
+		TextFile file=Services.getLoader().loadFile("test.txt");
+		
+		Services.getConsole().log(file.getLines());
 		
 		while(Window.isOpen()){
-			MessageBus.post(update);
-			while(MessageBus.isNotEmpty()){
-				MessageBus.send();
-			}
+			Window.refresh();
 		}
-		
-		MessageBus.post(new Message(12));
-		while(MessageBus.isNotEmpty()){
-			MessageBus.send();
-		}
-	
 	}
 }
