@@ -8,4 +8,7 @@ public class NullRenderer extends CoreRenderer {
 
 	@Override
 	public void add(Thing thing){}
+
+	@Override
+	public void init(){}
 }

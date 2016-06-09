@@ -90,7 +90,6 @@ public class GLFWWindow extends CoreWindow {
 	
 	@Override
 	public float getScreenWidth(){
-		Services.getConsole().log(mode);
 		return mode.width();
 	}
 	

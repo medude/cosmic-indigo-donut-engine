@@ -108,6 +108,7 @@ public class Services {
 	private static CoreRenderer[] renderers=new CoreRenderer[2];
 	
 	public static CoreRenderer getRenderer(){
+		renderers[0].init();
 		return renderers[0];
 	}
 	

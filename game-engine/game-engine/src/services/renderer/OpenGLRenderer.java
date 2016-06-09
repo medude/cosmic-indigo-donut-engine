@@ -26,10 +26,15 @@ public class OpenGLRenderer extends CoreRenderer {
 	private Matrix4 projectionMatrix=ProjectionMatrix.create();
 	
 	@Override
+	public void init(){
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+	}
+	
+	@Override
 	public void add(Thing thing){
 		things.add(thing);
 	}
-
+	
 	@Override
 	public void render(){
 		for(Thing thing:things){
@@ -44,7 +49,8 @@ public class OpenGLRenderer extends CoreRenderer {
 			
 			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, data.getIndiciesID());
 			
-			Services.getShader().loadVariable("transformation", shader, TransformationMatrix.create(new Vector3(0, -1, -30), new Vector3(0, 180, 0), 1));
+			Services.getShader().loadVariable("transformation", shader, TransformationMatrix.create(new Vector3(0, 0, -3), new Vector3(0, 0, 0), 1));
+			
 			Services.getShader().loadVariable("projection", shader, projectionMatrix);
 			
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);

@@ -10,6 +10,7 @@ import java.util.List;
 import dataTypes.ModelData;
 import math.Vector2;
 import math.Vector3;
+import services.Services;
 
 public class HomemadeObjLoader extends CoreOBJLoader {
 	public ModelData parse(String filename){
@@ -105,10 +106,10 @@ public class HomemadeObjLoader extends CoreOBJLoader {
 		
 		for(int i=0; i<indicies.size(); i++){
 			indiciesArray[i]=indicies.get(i);
+			Services.getConsole().log(indiciesArray[i]);
 		}
 		
 		return new ModelData(vertArray, indiciesArray, normalsArray, UVArray);
-		//return new ModelData(vertArray, indiciesArray);
 	}
 	
 	private static void processVertex(String[] vertexData, List<Short> indicies, List<Vector2> UV, List<Vector3> normals, float[] textureArray, float[] normalArray){
