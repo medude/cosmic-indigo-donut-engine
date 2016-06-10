@@ -8,6 +8,8 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
 
+import services.Services;
+
 public class GLFWWindow extends CoreWindow {
 	private static GLFWErrorCallback errorCallback;
 	private static GLFWKeyCallback keyCallback;
@@ -15,7 +17,7 @@ public class GLFWWindow extends CoreWindow {
 	private static GLFWVidMode mode;
 	
 	@Override
-	public void init() {
+	public void init(){
 		//Print errors to the error console
 		GLFW.glfwSetErrorCallback(errorCallback=GLFWErrorCallback.createPrint(System.err));
 		
@@ -29,19 +31,19 @@ public class GLFWWindow extends CoreWindow {
 	}
 	
 	@Override
-	public void refresh(long id) {
+	public void refresh(long id){
 		GLFW.glfwSwapBuffers(id);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		GLFW.glfwPollEvents();
 	}
 	
 	@Override
-	public boolean isOpen(long id) {
+	public boolean isOpen(long id){
 		return GLFW.glfwWindowShouldClose(id)==GLFW.GLFW_FALSE;
 	}
 	
 	@Override
-	public long create(String windowName) {
+	public long create(String windowName){
 		//Configure window
 				GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_FALSE); //Hide window- for now
 				GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE); //Let it resize!
@@ -72,13 +74,12 @@ public class GLFWWindow extends CoreWindow {
 				GLFW.glfwShowWindow(window);
 				
 				GL.createCapabilities();
-				GL11.glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 				
 				return window;
 	}
 	
 	@Override
-	public void close(long id) {
+	public void close(long id){
 		GLFW.glfwSetWindowShouldClose(id, GLFW.GLFW_TRUE);
 		GLFW.glfwDestroyWindow(id);
 		keyCallback.release();
@@ -87,12 +88,12 @@ public class GLFWWindow extends CoreWindow {
 	}
 	
 	@Override
-	public float getScreenWidth() {
+	public float getScreenWidth(){
 		return mode.width();
 	}
 	
 	@Override
-	public float getScreenHeight() {
+	public float getScreenHeight(){
 		return mode.height();
 	}
 }

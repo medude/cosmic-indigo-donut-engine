@@ -73,7 +73,11 @@ freely, subject to the following restrictions:
 
 ----------------------------------------------------------------------------------------------------------------------
 
+<<<<<<< HEAD
 oObjLoader is provided under the Unlicence as follows:
+=======
+A modified version of oObjLoader is provided under the Unlicence as follows:
+>>>>>>> renderer
 This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or

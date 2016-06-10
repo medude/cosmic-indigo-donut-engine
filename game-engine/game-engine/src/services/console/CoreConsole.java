@@ -8,4 +8,8 @@ public abstract class CoreConsole {
 	public abstract void error(String message);
 	
 	public abstract void error(Object message);
+	
+	public abstract void warn(String message);
+	
+	public abstract void warn(Object message);
 }

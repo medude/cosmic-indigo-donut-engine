@@ -23,4 +23,14 @@ public class JavaConsole extends CoreConsole {
 	public void error(Object message) {
 		System.err.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime())+" '"+String.valueOf(message)+"'");
 	}
+
+	@Override
+	public void warn(String message) {
+		System.out.println("Warning: "+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime())+" '"+message+"'");
+	}
+
+	@Override
+	public void warn(Object message) {
+		System.out.println("Warning: "+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime())+" '"+String.valueOf(message)+"'");
+	}
 }
