@@ -60,7 +60,7 @@ public class OpenGLRenderer extends CoreRenderer {
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((TextureComponent) thing.getComponent("TextureComponent")).getTexture().getID());
 			
-			Services.getShader().loadVariable("transformation", shader, TransformationMatrix.create(new Vector3(0, -2.5f, -10), new Vector3(0, rot, 0), 1));
+			Services.getShader().loadVariable("transformation", shader, TransformationMatrix.create(new Vector3(0, -2.5f, -20), new Vector3(0, rot, 0), 1));
 			rot++;
 			
 			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, data.getIndiciesID());

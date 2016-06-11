@@ -7,9 +7,6 @@ import services.console.NullConsole;
 import services.errorHandler.CoreErrorHandler;
 import services.errorHandler.JavaErrorHandler;
 import services.errorHandler.NullErrorHandler;
-import services.objLoader.CoreOBJLoader;
-import services.objLoader.HomemadeObjLoader;
-import services.objLoader.NullObjLoader;
 import services.renderer.CoreRenderer;
 import services.renderer.NullRenderer;
 import services.renderer.OpenGLRenderer;
@@ -24,9 +21,6 @@ public class Services {
 		
 		errorHandlers[0]=new JavaErrorHandler();
 		errorHandlers[1]=new NullErrorHandler();
-		
-		objLoaders[0]=new HomemadeObjLoader();
-		objLoaders[1]=new NullObjLoader();
 		
 		renderers[0]=new OpenGLRenderer();
 		renderers[1]=new NullRenderer();
@@ -58,15 +52,6 @@ public class Services {
 	
 	public static CoreConsole getConsole(){
 		return consoles[0];
-	}
-	
-	//////////////////////////////////
-	//OBJ Loaders                   //
-	//////////////////////////////////
-	private static CoreOBJLoader[] objLoaders=new CoreOBJLoader[2];
-	
-	public static CoreOBJLoader getOBJLoader(){
-		return objLoaders[0];
 	}
 	
 	//////////////////////////////////

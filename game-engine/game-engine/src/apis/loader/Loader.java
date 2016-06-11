@@ -1,14 +1,15 @@
 package apis.loader;
 
 import apis.ApiHandler;
+import dataTypes.ModelData;
 import dataTypes.TextFile;
 import dataTypes.Texture;
 
 public class Loader {
 	static LoaderType loaderObject=ApiHandler.getLoader();
 	
-	public static TextFile loadFile(String path){
-		return loaderObject.loadFile(path);
+	public static TextFile loadFile(String filename){
+		return loaderObject.loadFile(filename);
 	}
 	
 	public static Texture loadImage(String filename){
@@ -17,5 +18,9 @@ public class Loader {
 	
 	public static void cleanup(){
 		loaderObject.cleanup();
+	}
+	
+	public static ModelData loadOBJ(String filename){
+		return loaderObject.loadOBJ(filename);
 	}
 }

@@ -1,5 +1,6 @@
 package apis.loader;
 
+import dataTypes.ModelData;
 import dataTypes.TextFile;
 import dataTypes.Texture;
 
@@ -12,4 +13,7 @@ public class NullFileLoader implements LoaderType {
 
 	@Override
 	public void cleanup(){}
+
+	@Override
+	public ModelData loadOBJ(String filename){return null;}
 }

@@ -1,12 +1,15 @@
 package apis.loader;
 
+import dataTypes.ModelData;
 import dataTypes.TextFile;
 import dataTypes.Texture;
 
 public interface LoaderType {
-	public abstract TextFile loadFile(String path);
+	public TextFile loadFile(String filename);
 	
-	public abstract Texture loadImage(String filename);
+	public Texture loadImage(String filename);
 	
-	public abstract void cleanup();
+	public void cleanup();
+	
+	public ModelData loadOBJ(String filename);
 }

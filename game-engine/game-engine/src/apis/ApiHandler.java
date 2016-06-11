@@ -13,9 +13,6 @@ import services.console.NullConsole;
 import services.errorHandler.CoreErrorHandler;
 import services.errorHandler.JavaErrorHandler;
 import services.errorHandler.NullErrorHandler;
-import services.objLoader.CoreOBJLoader;
-import services.objLoader.HomemadeObjLoader;
-import services.objLoader.NullObjLoader;
 import services.renderer.CoreRenderer;
 import services.renderer.NullRenderer;
 import services.renderer.OpenGLRenderer;
@@ -38,9 +35,6 @@ public class ApiHandler {
 			
 			loaders[0]=new JavaFileLoader();
 			loaders[1]=new NullFileLoader();
-			
-			objLoaders[0]=new HomemadeObjLoader();
-			objLoaders[1]=new NullObjLoader();
 			
 			renderers[0]=new OpenGLRenderer();
 			renderers[1]=new NullRenderer();
@@ -91,15 +85,6 @@ public class ApiHandler {
 		
 		public static LoaderType getLoader(){
 			return loaders[0];
-		}
-		
-		//////////////////////////////////
-		//OBJ Loaders                   //
-		//////////////////////////////////
-		private static CoreOBJLoader[] objLoaders=new CoreOBJLoader[2];
-		
-		public static CoreOBJLoader getOBJLoader(){
-			return objLoaders[0];
 		}
 		
 		//////////////////////////////////
