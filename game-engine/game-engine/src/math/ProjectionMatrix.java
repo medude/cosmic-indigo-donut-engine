@@ -17,7 +17,7 @@ public class ProjectionMatrix {
 		farPlanex=farPlane;
 		fovx=fov;
 		
-		float aspectRatio=(float) WindowManager.getScreenWidth() / (float) WindowManager.getScreenHeight();
+		float aspectRatio=(float) WindowManager.getWidth() / (float) WindowManager.getHeight();
 		float yScale=(float) (1f/Math.tan(Math.toRadians(fov/2f)))*aspectRatio;
 		float xScale=yScale/aspectRatio;
 		float frustumLength=farPlane-nearPlane;

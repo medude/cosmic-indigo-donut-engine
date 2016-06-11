@@ -37,4 +37,12 @@ public class WindowManager {
 	public static int getScreenHeight(){
 		return windowObject.getScreenHeight();
 	}
+	
+	public static int getWidth(){
+		return windowObject.getWidth();
+	}
+	
+	public static int getHeight(){
+		return windowObject.getHeight();
+	}
 }

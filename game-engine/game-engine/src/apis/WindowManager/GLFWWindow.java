@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
 
+import apis.renderer.Renderer;
 import dataTypes.Window;
 
 public class GLFWWindow implements WindowType {
@@ -17,6 +18,9 @@ public class GLFWWindow implements WindowType {
 	private static GLFWWindowSizeCallback resizeCallback;
 	
 	private static GLFWVidMode mode;
+	
+	private static int windowWidth;
+	private static int windowHeight;
 	
 	@Override
 	public void init(){
@@ -46,6 +50,9 @@ public class GLFWWindow implements WindowType {
 	
 	@Override
 	public Window create(String windowName, int height, int width){
+		windowWidth=width;
+		windowHeight=height;
+		
 		//Configure window
 		GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_FALSE); //Hide window- for now
 		GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE); //Let it resize!
@@ -74,8 +81,10 @@ public class GLFWWindow implements WindowType {
 		//Resize callback
 		GLFW.glfwSetWindowSizeCallback(window, resizeCallback=new GLFWWindowSizeCallback(){
 			@Override
-			public void invoke(long window, int width, int height) {
-				
+			public void invoke(long window, int width, int height){
+				windowWidth=width;
+				windowHeight=height;
+				Renderer.init();
 			}
 		});
 		
@@ -86,8 +95,6 @@ public class GLFWWindow implements WindowType {
 		
 		GL.createCapabilities();
 		
-		GL11.glViewport(0, 0, width, height);
-		
 		return new Window(window);
 	}
 	
@@ -97,17 +104,28 @@ public class GLFWWindow implements WindowType {
 		GLFW.glfwSetWindowShouldClose(id, GLFW.GLFW_TRUE);
 		GLFW.glfwDestroyWindow(id);
 		keyCallback.release();
+		resizeCallback.release();
 		GLFW.glfwTerminate();
 		errorCallback.release();
 	}
 	
 	@Override
 	public int getScreenWidth(){
-		return (int) mode.width();
+		return mode.width();
 	}
 	
 	@Override
 	public int getScreenHeight(){
 		return mode.height();
+	}
+
+	@Override
+	public int getWidth() {
+		return windowWidth;
+	}
+
+	@Override
+	public int getHeight() {
+		return windowHeight;
 	}
 }

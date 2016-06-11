@@ -16,4 +16,8 @@ public interface WindowType {
 	public int getScreenWidth();
 	
 	public int getScreenHeight();
+	
+	public int getWidth();
+	
+	public int getHeight();
 }

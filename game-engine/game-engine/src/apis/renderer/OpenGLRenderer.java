@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import apis.WindowManager.WindowManager;
 import components.Thing;
 import components.types.ModelComponent;
 import components.types.ShaderComponent;
@@ -28,12 +29,13 @@ public class OpenGLRenderer implements RendererType {
 	@Override
 	public void init(){
 		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glCullFace(GL11.GL_BACK);
+			GL11.glCullFace(GL11.GL_BACK);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		
 		projectionMatrix=ProjectionMatrix.create();
 		
 		GL11.glClearColor(1, 1, 1, 0);
+		GL11.glViewport(0, 0, WindowManager.getWidth(), WindowManager.getHeight());
 	}
 	
 	@Override
