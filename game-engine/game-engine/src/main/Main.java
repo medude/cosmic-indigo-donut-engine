@@ -3,6 +3,7 @@ package main;
 import apis.ApiHandler;
 import apis.WindowManager.WindowManager;
 import apis.loader.Loader;
+import apis.renderer.Renderer;
 import components.Thing;
 import components.ThingManager;
 import components.types.ModelComponent;
@@ -35,10 +36,10 @@ public class Main {
 			thing.addComponent(new ModelComponent(rectangle));
 			thing.addComponent(new ShaderComponent(shader));
 			
-			Services.getRenderer().add(thing);
+			Renderer.add(thing);
 			
 			while(WindowManager.testForClose(window)){
-				Services.getRenderer().render();
+				Renderer.render();
 				WindowManager.update(window);
 			}
 			

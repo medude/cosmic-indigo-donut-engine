@@ -4,7 +4,7 @@ import apis.ApiHandler;
 import dataTypes.Window;
 
 public class WindowManager {
-	static WindowType windowObject=ApiHandler.getWindow();
+	private static WindowType windowObject=ApiHandler.getWindow();
 	
 	public static Window create(String title, int width, int height){
 		return windowObject.create(title, height, width);

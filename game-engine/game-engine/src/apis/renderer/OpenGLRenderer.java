@@ -1,4 +1,4 @@
-package services.renderer;
+package apis.renderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import math.TransformationMatrix;
 import math.Vector3;
 import services.Services;
 
-public class OpenGLRenderer extends CoreRenderer {
+public class OpenGLRenderer implements RendererType {
 	private List<Thing> things=new ArrayList<Thing>();
 	private Matrix4 projectionMatrix;
 	

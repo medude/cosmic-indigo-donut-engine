@@ -1,8 +1,8 @@
-package services.renderer;
+package apis.renderer;
 
 import components.Thing;
 
-public class NullRenderer extends CoreRenderer {
+public class NullRenderer implements RendererType {
 	@Override
 	public void render(){}
 

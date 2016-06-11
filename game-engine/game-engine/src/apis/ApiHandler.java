@@ -6,6 +6,9 @@ import apis.WindowManager.WindowType;
 import apis.loader.JavaFileLoader;
 import apis.loader.LoaderType;
 import apis.loader.NullFileLoader;
+import apis.renderer.NullRenderer;
+import apis.renderer.OpenGLRenderer;
+import apis.renderer.RendererType;
 import dataTypes.ModelData;
 import services.console.CoreConsole;
 import services.console.JavaConsole;
@@ -13,9 +16,6 @@ import services.console.NullConsole;
 import services.errorHandler.CoreErrorHandler;
 import services.errorHandler.JavaErrorHandler;
 import services.errorHandler.NullErrorHandler;
-import services.renderer.CoreRenderer;
-import services.renderer.NullRenderer;
-import services.renderer.OpenGLRenderer;
 import services.shaders.CoreShader;
 import services.shaders.GLSLShader;
 import services.shaders.NullShader;
@@ -90,9 +90,9 @@ public class ApiHandler {
 		//////////////////////////////////
 		//Renderer                      //
 		//////////////////////////////////
-		private static CoreRenderer[] renderers=new CoreRenderer[2];
+		private static RendererType[] renderers=new RendererType[2];
 		
-		public static CoreRenderer getRenderer(){
+		public static RendererType getRenderer(){
 			renderers[0].init();
 			return renderers[0];
 		}

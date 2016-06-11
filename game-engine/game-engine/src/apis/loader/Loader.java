@@ -6,7 +6,7 @@ import dataTypes.TextFile;
 import dataTypes.Texture;
 
 public class Loader {
-	static LoaderType loaderObject=ApiHandler.getLoader();
+	private static LoaderType loaderObject=ApiHandler.getLoader();
 	
 	public static TextFile loadFile(String filename){
 		return loaderObject.loadFile(filename);

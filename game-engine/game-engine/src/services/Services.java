@@ -7,9 +7,6 @@ import services.console.NullConsole;
 import services.errorHandler.CoreErrorHandler;
 import services.errorHandler.JavaErrorHandler;
 import services.errorHandler.NullErrorHandler;
-import services.renderer.CoreRenderer;
-import services.renderer.NullRenderer;
-import services.renderer.OpenGLRenderer;
 import services.shaders.CoreShader;
 import services.shaders.GLSLShader;
 import services.shaders.NullShader;
@@ -21,9 +18,6 @@ public class Services {
 		
 		errorHandlers[0]=new JavaErrorHandler();
 		errorHandlers[1]=new NullErrorHandler();
-		
-		renderers[0]=new OpenGLRenderer();
-		renderers[1]=new NullRenderer();
 		
 		shaders[0]=new GLSLShader();
 		shaders[1]=new NullShader();
@@ -52,16 +46,6 @@ public class Services {
 	
 	public static CoreConsole getConsole(){
 		return consoles[0];
-	}
-	
-	//////////////////////////////////
-	//Renderer                      //
-	//////////////////////////////////
-	private static CoreRenderer[] renderers=new CoreRenderer[2];
-	
-	public static CoreRenderer getRenderer(){
-		renderers[0].init();
-		return renderers[0];
 	}
 	
 	//////////////////////////////////
