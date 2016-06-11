@@ -19,9 +19,6 @@ import services.renderer.OpenGLRenderer;
 import services.shaders.CoreShader;
 import services.shaders.GLSLShader;
 import services.shaders.NullShader;
-import services.window.CoreWindow;
-import services.window.GLFWWindow;
-import services.window.NullWindow;
 
 public class Services {
 	public static void init(){
@@ -30,11 +27,6 @@ public class Services {
 		
 		errorHandlers[0]=new JavaErrorHandler();
 		errorHandlers[1]=new NullErrorHandler();
-		
-		windows[0]=new GLFWWindow();
-		windows[1]=new NullWindow();
-		
-		windows[0].init();
 		
 		loaders[0]=new JavaFileLoader();
 		loaders[1]=new NullFileLoader();
@@ -73,15 +65,6 @@ public class Services {
 	
 	public static CoreConsole getConsole(){
 		return consoles[0];
-	}
-	
-	//////////////////////////////////
-	//Windows                       //
-	//////////////////////////////////
-	private static CoreWindow[] windows=new CoreWindow[2];
-	
-	public static CoreWindow getWindow(){
-		return windows[0];
 	}
 	
 	//////////////////////////////////

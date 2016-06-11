@@ -1,14 +1,16 @@
 package main;
 
+import apis.ApiHandler;
+import apis.WindowManager.WindowManager;
 import components.Thing;
 import components.ThingManager;
 import components.types.ModelComponent;
 import components.types.ShaderComponent;
 import components.types.TextureComponent;
-import coreFunctions.Window;
 import dataTypes.ModelData;
 import dataTypes.Shader;
 import dataTypes.Texture;
+import dataTypes.Window;
 import services.Services;
 
 public class Main {
@@ -20,7 +22,8 @@ public class Main {
 	public void run(){
 		try{
 			Services.init();
-			Window.create("Test \"Game\"");
+			ApiHandler.init();
+			Window window=WindowManager.create("Test \"Game\"");
 			
 			ModelData rectangle=Services.getOBJLoader().parse("stall");
 			Shader shader=Services.getShader().load("shader");
@@ -33,10 +36,12 @@ public class Main {
 			
 			Services.getRenderer().add(thing);
 			
-			while(Window.isOpen()){
+			while(WindowManager.testForClose(window)){
 				Services.getRenderer().render();
-				Window.refresh();
+				WindowManager.update(window);
 			}
+		}catch(Throwable e){
+			Services.getErrorHandler().handle(e);
 		}finally{
 			Services.cleanup();
 		}

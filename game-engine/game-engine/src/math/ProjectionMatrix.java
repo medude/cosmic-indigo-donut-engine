@@ -1,9 +1,9 @@
 package math;
 
-import services.Services;
+import apis.WindowManager.WindowManager;
 
 public class ProjectionMatrix {
-	//Imagine the name without the X. (This is needed to access the globals in a static context.)
+	//Imagine the name without the X. (This is needed to access them as globals in a static context.)
 	private static float nearPlanex;
 	private static float farPlanex;
 	private static float fovx;
@@ -17,8 +17,8 @@ public class ProjectionMatrix {
 		farPlanex=farPlane;
 		fovx=fov;
 		
-		float aspectRatio=Services.getWindow().getScreenWidth()/Services.getWindow().getScreenHeight();
-		float yScale=(float) ((1f/Math.tan(Math.toRadians(fov/2f)))*aspectRatio);
+		float aspectRatio=(float) WindowManager.getScreenWidth() / (float) WindowManager.getScreenHeight();
+		float yScale=(float) (1f/Math.tan(Math.toRadians(fov/2f)))*aspectRatio;
 		float xScale=yScale/aspectRatio;
 		float frustumLength=farPlane-nearPlane;
 		
