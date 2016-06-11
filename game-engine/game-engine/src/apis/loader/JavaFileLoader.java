@@ -1,4 +1,4 @@
-package services.fileLoader;
+package apis.loader;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -22,7 +22,7 @@ import dataTypes.TextFile;
 import dataTypes.Texture;
 import services.Services;
 
-public class JavaFileLoader extends CoreFileLoader {
+public class JavaFileLoader implements LoaderType {
 	public List<Integer> images=new ArrayList<Integer>();
 	
 	@Override
@@ -88,10 +88,6 @@ public class JavaFileLoader extends CoreFileLoader {
 		}
 		
 		buffer.flip();
-		
-		// You now have a ByteBuffer filled with the color data of each pixel.
-		// Now just create a texture ID and bind it. Then you can load it using 
-		// whatever OpenGL method you want, for example:
 		
 		int textureID=GL11.glGenTextures(); //Generate texture ID
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID); //Bind texture ID#

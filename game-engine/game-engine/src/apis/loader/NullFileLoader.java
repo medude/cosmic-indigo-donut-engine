@@ -1,9 +1,9 @@
-package services.fileLoader;
+package apis.loader;
 
 import dataTypes.TextFile;
 import dataTypes.Texture;
 
-public class NullFileLoader extends CoreFileLoader {
+public class NullFileLoader implements LoaderType {
 	@Override
 	public TextFile loadFile(String path){return null;}
 

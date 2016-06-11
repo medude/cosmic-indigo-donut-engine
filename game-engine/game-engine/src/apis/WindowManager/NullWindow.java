@@ -2,7 +2,7 @@ package apis.WindowManager;
 
 import dataTypes.Window;
 
-public class NullWindow extends WindowType {
+public class NullWindow implements WindowType {
 	@Override
 	public void init(){}
 

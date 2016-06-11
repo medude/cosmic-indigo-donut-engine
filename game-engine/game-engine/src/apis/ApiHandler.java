@@ -3,6 +3,9 @@ package apis;
 import apis.WindowManager.GLFWWindow;
 import apis.WindowManager.NullWindow;
 import apis.WindowManager.WindowType;
+import apis.loader.JavaFileLoader;
+import apis.loader.LoaderType;
+import apis.loader.NullFileLoader;
 import dataTypes.ModelData;
 import services.console.CoreConsole;
 import services.console.JavaConsole;
@@ -10,9 +13,6 @@ import services.console.NullConsole;
 import services.errorHandler.CoreErrorHandler;
 import services.errorHandler.JavaErrorHandler;
 import services.errorHandler.NullErrorHandler;
-import services.fileLoader.CoreFileLoader;
-import services.fileLoader.JavaFileLoader;
-import services.fileLoader.NullFileLoader;
 import services.objLoader.CoreOBJLoader;
 import services.objLoader.HomemadeObjLoader;
 import services.objLoader.NullObjLoader;
@@ -87,9 +87,9 @@ public class ApiHandler {
 		//////////////////////////////////
 		//Loaders                       //
 		//////////////////////////////////
-		private static CoreFileLoader[] loaders=new CoreFileLoader[2];
+		private static LoaderType[] loaders=new LoaderType[2];
 		
-		public static CoreFileLoader getLoader(){
+		public static LoaderType getLoader(){
 			return loaders[0];
 		}
 		

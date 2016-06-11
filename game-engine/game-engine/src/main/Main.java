@@ -2,6 +2,7 @@ package main;
 
 import apis.ApiHandler;
 import apis.WindowManager.WindowManager;
+import apis.loader.Loader;
 import components.Thing;
 import components.ThingManager;
 import components.types.ModelComponent;
@@ -27,7 +28,7 @@ public class Main {
 			
 			ModelData rectangle=Services.getOBJLoader().parse("stall");
 			Shader shader=Services.getShader().load("shader");
-			Texture texture=Services.getLoader().loadImage("stallTexture");
+			Texture texture=Loader.loadImage("stallTexture");
 			
 			Thing thing=ThingManager.makeThing();
 			thing.addComponent(new TextureComponent(texture));
@@ -40,10 +41,12 @@ public class Main {
 				Services.getRenderer().render();
 				WindowManager.update(window);
 			}
+			
 		}catch(Throwable e){
 			Services.getErrorHandler().handle(e);
 		}finally{
 			Services.cleanup();
+			ApiHandler.cleanup();
 		}
 	}
 }

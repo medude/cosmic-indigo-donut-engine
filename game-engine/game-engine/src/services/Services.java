@@ -7,9 +7,6 @@ import services.console.NullConsole;
 import services.errorHandler.CoreErrorHandler;
 import services.errorHandler.JavaErrorHandler;
 import services.errorHandler.NullErrorHandler;
-import services.fileLoader.CoreFileLoader;
-import services.fileLoader.JavaFileLoader;
-import services.fileLoader.NullFileLoader;
 import services.objLoader.CoreOBJLoader;
 import services.objLoader.HomemadeObjLoader;
 import services.objLoader.NullObjLoader;
@@ -28,9 +25,6 @@ public class Services {
 		errorHandlers[0]=new JavaErrorHandler();
 		errorHandlers[1]=new NullErrorHandler();
 		
-		loaders[0]=new JavaFileLoader();
-		loaders[1]=new NullFileLoader();
-		
 		objLoaders[0]=new HomemadeObjLoader();
 		objLoaders[1]=new NullObjLoader();
 		
@@ -46,7 +40,6 @@ public class Services {
 		data.cleanup();
 		
 		getShader().cleanup();
-		getLoader().cleanup();
 	}
 	
 	//////////////////////////////////
@@ -65,15 +58,6 @@ public class Services {
 	
 	public static CoreConsole getConsole(){
 		return consoles[0];
-	}
-	
-	//////////////////////////////////
-	//Loaders                       //
-	//////////////////////////////////
-	private static CoreFileLoader[] loaders=new CoreFileLoader[2];
-	
-	public static CoreFileLoader getLoader(){
-		return loaders[0];
 	}
 	
 	//////////////////////////////////

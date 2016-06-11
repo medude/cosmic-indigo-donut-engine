@@ -4,15 +4,17 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
 
 import dataTypes.Window;
 
-public class GLFWWindow extends WindowType {
+public class GLFWWindow implements WindowType {
 	private static GLFWErrorCallback errorCallback;
 	private static GLFWKeyCallback keyCallback;
+	private static GLFWWindowSizeCallback resizeCallback;
 	
 	private static GLFWVidMode mode;
 	
@@ -66,6 +68,14 @@ public class GLFWWindow extends WindowType {
 				if(key==GLFW.GLFW_KEY_ESCAPE&&action==GLFW.GLFW_RELEASE){
 					GLFW.glfwSetWindowShouldClose(window, GLFW.GLFW_TRUE);
 				}
+			}
+		});
+		
+		//Resize callback
+		GLFW.glfwSetWindowSizeCallback(window, resizeCallback=new GLFWWindowSizeCallback(){
+			@Override
+			public void invoke(long window, int width, int height) {
+				
 			}
 		});
 		
