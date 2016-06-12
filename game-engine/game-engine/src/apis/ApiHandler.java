@@ -3,6 +3,9 @@ package apis;
 import apis.WindowManager.GLFWWindow;
 import apis.WindowManager.NullWindow;
 import apis.WindowManager.WindowType;
+import apis.console.ConsoleType;
+import apis.console.JavaConsole;
+import apis.console.NullConsole;
 import apis.loader.JavaFileLoader;
 import apis.loader.LoaderType;
 import apis.loader.NullFileLoader;
@@ -10,9 +13,6 @@ import apis.renderer.NullRenderer;
 import apis.renderer.OpenGLRenderer;
 import apis.renderer.RendererType;
 import dataTypes.ModelData;
-import services.console.CoreConsole;
-import services.console.JavaConsole;
-import services.console.NullConsole;
 import services.errorHandler.CoreErrorHandler;
 import services.errorHandler.JavaErrorHandler;
 import services.errorHandler.NullErrorHandler;
@@ -63,9 +63,9 @@ public class ApiHandler {
 		//////////////////////////////////
 		//Consoles                      //
 		//////////////////////////////////
-		private static CoreConsole[] consoles=new CoreConsole[2];
+		private static ConsoleType[] consoles=new ConsoleType[2];
 		
-		public static CoreConsole getConsole(){
+		public static ConsoleType getConsole(){
 			return consoles[0];
 		}
 		

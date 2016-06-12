@@ -28,7 +28,6 @@ public class OpenGLRenderer implements RendererType {
 	
 	@Override
 	public void init(){
-		Services.getConsole().log("Test");
 		GL11.glEnable(GL11.GL_CULL_FACE);
 			GL11.glCullFace(GL11.GL_BACK);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -37,7 +36,6 @@ public class OpenGLRenderer implements RendererType {
 		
 		GL11.glClearColor(1, 1, 1, 0);
 		GL11.glViewport(0, 0, WindowManager.getWidth(), WindowManager.getHeight());
-		Services.getConsole().log(WindowManager.getWidth());
 	}
 	
 	@Override

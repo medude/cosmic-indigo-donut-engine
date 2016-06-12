@@ -3,12 +3,9 @@ package services.errorHandler;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import services.Services;
-import services.console.CoreConsole;
+import apis.console.Console;
 
 public class JavaErrorHandler extends CoreErrorHandler {
-	CoreConsole console=Services.getConsole();
-	
 	@Override
 	public void handle(Throwable throwable){
 		handle(throwable, "Error!", true);
@@ -24,9 +21,9 @@ public class JavaErrorHandler extends CoreErrorHandler {
 		error=errorS.toString();
 		
 		if(doShowError){
-			Services.getConsole().error(message+"\n"+error);
+			Console.error(message+"\n"+error);
 		}else{
-			console.error(message);
+			Console.error(message);
 		}
 		
 		System.exit(-1);
@@ -34,7 +31,7 @@ public class JavaErrorHandler extends CoreErrorHandler {
 
 	@Override
 	public void handle(String message){
-		console.error(message);
+		Console.error(message);
 		
 		System.exit(-1);
 	}

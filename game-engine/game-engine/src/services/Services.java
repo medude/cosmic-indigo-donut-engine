@@ -1,9 +1,6 @@
 package services;
 
 import dataTypes.ModelData;
-import services.console.CoreConsole;
-import services.console.JavaConsole;
-import services.console.NullConsole;
 import services.errorHandler.CoreErrorHandler;
 import services.errorHandler.JavaErrorHandler;
 import services.errorHandler.NullErrorHandler;
@@ -13,8 +10,6 @@ import services.shaders.NullShader;
 
 public class Services {
 	public static void init(){
-		consoles[0]=new JavaConsole();
-		consoles[1]=new NullConsole();
 		
 		errorHandlers[0]=new JavaErrorHandler();
 		errorHandlers[1]=new NullErrorHandler();
@@ -37,15 +32,6 @@ public class Services {
 	
 	public static CoreErrorHandler getErrorHandler(){
 		return errorHandlers[0];
-	}
-	
-	//////////////////////////////////
-	//Consoles                      //
-	//////////////////////////////////
-	private static CoreConsole[] consoles=new CoreConsole[2];
-	
-	public static CoreConsole getConsole(){
-		return consoles[0];
 	}
 	
 	//////////////////////////////////
