@@ -1,4 +1,4 @@
-package services.shaders;
+package apis.shaderManager;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,7 +15,7 @@ import apis.errorHandle.ErrorHandle;
 import dataTypes.Shader;
 import math.Matrix4;
 
-public class GLSLShader extends CoreShader {
+public class GLSLShader implements ShaderType {
 	private List<Integer> shaders=new ArrayList<Integer>();
 	private List<Integer> programs=new ArrayList<Integer>();
 	
@@ -49,42 +49,6 @@ public class GLSLShader extends CoreShader {
 		programs.add(program);
 		
 		return new Shader(program);
-	}
-	
-	@Override
-	public Shader load(String path, String[] variables) {
-		int vertex=0;
-		int fragment=0;
-		
-		path="res/shaders/"+path;
-		
-		//Vertex shader
-		vertex=createShader(path+".vert", GL20.GL_VERTEX_SHADER);
-		
-		//Fragment shader
-		fragment=createShader(path+".frag", GL20.GL_FRAGMENT_SHADER);
-		
-		//Program
-		int program=GL20.glCreateProgram();
-		
-		GL20.glAttachShader(program, vertex);
-		GL20.glAttachShader(program, fragment);
-		
-		GL20.glBindAttribLocation(program, 0, "in_Position");
-		GL20.glBindAttribLocation(program, 2, "in_UV");
-		
-		GL20.glLinkProgram(program);
-		GL20.glValidateProgram(program);
-		
-		Shader shader=new Shader(program);
-		
-		for(String variable:variables){
-			loadVariable(variable, shader, 0);
-		}
-		
-		programs.add(program);
-		
-		return shader;
 	}
 	
 	@Override

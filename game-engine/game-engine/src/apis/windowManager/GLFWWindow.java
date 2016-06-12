@@ -1,4 +1,4 @@
-package apis.WindowManager;
+package apis.windowManager;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;

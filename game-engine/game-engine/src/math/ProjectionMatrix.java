@@ -1,6 +1,6 @@
 package math;
 
-import apis.WindowManager.WindowManager;
+import apis.windowManager.WindowManager;
 
 public class ProjectionMatrix {
 	//Imagine the name without the X. (This is needed to access them as globals in a static context.)

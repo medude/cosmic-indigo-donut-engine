@@ -1,10 +1,11 @@
 package main;
 
 import apis.ApiHandler;
-import apis.WindowManager.WindowManager;
 import apis.errorHandle.ErrorHandle;
 import apis.loader.Loader;
 import apis.renderer.Renderer;
+import apis.shaderManager.ShaderManager;
+import apis.windowManager.WindowManager;
 import components.Thing;
 import components.ThingManager;
 import components.types.ModelComponent;
@@ -14,7 +15,6 @@ import dataTypes.ModelData;
 import dataTypes.Shader;
 import dataTypes.Texture;
 import dataTypes.Window;
-import services.Services;
 
 public class Main {
 	public static void main(String[] args){
@@ -24,12 +24,11 @@ public class Main {
 	
 	public void run(){
 		try{
-			Services.init();
 			ApiHandler.init();
 			Window window=WindowManager.create("Test \"Game\"");
 			
 			ModelData rectangle=Loader.loadOBJ("stall");
-			Shader shader=Services.getShader().load("shader");
+			Shader shader=ShaderManager.load("shader");
 			Texture texture=Loader.loadImage("stallTexture");
 			
 			Thing thing=ThingManager.makeThing();
@@ -47,7 +46,6 @@ public class Main {
 		}catch(Throwable e){
 			ErrorHandle.handle(e);
 		}finally{
-			Services.cleanup();
 			ApiHandler.cleanup();
 		}
 	}

@@ -1,9 +1,9 @@
-package services.shaders;
+package apis.shaderManager;
 
 import dataTypes.Shader;
 import math.Matrix4;
 
-public class NullShader extends CoreShader {
+public class NullShader implements ShaderType {
 	@Override
 	public Shader load(String path){return null;}
 
@@ -15,7 +15,4 @@ public class NullShader extends CoreShader {
 	
 	@Override
 	public void loadVariable(String name, Shader shader, Matrix4 value){}
-	
-	@Override
-	public Shader load(String path, String[] variables){return null;}
 }

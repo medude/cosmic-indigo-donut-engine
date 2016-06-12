@@ -1,4 +1,4 @@
-package apis.WindowManager;
+package apis.windowManager;
 
 import dataTypes.Window;
 

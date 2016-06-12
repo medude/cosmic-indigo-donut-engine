@@ -1,8 +1,5 @@
 package apis;
 
-import apis.WindowManager.GLFWWindow;
-import apis.WindowManager.NullWindow;
-import apis.WindowManager.WindowType;
 import apis.console.ConsoleType;
 import apis.console.JavaConsole;
 import apis.console.NullConsole;
@@ -15,10 +12,13 @@ import apis.loader.NullFileLoader;
 import apis.renderer.NullRenderer;
 import apis.renderer.OpenGLRenderer;
 import apis.renderer.RendererType;
+import apis.shaderManager.GLSLShader;
+import apis.shaderManager.NullShader;
+import apis.shaderManager.ShaderType;
+import apis.windowManager.GLFWWindow;
+import apis.windowManager.NullWindow;
+import apis.windowManager.WindowType;
 import dataTypes.ModelData;
-import services.shaders.CoreShader;
-import services.shaders.GLSLShader;
-import services.shaders.NullShader;
 
 public class ApiHandler {
 		public static void init(){
@@ -100,9 +100,9 @@ public class ApiHandler {
 		//////////////////////////////////
 		//Shader                        //
 		//////////////////////////////////
-		private static CoreShader[] shaders=new CoreShader[2];
+		private static ShaderType[] shaders=new ShaderType[2];
 		
-		public static CoreShader getShader(){
+		public static ShaderType getShader(){
 			return shaders[0];
 		}
 }

@@ -9,7 +9,8 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-import apis.WindowManager.WindowManager;
+import apis.shaderManager.ShaderManager;
+import apis.windowManager.WindowManager;
 import components.Thing;
 import components.types.ModelComponent;
 import components.types.ShaderComponent;
@@ -20,7 +21,6 @@ import math.Matrix4;
 import math.ProjectionMatrix;
 import math.TransformationMatrix;
 import math.Vector3;
-import services.Services;
 
 public class OpenGLRenderer implements RendererType {
 	private List<Thing> things=new ArrayList<Thing>();
@@ -53,7 +53,7 @@ public class OpenGLRenderer implements RendererType {
 			
 			GL20.glUseProgram(shader.getID());
 			
-			Services.getShader().loadVariable("projection", shader, projectionMatrix);
+			ShaderManager.loadVariable("projection", shader, projectionMatrix);
 			
 			GL30.glBindVertexArray(data.getVAOID());
 			GL20.glEnableVertexAttribArray(0);
@@ -62,7 +62,7 @@ public class OpenGLRenderer implements RendererType {
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((TextureComponent) thing.getComponent("TextureComponent")).getTexture().getID());
 			
-			Services.getShader().loadVariable("transformation", shader, TransformationMatrix.create(new Vector3(0, -2.5f, -20f), new Vector3(0, rot, 0), 1));
+			ShaderManager.loadVariable("transformation", shader, TransformationMatrix.create(new Vector3(0, -2.5f, -20f), new Vector3(0, rot, 0), 1));
 			rot++;
 			
 			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, data.getIndiciesID());
