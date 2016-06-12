@@ -6,6 +6,7 @@ import components.Thing;
 public class Renderer {
 	private static RendererType rendererObject=ApiHandler.getRenderer();
 	public static void init(){
+		rendererObject.init();
 	}
 	
 	public static void add(Thing thing){

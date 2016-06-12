@@ -27,7 +27,7 @@ public class Main {
 			ApiHandler.init();
 			Window window=WindowManager.create("Test \"Game\"");
 			
-			ModelData rectangle=Loader.loadOBJ("stall");
+			ModelData rectangle=Loader.loadOBJ("Plane");
 			Shader shader=Services.getShader().load("shader");
 			Texture texture=Loader.loadImage("stallTexture");
 			

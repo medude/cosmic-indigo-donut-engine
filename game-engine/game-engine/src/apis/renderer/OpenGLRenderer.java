@@ -28,6 +28,7 @@ public class OpenGLRenderer implements RendererType {
 	
 	@Override
 	public void init(){
+		Services.getConsole().log("Test");
 		GL11.glEnable(GL11.GL_CULL_FACE);
 			GL11.glCullFace(GL11.GL_BACK);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -36,6 +37,7 @@ public class OpenGLRenderer implements RendererType {
 		
 		GL11.glClearColor(1, 1, 1, 0);
 		GL11.glViewport(0, 0, WindowManager.getWidth(), WindowManager.getHeight());
+		Services.getConsole().log(WindowManager.getWidth());
 	}
 	
 	@Override
@@ -62,7 +64,7 @@ public class OpenGLRenderer implements RendererType {
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((TextureComponent) thing.getComponent("TextureComponent")).getTexture().getID());
 			
-			Services.getShader().loadVariable("transformation", shader, TransformationMatrix.create(new Vector3(0, -2.5f, -20), new Vector3(0, rot, 0), 1));
+			Services.getShader().loadVariable("transformation", shader, TransformationMatrix.create(new Vector3(0, 0, -4f), new Vector3(90, rot, 0), 1));
 			rot++;
 			
 			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, data.getIndiciesID());

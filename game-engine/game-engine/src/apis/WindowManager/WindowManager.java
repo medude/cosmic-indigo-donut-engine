@@ -18,6 +18,10 @@ public class WindowManager {
 		return windowObject.create(title, windowObject.getScreenHeight(), windowObject.getScreenWidth());
 	}
 	
+	public static Window create(){
+		return windowObject.create("Game", windowObject.getScreenHeight(), windowObject.getScreenWidth());
+	}
+	
 	public static void close(Window window){
 		windowObject.close(window);
 	}
