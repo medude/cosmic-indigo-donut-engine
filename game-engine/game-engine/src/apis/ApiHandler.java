@@ -6,6 +6,9 @@ import apis.WindowManager.WindowType;
 import apis.console.ConsoleType;
 import apis.console.JavaConsole;
 import apis.console.NullConsole;
+import apis.errorHandle.ErrorHandleType;
+import apis.errorHandle.JavaErrorHandler;
+import apis.errorHandle.NullErrorHandler;
 import apis.loader.JavaFileLoader;
 import apis.loader.LoaderType;
 import apis.loader.NullFileLoader;
@@ -13,9 +16,6 @@ import apis.renderer.NullRenderer;
 import apis.renderer.OpenGLRenderer;
 import apis.renderer.RendererType;
 import dataTypes.ModelData;
-import services.errorHandler.CoreErrorHandler;
-import services.errorHandler.JavaErrorHandler;
-import services.errorHandler.NullErrorHandler;
 import services.shaders.CoreShader;
 import services.shaders.GLSLShader;
 import services.shaders.NullShader;
@@ -54,9 +54,9 @@ public class ApiHandler {
 		//////////////////////////////////
 		//Error Handlers                //
 		//////////////////////////////////
-		private static CoreErrorHandler[] errorHandlers=new CoreErrorHandler[2];
+		private static ErrorHandleType[] errorHandlers=new ErrorHandleType[2];
 		
-		public static CoreErrorHandler getErrorHandler(){
+		public static ErrorHandleType getErrorHandler(){
 			return errorHandlers[0];
 		}
 		

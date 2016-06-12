@@ -1,16 +1,11 @@
-package services.errorHandler;
+package apis.errorHandle;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import apis.console.Console;
 
-public class JavaErrorHandler extends CoreErrorHandler {
-	@Override
-	public void handle(Throwable throwable){
-		handle(throwable, "Error!", true);
-	}
-
+public class JavaErrorHandler implements ErrorHandleType {
 	@Override
 	public void handle(Throwable throwable, String message, boolean doShowError){
 		StringWriter errorS=new StringWriter();
@@ -25,13 +20,6 @@ public class JavaErrorHandler extends CoreErrorHandler {
 		}else{
 			Console.error(message);
 		}
-		
-		System.exit(-1);
-	}
-
-	@Override
-	public void handle(String message){
-		Console.error(message);
 		
 		System.exit(-1);
 	}

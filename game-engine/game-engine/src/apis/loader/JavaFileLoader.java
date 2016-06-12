@@ -20,12 +20,12 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL30;
 
+import apis.errorHandle.ErrorHandle;
 import dataTypes.ModelData;
 import dataTypes.TextFile;
 import dataTypes.Texture;
 import math.Vector2;
 import math.Vector3;
-import services.Services;
 
 public class JavaFileLoader implements LoaderType {
 	public List<Integer> images=new ArrayList<Integer>();
@@ -59,7 +59,7 @@ public class JavaFileLoader implements LoaderType {
 			return new TextFile(lineList);
 			
 		} catch(IOException e){
-			Services.getErrorHandler().handle(e);
+			ErrorHandle.handle(e);
 		}
 		
 		return null;
@@ -73,7 +73,7 @@ public class JavaFileLoader implements LoaderType {
 		try{
 			image=ImageIO.read(new File("res/images/"+filename+".png"));
 		}catch(IOException e){
-			Services.getErrorHandler().handle(e);
+			ErrorHandle.handle(e);
 		}
 		
 		int[] pixels=new int[image.getWidth() * image.getHeight()];
@@ -127,8 +127,7 @@ public class JavaFileLoader implements LoaderType {
 		try {
 			fr=new FileReader(new File("res/"+filename+".obj"));
 		} catch (FileNotFoundException e) {
-			System.err.println("Model data "+filename+".obj not found in res/ folder!");
-			e.printStackTrace();
+			ErrorHandle.handle(e, "File "+filename+".obj was not found in the res directory.", false);
 		}
 		
 		BufferedReader reader=new BufferedReader(fr);

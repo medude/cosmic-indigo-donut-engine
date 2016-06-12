@@ -2,6 +2,7 @@ package main;
 
 import apis.ApiHandler;
 import apis.WindowManager.WindowManager;
+import apis.errorHandle.ErrorHandle;
 import apis.loader.Loader;
 import apis.renderer.Renderer;
 import components.Thing;
@@ -27,7 +28,7 @@ public class Main {
 			ApiHandler.init();
 			Window window=WindowManager.create("Test \"Game\"");
 			
-			ModelData rectangle=Loader.loadOBJ("Plane");
+			ModelData rectangle=Loader.loadOBJ("stall");
 			Shader shader=Services.getShader().load("shader");
 			Texture texture=Loader.loadImage("stallTexture");
 			
@@ -44,7 +45,7 @@ public class Main {
 			}
 			
 		}catch(Throwable e){
-			Services.getErrorHandler().handle(e);
+			ErrorHandle.handle(e);
 		}finally{
 			Services.cleanup();
 			ApiHandler.cleanup();
