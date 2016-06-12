@@ -1,15 +1,20 @@
 package main;
 
+import apis.ApiHandler;
+import apis.errorHandle.ErrorHandle;
+import apis.loader.Loader;
+import apis.renderer.Renderer;
+import apis.shaderManager.ShaderManager;
+import apis.windowManager.WindowManager;
 import components.Thing;
 import components.ThingManager;
 import components.types.ModelComponent;
 import components.types.ShaderComponent;
 import components.types.TextureComponent;
-import coreFunctions.Window;
 import dataTypes.ModelData;
 import dataTypes.Shader;
 import dataTypes.Texture;
-import services.Services;
+import dataTypes.Window;
 
 public class Main {
 	public static void main(String[] args){
@@ -19,26 +24,29 @@ public class Main {
 	
 	public void run(){
 		try{
-			Services.init();
-			Window.create("Test \"Game\"");
+			ApiHandler.init();
+			Window window=WindowManager.create("Test \"Game\"");
 			
-			ModelData rectangle=Services.getOBJLoader().parse("stall");
-			Shader shader=Services.getShader().load("shader");
-			Texture texture=Services.getLoader().loadImage("stallTexture");
+			ModelData rectangle=Loader.loadOBJ("stall");
+			Shader shader=ShaderManager.load("shader");
+			Texture texture=Loader.loadImage("stallTexture");
 			
 			Thing thing=ThingManager.makeThing();
 			thing.addComponent(new TextureComponent(texture));
 			thing.addComponent(new ModelComponent(rectangle));
 			thing.addComponent(new ShaderComponent(shader));
 			
-			Services.getRenderer().add(thing);
+			Renderer.add(thing);
 			
-			while(Window.isOpen()){
-				Services.getRenderer().render();
-				Window.refresh();
+			while(WindowManager.testForClose(window)){
+				Renderer.render();
+				WindowManager.update(window);
 			}
+			
+		}catch(Throwable e){
+			ErrorHandle.handle(e);
 		}finally{
-			Services.cleanup();
+			ApiHandler.cleanup();
 		}
 	}
 }
