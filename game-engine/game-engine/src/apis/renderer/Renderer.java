@@ -1,7 +1,7 @@
 package apis.renderer;
 
 import apis.ApiHandler;
-import scene.Thing;
+import scene.Scene;
 
 public class Renderer {
 	private static RendererType rendererObject=ApiHandler.getRenderer();
@@ -9,8 +9,8 @@ public class Renderer {
 		rendererObject.init();
 	}
 	
-	public static void add(Thing thing){
-		rendererObject.add(thing);
+	public static void add(Scene scene){
+		rendererObject.add(scene);
 	}
 	
 	public static void render(){

@@ -9,10 +9,12 @@ import apis.windowManager.WindowManager;
 import components.types.ModelComponent;
 import components.types.ShaderComponent;
 import components.types.TextureComponent;
+import components.types.TransformComponent;
 import dataTypes.ModelData;
 import dataTypes.Shader;
 import dataTypes.Texture;
 import dataTypes.Window;
+import math.TransformationMatrix;
 import math.Vector3;
 import scene.Thing;
 import scene.Area;
@@ -39,12 +41,13 @@ public class Main {
 			thing.addComponent(new TextureComponent(texture));
 			thing.addComponent(new ModelComponent(rectangle));
 			thing.addComponent(new ShaderComponent(shader));
+			thing.addComponent(new TransformComponent(TransformationMatrix.create(new Vector3(0, -2.5f, -20), new Vector3(0, 0, 0), 1)));
 			
 			Group group=new Group(new Vector3(0, 0, 0), null, new Thing[]{thing});
 			Area area=new Area(new Group[]{group});
 			Scene scene=new Scene(new Area[]{area}, null);
 			
-			Renderer.add(thing);
+			Renderer.add(scene);
 			
 			while(WindowManager.testForClose(window)){
 				Renderer.render();

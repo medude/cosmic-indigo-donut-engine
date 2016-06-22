@@ -1,13 +1,13 @@
 package apis.renderer;
 
-import scene.Thing;
+import scene.Scene;
 
 public class NullRenderer implements RendererType {
 	@Override
 	public void render(){}
 
 	@Override
-	public void add(Thing thing){}
+	public void add(Scene scene){}
 
 	@Override
 	public void init(){}

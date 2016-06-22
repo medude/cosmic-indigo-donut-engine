@@ -14,15 +14,18 @@ import apis.windowManager.WindowManager;
 import components.types.ModelComponent;
 import components.types.ShaderComponent;
 import components.types.TextureComponent;
+import components.types.TransformComponent;
 import dataTypes.ModelData;
 import dataTypes.Shader;
 import math.Matrix4;
 import math.ProjectionMatrix;
 import math.TransformationMatrix;
 import math.Vector3;
+import scene.Scene;
 import scene.Thing;
 
 public class OpenGLRenderer implements RendererType {
+	private Scene currentScene;
 	private List<Thing> things=new ArrayList<Thing>();
 	private Matrix4 projectionMatrix;
 	
@@ -39,8 +42,9 @@ public class OpenGLRenderer implements RendererType {
 	}
 	
 	@Override
-	public void add(Thing thing){
-		things.add(thing);
+	public void add(Scene scene){
+		currentScene=scene;
+		things.add(scene.children[0].children[0].thingChildren[0]);
 	}
 	
 	private float rot=0;
@@ -62,8 +66,7 @@ public class OpenGLRenderer implements RendererType {
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((TextureComponent) thing.getComponent("TextureComponent")).getTexture().getID());
 			
-			ShaderManager.loadVariable("transformation", shader, TransformationMatrix.create(new Vector3(0, -2.5f, -20f), new Vector3(0, rot, 0), 1));
-			rot++;
+			ShaderManager.loadVariable("transformation", shader, ((TransformComponent) thing.getComponent("TransformComponent")).getTransform());
 			
 			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, data.getIndiciesID());
 			
