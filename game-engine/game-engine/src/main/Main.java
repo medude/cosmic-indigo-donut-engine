@@ -13,7 +13,11 @@ import dataTypes.ModelData;
 import dataTypes.Shader;
 import dataTypes.Texture;
 import dataTypes.Window;
+import math.Vector3;
 import scene.Thing;
+import scene.Area;
+import scene.Group;
+import scene.Scene;
 import scene.SceneManager;
 
 public class Main {
@@ -35,6 +39,10 @@ public class Main {
 			thing.addComponent(new TextureComponent(texture));
 			thing.addComponent(new ModelComponent(rectangle));
 			thing.addComponent(new ShaderComponent(shader));
+			
+			Group group=new Group(new Vector3(0, 0, 0), null, new Thing[]{thing});
+			Area area=new Area(new Group[]{group});
+			Scene scene=new Scene(new Area[]{area}, null);
 			
 			Renderer.add(thing);
 			

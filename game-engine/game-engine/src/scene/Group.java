@@ -3,9 +3,9 @@ package scene;
 import math.Vector3;
 
 public class Group {
-	Vector3 position=new Vector3();
-	Group[] groupChildren;
-	Thing[] thingChildren;
+	public Vector3 position=new Vector3();
+	public Group[] groupChildren;
+	public Thing[] thingChildren;
 	
 	public Group(Vector3 position, Group[] groupChildren, Thing[] thingChildren){
 		this.position=position;
