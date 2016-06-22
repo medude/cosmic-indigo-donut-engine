@@ -1,6 +1,8 @@
-package components;
+package scene;
 
 import java.util.HashMap;
+
+import components.Component;
 
 public class Thing {
 	private int id;

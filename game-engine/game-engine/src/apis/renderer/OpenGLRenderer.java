@@ -11,7 +11,6 @@ import org.lwjgl.opengl.GL30;
 
 import apis.shaderManager.ShaderManager;
 import apis.windowManager.WindowManager;
-import components.Thing;
 import components.types.ModelComponent;
 import components.types.ShaderComponent;
 import components.types.TextureComponent;
@@ -21,6 +20,7 @@ import math.Matrix4;
 import math.ProjectionMatrix;
 import math.TransformationMatrix;
 import math.Vector3;
+import scene.Thing;
 
 public class OpenGLRenderer implements RendererType {
 	private List<Thing> things=new ArrayList<Thing>();

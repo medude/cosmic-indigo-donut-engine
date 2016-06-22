@@ -1,6 +1,6 @@
 package apis.renderer;
 
-import components.Thing;
+import scene.Thing;
 
 public class NullRenderer implements RendererType {
 	@Override

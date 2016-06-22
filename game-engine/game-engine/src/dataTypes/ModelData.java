@@ -18,19 +18,21 @@ public class ModelData {
 	private int vaoID=0;
 	private int indiciesID=0;
 	
-	private float[] positions={};
-	private int[] indicies={};
-	private float[] normals={};
-	private float[] uv={};
+	//private float[] positions={};
+	//private int[] indicies={};
+	//private float[] normals={};
+	//private float[] uv={};
 	
 	private int vertexCount;
 	
 	public ModelData(float[] positions, int[] indicies){
-		create(positions, indicies, normals, uv);
+		//create(positions, indicies, normals, uv);
+		create(positions, indicies, new float[0], new float[0]);
 	}
 	
 	public ModelData(float[] positions, int[] indicies, float[] normals){
-		create(positions, indicies, normals, uv);
+		//create(positions, indicies, normals, uv);
+		create(positions, indicies, normals, new float[0]);
 	}
 	
 	public ModelData(float[] positions, int[] indicies, float[] normals, float[] uv){
@@ -38,11 +40,11 @@ public class ModelData {
 	}
 
 	private void create(float[] positions, int[] indicies, float[] normals, float[] uv){
-		this.positions=positions;
-		this.indicies=indicies;
+		//this.positions=positions;
+		//this.indicies=indicies;
+		//this.normals=normals;
+		//this.uv=uv;
 		this.vertexCount=indicies.length;
-		this.normals=normals;
-		this.uv=uv;
 		
 		FloatBuffer positionsBuffer=storeInBuffer(positions);
 		IntBuffer indiciesBuffer=storeInBuffer(indicies);
@@ -77,21 +79,21 @@ public class ModelData {
 		unbindIndiciesVBO();
 	}
 	
-	public float[] getPositions(){
-		return positions;
-	}
-	
-	public float[] getNormals(){
-		return normals;
-	}
-	
-	public float[] getUv(){
-		return uv;
-	}
-	
-	public int[] getIndicies(){
-		return indicies;
-	}
+	//public float[] getPositions(){
+	//	return positions;
+	//}
+	//
+	//public float[] getNormals(){
+	//	return normals;
+	//}
+	//
+	//public float[] getUv(){
+	//	return uv;
+	//}
+	//
+	//public int[] getIndicies(){
+	//	return indicies;
+	//}
 
 	public int getVertexCount(){
 		return vertexCount;

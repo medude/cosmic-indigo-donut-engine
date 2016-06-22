@@ -6,8 +6,6 @@ import apis.loader.Loader;
 import apis.renderer.Renderer;
 import apis.shaderManager.ShaderManager;
 import apis.windowManager.WindowManager;
-import components.Thing;
-import components.ThingManager;
 import components.types.ModelComponent;
 import components.types.ShaderComponent;
 import components.types.TextureComponent;
@@ -15,6 +13,8 @@ import dataTypes.ModelData;
 import dataTypes.Shader;
 import dataTypes.Texture;
 import dataTypes.Window;
+import scene.Thing;
+import scene.SceneManager;
 
 public class Main {
 	public static void main(String[] args){
@@ -31,7 +31,7 @@ public class Main {
 			Shader shader=ShaderManager.load("shader");
 			Texture texture=Loader.loadImage("stallTexture");
 			
-			Thing thing=ThingManager.makeThing();
+			Thing thing=SceneManager.makeThing();
 			thing.addComponent(new TextureComponent(texture));
 			thing.addComponent(new ModelComponent(rectangle));
 			thing.addComponent(new ShaderComponent(shader));

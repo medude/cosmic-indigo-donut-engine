@@ -1,7 +1,7 @@
 package apis.renderer;
 
 import apis.ApiHandler;
-import components.Thing;
+import scene.Thing;
 
 public class Renderer {
 	private static RendererType rendererObject=ApiHandler.getRenderer();
