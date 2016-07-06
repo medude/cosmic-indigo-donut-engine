@@ -33,9 +33,9 @@ public class Main {
 			ApiHandler.init();
 			Window window=WindowManager.create("Test \"Game\"");
 			
-			ModelData rectangle=Loader.loadOBJ("stall");
+			ModelData rectangle=Loader.loadOBJ("Plane");
 			Shader shader=ShaderManager.load("shader");
-			Texture texture=Loader.loadImage("stallTexture");
+			Texture texture=Loader.loadImage("test");
 			
 			Thing thing=SceneManager.makeThing();
 			thing.addComponent(new TextureComponent(texture));
@@ -49,7 +49,24 @@ public class Main {
 			
 			Renderer.add(scene);
 			
+			double rot = 0;
+			boolean forward = false;
+			
 			while(WindowManager.testForClose(window)){
+				thing.updateComponent("TransformComponent", new TransformComponent(TransformationMatrix.create(new Vector3(0, 0, -rot), new Vector3(90, rot, 0), 1)));
+				
+				if(rot == 180) {
+					forward = true;
+				} else if(rot == 5) {
+					forward = false;
+				}
+				
+				if(forward) {
+					rot--;
+				} else {
+					rot++;
+				}
+				
 				Renderer.render();
 				WindowManager.update(window);
 			}

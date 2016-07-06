@@ -44,7 +44,7 @@ public class ApiHandler {
 		}
 		
 		public static void cleanup(){
-			ModelData data=new ModelData(new float[0], new int[0]);
+			ModelData data=new ModelData(new double[0], new int[0]);
 			data.cleanup();
 			
 			getShader().cleanup();
