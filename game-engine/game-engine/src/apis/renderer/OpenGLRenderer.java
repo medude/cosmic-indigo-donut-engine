@@ -19,8 +19,6 @@ import dataTypes.ModelData;
 import dataTypes.Shader;
 import math.Matrix4;
 import math.ProjectionMatrix;
-import math.TransformationMatrix;
-import math.Vector3;
 import scene.Scene;
 import scene.Thing;
 
@@ -44,10 +42,8 @@ public class OpenGLRenderer implements RendererType {
 	@Override
 	public void add(Scene scene){
 		currentScene=scene;
-		things.add(scene.children[0].children[0].thingChildren[0]);
+		things.add((Thing) scene.children[0].children[0].children[0]);
 	}
-	
-	private float rot=0;
 	
 	@Override
 	public void render(){

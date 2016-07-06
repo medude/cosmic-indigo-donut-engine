@@ -6,7 +6,7 @@ public class ErrorHandle {
 	private static ErrorHandleType errorObject=ApiHandler.getErrorHandler();
 	
 	public static void handle(Throwable throwable){
-		errorObject.handle(throwable, "Error!", true);
+		errorObject.handle(throwable, null, true);
 	}
 	
 	public static void handle(Throwable throwable, String message, boolean showError){

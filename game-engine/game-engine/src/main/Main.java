@@ -43,7 +43,7 @@ public class Main {
 			thing.addComponent(new ShaderComponent(shader));
 			thing.addComponent(new TransformComponent(TransformationMatrix.create(new Vector3(0, -2.5f, -20), new Vector3(0, 0, 0), 1)));
 			
-			Group group=new Group(new Vector3(0, 0, 0), null, new Thing[]{thing});
+			Group group=new Group(new Vector3(0, 0, 0), new Thing[]{thing});
 			Area area=new Area(new Group[]{group});
 			Scene scene=new Scene(new Area[]{area}, null);
 			

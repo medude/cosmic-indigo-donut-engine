@@ -1,9 +1,16 @@
 package scene;
 
-public class Area {
-	public Group[] children;
-
-	public Area(Group[] children){
+public class Area extends Node {
+	public Node[] children;
+	
+	public Area(Node[] children){
+		super("area");
+		for(Node child:children){
+			if(!child.isType("group")){
+				throw new IllegalArgumentException("An object of type " + child.getType() + " was assigned as a child of an area.");
+			}
+		}
+		
 		this.children=children;
 	}
 }
