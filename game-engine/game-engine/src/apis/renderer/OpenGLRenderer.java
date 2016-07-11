@@ -30,8 +30,9 @@ public class OpenGLRenderer implements RendererType {
 	@Override
 	public void init(){
 		GL11.glEnable(GL11.GL_CULL_FACE);
-			GL11.glCullFace(GL11.GL_BACK);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		
+		GL11.glCullFace(GL11.GL_BACK);
 		
 		projectionMatrix=ProjectionMatrix.create();
 		
@@ -62,7 +63,7 @@ public class OpenGLRenderer implements RendererType {
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((TextureComponent) thing.getComponent("TextureComponent")).getTexture().getID());
 			
-			ShaderManager.loadVariable("transformation", shader, ((TransformComponent) thing.getComponent("TransformComponent")).getTransform());
+			ShaderManager.loadVariable("transformation", shader, ((TransformComponent) thing.getComponent("TransformComponent")).transform);
 			
 			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, data.getIndiciesID());
 			

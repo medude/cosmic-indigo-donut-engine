@@ -2,14 +2,17 @@ package scene;
 
 import java.util.HashMap;
 
+import apis.console.Console;
 import components.Component;
 import components.types.TransformComponent;
 import math.MatrixMath;
+import math.TransformationMatrix;
+import math.Vector3;
 
 public abstract class Node {
-	public TransformComponent localTransform;
-	public TransformComponent worldTransform;
-	
+	public TransformComponent localTransform = new TransformComponent(TransformationMatrix.create(new Vector3(0), new Vector3(0), 1));
+	// World transform is stored in the transform component.
+		
 	public Node[] children = {};
 	
 	private HashMap <String, Component> components = new HashMap <String, Component>();
@@ -25,8 +28,11 @@ public abstract class Node {
 	public void calculateChildTransform() {
 		for(Node child:children) {
 			if(child.dirtyFlag) {
-				child.worldTransform = new TransformComponent(MatrixMath.dotProduct(this.worldTransform.getTransform(),
-						child.localTransform.getTransform()));
+				TransformComponent transformation = new TransformComponent(MatrixMath.dotProduct(
+						((TransformComponent) this.getComponent("TransformComponent")).transform,
+						child.localTransform.transform));
+				
+				child.updateComponent("TransformComponent", transformation);
 				
 				child.dirtyFlag = false;
 			}

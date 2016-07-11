@@ -1,6 +1,7 @@
 package main;
 
 import apis.ApiHandler;
+import apis.console.Console;
 import apis.errorHandle.ErrorHandle;
 import apis.loader.Loader;
 import apis.renderer.Renderer;
@@ -41,7 +42,8 @@ public class Main {
 			thing.addComponent(new TextureComponent(texture));
 			thing.addComponent(new ModelComponent(rectangle));
 			thing.addComponent(new ShaderComponent(shader));
-			thing.addComponent(new TransformComponent(TransformationMatrix.create(new Vector3(0, -2.5f, -20), new Vector3(0, 0, 0), 1)));
+			thing.addComponent(new TransformComponent(TransformationMatrix.create(new Vector3(0, -2.5f, -20),
+					new Vector3(0, 0, 0), 1)));
 			
 			Group group=new Group(new Vector3(0, 0, 0), new Thing[]{thing});
 			Area area=new Area(new Group[]{group});
@@ -52,8 +54,13 @@ public class Main {
 			double rot = 0;
 			boolean forward = false;
 			
-			while(WindowManager.testForClose(window)){
-				thing.updateComponent("TransformComponent", new TransformComponent(TransformationMatrix.create(new Vector3(0, 0, -rot), new Vector3(90, rot, 0), 1)));
+			while(WindowManager.testForClose(window)) {
+				group.localTransform = new TransformComponent(TransformationMatrix.create(new Vector3(0, 0, -rot),
+						new Vector3(90, rot, 0), 1));
+				
+				scene.calculateChildTransform();
+				
+				Console.log(((TransformComponent) scene.getComponent("TransformComponent")).transform.toString());
 				
 				if(rot == 180) {
 					forward = true;
