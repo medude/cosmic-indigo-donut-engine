@@ -1,16 +1,3 @@
-/dataTypes/
-/services/
-/thing/
-<<<<<<< HEAD
-/externalLibraries/
 /main/
-/math/
-=======
-/components/
-/coreFunctions/
-/externalLibraries/
-/main/
-/math/
 /scene/
 /apis/
->>>>>>> branch 'master' of https://github.com/medude/cosmic-indigo-game-engine.git

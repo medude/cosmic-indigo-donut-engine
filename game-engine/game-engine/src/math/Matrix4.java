@@ -4,144 +4,168 @@ import java.nio.FloatBuffer;
 
 public class Matrix4 {
 	
+	public double[][] m = {
+			{ 1, 0, 0, 0 },
+			{ 0, 1, 0, 0 },
+			{ 0, 0, 1, 0 },
+			{ 0, 0, 0, 1 }
+	};
 	
-	public float m00=1;	public float m10=0;	public float m20=0;	public float m30=0;
+	public Vector3 position = new Vector3(0);
 	
-	
-	public float m01=0;	public float m11=1;	public float m21=0;	public float m31=0;
-	
-	
-	public float m02=0;	public float m12=0;	public float m22=1;	public float m32=0;
-	
-	
-	public float m03=0;	public float m13=0;	public float m23=0;	public float m33=1;
-	
-	
-	public void translate(Vector3 vec){
-		this.m30+=this.m00*vec.x+this.m10*vec.y+this.m20*vec.z;
-		this.m31+=this.m01*vec.x+this.m11*vec.y+this.m21*vec.z;
-		this.m32+=this.m02*vec.x+this.m12*vec.y+this.m22*vec.z;
-		this.m33+=this.m03*vec.x+this.m13*vec.y+this.m23*vec.z;
+	public void translate(Vector3 vec) {
+		this.m[3][0] += this.m[0][0] * vec.x + this.m[1][0] * vec.y + this.m[2][0] * vec.z;
+		this.m[3][1] += this.m[0][1] * vec.x + this.m[1][1] * vec.y + this.m[2][1] * vec.z;
+		this.m[3][2] += this.m[0][2] * vec.x + this.m[1][2] * vec.y + this.m[2][2] * vec.z;
+		this.m[3][3] += this.m[0][3] * vec.x + this.m[1][3] * vec.y + this.m[2][3] * vec.z;
+		
+		position.x += vec.x;
+		position.y += vec.y;
+		position.z += vec.z;
 	}
 	
-	public void rotate(float degrees, Vector3 axis){
-		degrees=(float) Math.toRadians(degrees);
-		float c=(float) Math.cos(degrees);
-		float s=(float) Math.sin(degrees);
-		float oneMinusC=1-c;
-		float xy=axis.x*axis.y;
-		float yz=axis.y*axis.z;
-		float xz=axis.x*axis.z;
-		float xs=axis.x*s;
-		float ys=axis.y*s;
-		float zs=axis.z*s;
+	public void rotate(double degrees, Vector3 axis) {
+		degrees = Math.toRadians(degrees);
+		double c = Math.cos(degrees);
+		double s = Math.sin(degrees);
+		double oneMinusC = 1 - c;
+		double xy = axis.x * axis.y;
+		double yz = axis.y * axis.z;
+		double xz = axis.x * axis.z;
+		double xs = axis.x * s;
+		double ys = axis.y * s;
+		double zs = axis.z * s;
 
-		float f00=axis.x*axis.x*oneMinusC+c;
-		float f01=xy*oneMinusC+zs;
-		float f02=xz*oneMinusC-ys;
+		double f00 = axis.x * axis.x * oneMinusC + c;
+		double f01 = xy * oneMinusC + zs;
+		double f02 = xz * oneMinusC - ys;
 		//n[3] not used
-		float f10=xy*oneMinusC-zs;
-		float f11=axis.y*axis.y*oneMinusC+c;
-		float f12=yz*oneMinusC+xs;
+		double f10 = xy * oneMinusC - zs;
+		double f11 = axis.y * axis.y * oneMinusC + c;
+		double f12 = yz * oneMinusC + xs;
 		//n[7] not used
-		float f20=xz*oneMinusC+ys;
-		float f21=yz*oneMinusC-xs;
-		float f22=axis.z*axis.z*oneMinusC+c;
+		double f20 = xz * oneMinusC + ys;
+		double f21 = yz * oneMinusC - xs;
+		double f22 = axis.z * axis.z * oneMinusC + c;
 
-		float t00=this.m00*f00+this.m10*f01+this.m20*f02;
-		float t01=this.m01*f00+this.m11*f01+this.m21*f02;
-		float t02=this.m02*f00+this.m12*f01+this.m22*f02;
-		float t03=this.m03*f00+this.m13*f01+this.m23*f02;
-		float t10=this.m00*f10+this.m10*f11+this.m20*f12;
-		float t11=this.m01*f10+this.m11*f11+this.m21*f12;
-		float t12=this.m02*f10+this.m12*f11+this.m22*f12;
-		float t13=this.m03*f10+this.m13*f11+this.m23*f12;
-		this.m20=this.m00*f20+this.m10*f21+this.m20*f22;
-		this.m21=this.m01*f20+this.m11*f21+this.m21*f22;
-		this.m22=this.m02*f20+this.m12*f21+this.m22*f22;
-		this.m23=this.m03*f20+this.m13*f21+this.m23*f22;
-		this.m00=t00;
-		this.m01=t01;
-		this.m02=t02;
-		this.m03=t03;
-		this.m10=t10;
-		this.m11=t11;
-		this.m12=t12;
-		this.m13=t13;
+		double t00 = this.m[0][0] * f00 + this.m[1][0] * f01 + this.m[2][0] * f02;
+		double t01 = this.m[0][1] * f00 + this.m[1][1] * f01 + this.m[2][1] * f02;
+		double t02 = this.m[0][2] * f00 + this.m[1][2] * f01 + this.m[2][2] * f02;
+		double t03 = this.m[0][3] * f00 + this.m[1][3] * f01 + this.m[2][3] * f02;
+		double t10 = this.m[0][0] * f10 + this.m[1][0] * f11 + this.m[2][0] * f12;
+		double t11 = this.m[0][1] * f10 + this.m[1][1] * f11 + this.m[2][1] * f12;
+		double t12 = this.m[0][2] * f10 + this.m[1][2] * f11 + this.m[2][2] * f12;
+		double t13 = this.m[0][3] * f10 + this.m[1][3] * f11 + this.m[2][3] * f12;
+		
+		this.m[2][0] = this.m[0][0] * f20 + this.m[1][0] * f21 + this.m[2][0] * f22;
+		this.m[2][1] = this.m[0][1] * f20 + this.m[1][1] * f21 + this.m[2][1] * f22;
+		this.m[2][2] = this.m[0][2] * f20 + this.m[1][2] * f21 + this.m[2][2] * f22;
+		this.m[2][3] = this.m[0][3] * f20 + this.m[1][3] * f21 + this.m[2][3] * f22;
+		
+		this.m[0][0] = t00;
+		this.m[0][1] = t01;
+		this.m[0][2] = t02;
+		this.m[0][3] = t03;
+		this.m[1][0] = t10;
+		this.m[1][1] = t11;
+		this.m[1][2] = t12;
+		this.m[1][3] = t13;
 	}
 	
-	public void scale(Vector3 vec){
-		this.m00*=vec.x;
-		this.m01*=vec.x;
-		this.m02*=vec.x;
-		this.m03*=vec.x;
-		this.m10*=vec.y;
-		this.m11*=vec.y;
-		this.m12*=vec.y;
-		this.m13*=vec.y;
-		this.m20*=vec.z;
-		this.m21*=vec.z;
-		this.m22*=vec.z;
-		this.m23*=vec.z;
+	public void scale(Vector3 vec) {
+		this.m[0][0] *= vec.x;
+		this.m[0][1] *= vec.x;
+		this.m[0][2] *= vec.x;
+		this.m[0][3] *= vec.x;
+		this.m[1][0] *= vec.y;
+		this.m[1][1] *= vec.y;
+		this.m[1][2] *= vec.y;
+		this.m[1][3] *= vec.y;
+		this.m[2][0] *= vec.z;
+		this.m[2][1] *= vec.z;
+		this.m[2][2] *= vec.z;
+		this.m[2][3] *= vec.z;
 	}
 	
-	public void setIdentity(){
-		this.m00=1.0f;
-		this.m01=0.0f;
-		this.m02=0.0f;
-		this.m03=0.0f;
-		this.m10=0.0f;
-		this.m11=1.0f;
-		this.m12=0.0f;
-		this.m13=0.0f;
-		this.m20=0.0f;
-		this.m21=0.0f;
-		this.m22=1.0f;
-		this.m23=0.0f;
-		this.m30=0.0f;
-		this.m31=0.0f;
-		this.m32=0.0f;
-		this.m33=1.0f;
+	public void setIdentity() {
+		this.m[0][0] = 1.0f;
+		this.m[0][1] = 0.0f;
+		this.m[0][2] = 0.0f;
+		this.m[0][3] = 0.0f;
+		this.m[1][0] = 0.0f;
+		this.m[1][1] = 1.0f;
+		this.m[1][2] = 0.0f;
+		this.m[1][3] = 0.0f;
+		this.m[2][0] = 0.0f;
+		this.m[2][1] = 0.0f;
+		this.m[2][2] = 1.0f;
+		this.m[2][3] = 0.0f;
+		this.m[3][0] = 0.0f;
+		this.m[3][1] = 0.0f;
+		this.m[3][2] = 0.0f;
+		this.m[3][3] = 1.0f;
 	}
 	
 	public void store(FloatBuffer buf) {
-		buf.put(m00);
-		buf.put(m01);
-		buf.put(m02);
-		buf.put(m03);
-		buf.put(m10);
-		buf.put(m11);
-		buf.put(m12);
-		buf.put(m13);
-		buf.put(m20);
-		buf.put(m21);
-		buf.put(m22);
-		buf.put(m23);
-		buf.put(m30);
-		buf.put(m31);
-		buf.put(m32);
-		buf.put(m33);
+		buf.put((float) m[0][0]);
+		buf.put((float) m[0][1]);
+		buf.put((float) m[0][2]);
+		buf.put((float) m[0][3]);
+		buf.put((float) m[1][0]);
+		buf.put((float) m[1][1]);
+		buf.put((float) m[1][2]);
+		buf.put((float) m[1][3]);
+		buf.put((float) m[2][0]);
+		buf.put((float) m[2][1]);
+		buf.put((float) m[2][2]);
+		buf.put((float) m[2][3]);
+		buf.put((float) m[3][0]);
+		buf.put((float) m[3][1]);
+		buf.put((float) m[3][2]);
+		buf.put((float) m[3][3]);
 	}
 	
-	public Matrix4(float m00, float m10, float m20, float m30, float m01, float m11, float m21, float m31, float m02,
-			float m12, float m22, float m32, float m03, float m13, float m23, float m33){
-		this.m00=m00;
-		this.m10=m10;
-		this.m20=m20;
-		this.m30=m30;
-		this.m01=m01;
-		this.m11=m11;
-		this.m21=m21;
-		this.m31=m31;
-		this.m02=m02;
-		this.m12=m12;
-		this.m22=m22;
-		this.m32=m32;
-		this.m03=m03;
-		this.m13=m13;
-		this.m23=m23;
-		this.m33=m33;
+	@Override
+	public String toString() {
+		String output = "";
+		
+		for(int i = 0; i < 4; i++){
+			for(int j = 0; j < 4; j++){
+				add(output, this.m[i][j]);
+				if(j < 3){
+					output += ", ";
+				}
+			}
+			
+			output += "\n";
+		}
+		
+		return output;
 	}
 	
-	public Matrix4(){}
+	private void add(String a, double b) {
+		a += String.valueOf(b);
+	}
+	
+	public Matrix4(double m00, double m10, double m20, double m30, double m01, double m11, double m21, double m31,
+			double m02, double m12, double m22, double m32, double m03, double m13, double m23, double m33) {
+		this.m[0][0] = m00;
+		this.m[1][0] = m10;
+		this.m[2][0] = m20;
+		this.m[3][0] = m30;
+		this.m[0][1] = m01;
+		this.m[1][1] = m11;
+		this.m[2][1] = m21;
+		this.m[3][1] = m31;
+		this.m[0][2] = m02;
+		this.m[1][2] = m12;
+		this.m[2][2] = m22;
+		this.m[3][2] = m32;
+		this.m[0][3] = m03;
+		this.m[1][3] = m13;
+		this.m[2][3] = m23;
+		this.m[3][3] = m33;
+	}
+	
+	public Matrix4() {}
 }

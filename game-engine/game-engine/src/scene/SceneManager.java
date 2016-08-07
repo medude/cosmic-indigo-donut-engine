@@ -1,6 +1,6 @@
-package components;
+package scene;
 
-public class ThingManager {
+public class SceneManager {
 	private static int thingID=0;
 	private static int componentID=-1;
 	

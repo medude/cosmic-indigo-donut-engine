@@ -9,47 +9,65 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import apis.console.Console;
 import apis.shaderManager.ShaderManager;
 import apis.windowManager.WindowManager;
-import components.Thing;
 import components.types.ModelComponent;
 import components.types.ShaderComponent;
 import components.types.TextureComponent;
+import components.types.TransformComponent;
 import dataTypes.ModelData;
 import dataTypes.Shader;
 import math.Matrix4;
 import math.ProjectionMatrix;
-import math.TransformationMatrix;
-import math.Vector3;
+import scene.Node;
+import scene.Scene;
+import scene.Thing;
 
 public class OpenGLRenderer implements RendererType {
-	private List<Thing> things=new ArrayList<Thing>();
+	private Scene currentScene;
+	private List<Thing> things = new ArrayList<Thing>();
 	private Matrix4 projectionMatrix;
 	
 	@Override
-	public void init(){
+	public void init() {
 		GL11.glEnable(GL11.GL_CULL_FACE);
-			GL11.glCullFace(GL11.GL_BACK);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		
-		projectionMatrix=ProjectionMatrix.create();
+		GL11.glCullFace(GL11.GL_BACK);
+		
+		projectionMatrix = ProjectionMatrix.create();
 		
 		GL11.glClearColor(1, 1, 1, 0);
 		GL11.glViewport(0, 0, WindowManager.getWidth(), WindowManager.getHeight());
 	}
 	
 	@Override
-	public void add(Thing thing){
-		things.add(thing);
+	public void add(Scene scene) {
+		currentScene = scene;
+		
+		iterateChildren(scene.children);
+		
+		Console.log(things);
 	}
 	
-	private float rot=0;
+	private void iterateChildren(Node[] children) {
+		for(Node child:children) {
+			if(child.isType("thing")) {
+				things.add((Thing) child);
+				Console.log("Added child!");
+			} else {
+				Console.log("Not a thing, moving on to children.");
+				iterateChildren(child.children);
+			}
+		}
+	}
 	
 	@Override
-	public void render(){
+	public void render() {
 		for(Thing thing:things){
-			ModelData data=((ModelComponent) thing.getComponent("ModelComponent")).getModel();
-			Shader shader=((ShaderComponent) thing.getComponent("ShaderComponent")).getShader();
+			ModelData data = ((ModelComponent) thing.getComponent("ModelComponent")).getModel();
+			Shader shader = ((ShaderComponent) thing.getComponent("ShaderComponent")).getShader();
 			
 			GL20.glUseProgram(shader.getID());
 			
@@ -62,8 +80,7 @@ public class OpenGLRenderer implements RendererType {
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((TextureComponent) thing.getComponent("TextureComponent")).getTexture().getID());
 			
-			ShaderManager.loadVariable("transformation", shader, TransformationMatrix.create(new Vector3(0, -2.5f, -20f), new Vector3(0, rot, 0), 1));
-			rot++;
+			ShaderManager.loadVariable("transformation", shader, ((TransformComponent) thing.getComponent("GlobalTransformComponent")).transform);
 			
 			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, data.getIndiciesID());
 			

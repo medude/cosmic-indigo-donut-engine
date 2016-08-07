@@ -1,9 +1,13 @@
 package scene;
 
-public class Scene {
-	private static ParentNode world=new ParentNode(1);
+import dataTypes.Texture;
+
+public class Scene extends Node {
+	public Texture map;
 	
-	public static void setup(ObjectNode node){
-		world.setChild(0, node);
+	public Scene(Node[] children, Texture map) {
+		super("scene");
+		this.children = children;
+		this.map = map;
 	}
 }
