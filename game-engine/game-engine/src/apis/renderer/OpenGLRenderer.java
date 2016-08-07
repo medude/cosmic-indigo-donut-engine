@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import apis.console.Console;
 import apis.shaderManager.ShaderManager;
 import apis.windowManager.WindowManager;
 import components.types.ModelComponent;
@@ -19,38 +20,54 @@ import dataTypes.ModelData;
 import dataTypes.Shader;
 import math.Matrix4;
 import math.ProjectionMatrix;
+import scene.Node;
 import scene.Scene;
 import scene.Thing;
 
 public class OpenGLRenderer implements RendererType {
 	private Scene currentScene;
-	private List<Thing> things=new ArrayList<Thing>();
+	private List<Thing> things = new ArrayList<Thing>();
 	private Matrix4 projectionMatrix;
 	
 	@Override
-	public void init(){
+	public void init() {
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		
 		GL11.glCullFace(GL11.GL_BACK);
 		
-		projectionMatrix=ProjectionMatrix.create();
+		projectionMatrix = ProjectionMatrix.create();
 		
 		GL11.glClearColor(1, 1, 1, 0);
 		GL11.glViewport(0, 0, WindowManager.getWidth(), WindowManager.getHeight());
 	}
 	
 	@Override
-	public void add(Scene scene){
-		currentScene=scene;
-		things.add((Thing) scene.children[0].children[0].children[0]);
+	public void add(Scene scene) {
+		currentScene = scene;
+		
+		iterateChildren(scene.children);
+		
+		Console.log(things);
+	}
+	
+	private void iterateChildren(Node[] children) {
+		for(Node child:children) {
+			if(child.isType("thing")) {
+				things.add((Thing) child);
+				Console.log("Added child!");
+			} else {
+				Console.log("Not a thing, moving on to children.");
+				iterateChildren(child.children);
+			}
+		}
 	}
 	
 	@Override
-	public void render(){
+	public void render() {
 		for(Thing thing:things){
-			ModelData data=((ModelComponent) thing.getComponent("ModelComponent")).getModel();
-			Shader shader=((ShaderComponent) thing.getComponent("ShaderComponent")).getShader();
+			ModelData data = ((ModelComponent) thing.getComponent("ModelComponent")).getModel();
+			Shader shader = ((ShaderComponent) thing.getComponent("ShaderComponent")).getShader();
 			
 			GL20.glUseProgram(shader.getID());
 			

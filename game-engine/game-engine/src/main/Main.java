@@ -32,22 +32,35 @@ public class Main {
 	public void run(){
 		try{
 			ApiHandler.init();
-			Window window=WindowManager.create("Test \"Game\"");
+			Window window = WindowManager.create("Test \"Game\"");
 			
-			ModelData rectangle=Loader.loadOBJ("Plane");
-			Shader shader=ShaderManager.load("shader");
-			Texture texture=Loader.loadImage("test");
+			ModelData rectangle = Loader.loadOBJ("Plane");
+			Shader shader = ShaderManager.load("shader");
+			Texture texture = Loader.loadImage("test");
 			
-			Thing thing=SceneManager.makeThing();
+			Thing thing = SceneManager.makeThing();
 			thing.addComponent(new TextureComponent(texture));
 			thing.addComponent(new ModelComponent(rectangle));
 			thing.addComponent(new ShaderComponent(shader));
-			thing.addComponent(new TransformComponent(TransformationMatrix.create(new Vector3(0, -2.5f, -20),
-					new Vector3(0, 0, 0), 1)));
 			
-			Group group=new Group(new Vector3(0, 0, 0), new Thing[]{thing});
-			Area area=new Area(new Group[]{group});
-			Scene scene=new Scene(new Area[]{area}, null);
+			Thing thing2 = SceneManager.makeThing();
+			thing2.addComponent(new TextureComponent(texture));
+			thing2.addComponent(new ModelComponent(rectangle));
+			thing2.addComponent(new ShaderComponent(shader));
+			
+			Thing thing3 = SceneManager.makeThing();
+			thing3.addComponent(new TextureComponent(texture));
+			thing3.addComponent(new ModelComponent(rectangle));
+			thing3.addComponent(new ShaderComponent(shader));
+			
+			Group group = new Group(new Thing[]{thing});
+			Group group2 = new Group(new Thing[]{thing2, thing3});
+			Area area = new Area(new Group[]{group});
+			Area area2 = new Area(new Group[]{group2});
+			Scene scene = new Scene(new Area[]{area, area2}, null);
+			
+			area2.updateComponent("LocalTransformComponent", new TransformComponent(TransformationMatrix.create(
+						new Vector3(0, -1, -5), new Vector3(90, 0, 0), 1)));
 			
 			Renderer.add(scene);
 			
