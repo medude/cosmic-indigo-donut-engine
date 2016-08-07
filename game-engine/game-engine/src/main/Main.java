@@ -55,12 +55,12 @@ public class Main {
 			boolean forward = false;
 			
 			while(WindowManager.testForClose(window)) {
-				group.localTransform = new TransformComponent(TransformationMatrix.create(new Vector3(0, 0, -rot),
-						new Vector3(90, rot, 0), 1));
+				group.updateComponent("LocalTransformComponent", new TransformComponent(TransformationMatrix.create(
+						new Vector3(0, 0, -rot), new Vector3(90, rot, 0), 1)));
 				
-				scene.calculateChildTransform();
+				scene.calculateChildTransform(false);
 				
-				Console.log(((TransformComponent) scene.getComponent("TransformComponent")).transform.toString());
+				Console.log(((TransformComponent) thing.getComponent("LocalTransformComponent")).transform.position.toString());
 				
 				if(rot == 180) {
 					forward = true;
@@ -73,6 +73,7 @@ public class Main {
 				} else {
 					rot++;
 				}
+				
 				
 				Renderer.render();
 				WindowManager.update(window);

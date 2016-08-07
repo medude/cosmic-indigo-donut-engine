@@ -18,4 +18,9 @@ public class Vector3 {
 		this.y = all;
 		this.z = all;
 	}
+	
+	@Override
+	public String toString() {
+		return this.x + ", " + this.y + ", " + this.z;
+	}
 }

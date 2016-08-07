@@ -63,7 +63,7 @@ public class OpenGLRenderer implements RendererType {
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((TextureComponent) thing.getComponent("TextureComponent")).getTexture().getID());
 			
-			ShaderManager.loadVariable("transformation", shader, ((TransformComponent) thing.getComponent("TransformComponent")).transform);
+			ShaderManager.loadVariable("transformation", shader, ((TransformComponent) thing.getComponent("GlobalTransformComponent")).transform);
 			
 			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, data.getIndiciesID());
 			

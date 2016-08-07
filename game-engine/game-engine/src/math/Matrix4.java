@@ -11,12 +11,17 @@ public class Matrix4 {
 			{ 0, 0, 0, 1 }
 	};
 	
+	public Vector3 position = new Vector3(0);
 	
 	public void translate(Vector3 vec) {
 		this.m[3][0] += this.m[0][0] * vec.x + this.m[1][0] * vec.y + this.m[2][0] * vec.z;
 		this.m[3][1] += this.m[0][1] * vec.x + this.m[1][1] * vec.y + this.m[2][1] * vec.z;
 		this.m[3][2] += this.m[0][2] * vec.x + this.m[1][2] * vec.y + this.m[2][2] * vec.z;
 		this.m[3][3] += this.m[0][3] * vec.x + this.m[1][3] * vec.y + this.m[2][3] * vec.z;
+		
+		position.x += vec.x;
+		position.y += vec.y;
+		position.z += vec.z;
 	}
 	
 	public void rotate(double degrees, Vector3 axis) {
