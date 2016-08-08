@@ -1,5 +1,6 @@
 package apis.config;
 
+import apis.console.Console;
 import apis.loader.Loader;
 import dataTypes.TextFile;
 

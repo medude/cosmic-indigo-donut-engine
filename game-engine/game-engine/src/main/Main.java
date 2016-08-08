@@ -42,7 +42,7 @@ public class Main {
 			
 			ApiHandler.init(); // Init all APIs
 			
-			ConfigData data = Config.readFile("main.conf");
+			ConfigData data = Config.readFile("conf.conf");
 			
 			Window window = WindowManager.create(data.data.get("window.title")); // Create window
 			
