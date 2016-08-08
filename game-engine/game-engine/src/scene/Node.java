@@ -2,7 +2,6 @@ package scene;
 
 import java.util.HashMap;
 
-import apis.console.Console;
 import components.Component;
 import components.types.TransformComponent;
 import math.MatrixMath;
@@ -26,17 +25,12 @@ public abstract class Node {
 	
 	public void calculateChildTransform(boolean forceTrue) {
 		for(Node child:children) {
-			Console.log("Calculating transform for " + child.getType());
-			
 			boolean flag = false;
 			
 			if(child.dirtyFlag || forceTrue) {
-				Console.log("Dirty flag true!");
 				TransformComponent transformation = new TransformComponent(MatrixMath.dotProduct(
 						((TransformComponent) this.getComponent("GlobalTransformComponent")).transform,
 						((TransformComponent) child.getComponent("LocalTransformComponent")).transform));
-				
-				Console.log(((TransformComponent) child.getComponent("LocalTransformComponent")).transform.position.toString());
 				
 				child.updateComponent("GlobalTransformComponent", transformation);
 				

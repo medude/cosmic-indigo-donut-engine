@@ -1,5 +1,7 @@
 package apis;
 
+import apis.config.ConfigType;
+import apis.config.JavaConfig;
 import apis.console.ConsoleType;
 import apis.console.JavaConsole;
 import apis.console.NullConsole;
@@ -22,25 +24,27 @@ import dataTypes.ModelData;
 
 public class ApiHandler {
 		public static void init(){
-			consoles[0]=new JavaConsole();
-			consoles[1]=new NullConsole();
+			consoles[0] = new JavaConsole();
+			consoles[1] = new NullConsole();
 			
-			errorHandlers[0]=new JavaErrorHandler();
-			errorHandlers[1]=new NullErrorHandler();
+			errorHandlers[0] = new JavaErrorHandler();
+			errorHandlers[1] = new NullErrorHandler();
 			
-			windows[0]=new GLFWWindow();
-			windows[1]=new NullWindow();
+			windows[0] = new GLFWWindow();
+			windows[1] = new NullWindow();
 			
 			windows[0].init();
 			
-			loaders[0]=new JavaFileLoader();
-			loaders[1]=new NullFileLoader();
+			loaders[0] = new JavaFileLoader();
+			loaders[1] = new NullFileLoader();
 			
-			renderers[0]=new OpenGLRenderer();
-			renderers[1]=new NullRenderer();
+			renderers[0] = new OpenGLRenderer();
+			renderers[1] = new NullRenderer();
 			
-			shaders[0]=new GLSLShader();
-			shaders[1]=new NullShader();
+			shaders[0] = new GLSLShader();
+			shaders[1] = new NullShader();
+			
+			configs[0] = new JavaConfig();
 		}
 		
 		public static void cleanup(){
@@ -54,7 +58,7 @@ public class ApiHandler {
 		//////////////////////////////////
 		//Error Handlers                //
 		//////////////////////////////////
-		private static ErrorHandleType[] errorHandlers=new ErrorHandleType[2];
+		private static ErrorHandleType[] errorHandlers = new ErrorHandleType[2];
 		
 		public static ErrorHandleType getErrorHandler(){
 			return errorHandlers[0];
@@ -63,7 +67,7 @@ public class ApiHandler {
 		//////////////////////////////////
 		//Consoles                      //
 		//////////////////////////////////
-		private static ConsoleType[] consoles=new ConsoleType[2];
+		private static ConsoleType[] consoles = new ConsoleType[2];
 		
 		public static ConsoleType getConsole(){
 			return consoles[0];
@@ -72,7 +76,7 @@ public class ApiHandler {
 		//////////////////////////////////
 		//Windows                       //
 		//////////////////////////////////
-		private static WindowType[] windows=new WindowType[2];
+		private static WindowType[] windows = new WindowType[2];
 		
 		public static WindowType getWindow(){
 			return windows[0];
@@ -81,7 +85,7 @@ public class ApiHandler {
 		//////////////////////////////////
 		//Loaders                       //
 		//////////////////////////////////
-		private static LoaderType[] loaders=new LoaderType[2];
+		private static LoaderType[] loaders = new LoaderType[2];
 		
 		public static LoaderType getLoader(){
 			return loaders[0];
@@ -90,7 +94,7 @@ public class ApiHandler {
 		//////////////////////////////////
 		//Renderer                      //
 		//////////////////////////////////
-		private static RendererType[] renderers=new RendererType[2];
+		private static RendererType[] renderers = new RendererType[2];
 		
 		public static RendererType getRenderer(){
 			renderers[0].init();
@@ -100,9 +104,18 @@ public class ApiHandler {
 		//////////////////////////////////
 		//Shader                        //
 		//////////////////////////////////
-		private static ShaderType[] shaders=new ShaderType[2];
+		private static ShaderType[] shaders = new ShaderType[2];
 		
 		public static ShaderType getShader(){
 			return shaders[0];
+		}
+		
+		//////////////////////////////////
+		//Config                        //
+		//////////////////////////////////
+		private static ConfigType[] configs = new ConfigType[2];
+		
+		public static ConfigType getConfig(){
+			return configs[0];
 		}
 }

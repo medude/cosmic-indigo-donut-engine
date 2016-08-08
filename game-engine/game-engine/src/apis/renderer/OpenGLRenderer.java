@@ -9,7 +9,6 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-import apis.console.Console;
 import apis.shaderManager.ShaderManager;
 import apis.windowManager.WindowManager;
 import components.types.ModelComponent;
@@ -47,17 +46,13 @@ public class OpenGLRenderer implements RendererType {
 		currentScene = scene;
 		
 		iterateChildren(scene.children);
-		
-		Console.log(things);
 	}
 	
 	private void iterateChildren(Node[] children) {
 		for(Node child:children) {
 			if(child.isType("thing")) {
 				things.add((Thing) child);
-				Console.log("Added child!");
 			} else {
-				Console.log("Not a thing, moving on to children.");
 				iterateChildren(child.children);
 			}
 		}

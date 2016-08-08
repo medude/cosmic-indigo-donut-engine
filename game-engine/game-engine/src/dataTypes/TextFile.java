@@ -12,10 +12,14 @@ public class TextFile {
 		return lines;
 	}
 	
-	public String getNextLine(){
-		String currentString=lines[currentLine];
-		currentLine++;
-		return currentString;
+	public String getNextLine() {
+		if(lines.length > currentLine) {
+			String currentString = lines[currentLine];
+			currentLine++;
+			return currentString;
+		} else {
+			return null;
+		}
 	}
 	
 	public void skipLine(){
