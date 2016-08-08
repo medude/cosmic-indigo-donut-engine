@@ -18,6 +18,15 @@ public class JavaConfig implements ConfigType {
 			} else if(line.startsWith("#")) {
 				continue;
 				
+			} else if(line.startsWith("v.")) {
+				String[] version = line.split("\\.");
+				
+				data.bigVersion = Integer.parseInt(version[1]);
+				data.midVersion = Integer.parseInt(version[2]);
+				data.lilVersion = Integer.parseInt(version[3]);
+				
+			} else if(line.length() == 0) {
+				
 			} else {
 				String[] pair = new String[2];
 				

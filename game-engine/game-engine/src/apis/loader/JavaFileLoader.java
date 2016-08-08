@@ -125,7 +125,7 @@ public class JavaFileLoader implements LoaderType {
 	public ModelData loadOBJ(String filename) {
 		FileReader fr = null;
 		try {
-			fr = new FileReader(new File("res/" + filename + ".obj"));
+			fr = new FileReader(new File("res/models/" + filename + ".obj"));
 		} catch(FileNotFoundException e) {
 			ErrorHandle.handle(e, "File " + filename + ".obj was not found in the res directory.", false);
 		}
