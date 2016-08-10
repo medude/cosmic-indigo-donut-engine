@@ -5,13 +5,13 @@ import dataTypes.ModelData;
 
 public class ModelComponent extends Component {
 	private ModelData model;
-	
-	public ModelComponent(ModelData model){
+
+	public ModelComponent(ModelData model) {
 		super("ModelComponent");
-		this.model=model;
+		this.model = model;
 	}
-	
-	public ModelData getModel(){
+
+	public ModelData getModel() {
 		return model;
 	}
 }

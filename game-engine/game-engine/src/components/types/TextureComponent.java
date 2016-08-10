@@ -5,13 +5,13 @@ import dataTypes.Texture;
 
 public class TextureComponent extends Component {
 	private Texture texture;
-	
-	public TextureComponent(Texture texture){
+
+	public TextureComponent(Texture texture) {
 		super("TextureComponent");
-		this.texture=texture;
+		this.texture = texture;
 	}
-	
-	public Texture getTexture(){
+
+	public Texture getTexture() {
 		return texture;
 	}
 }

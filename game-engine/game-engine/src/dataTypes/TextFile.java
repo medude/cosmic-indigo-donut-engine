@@ -2,18 +2,18 @@ package dataTypes;
 
 public class TextFile {
 	private String[] lines;
-	private int currentLine=0;
-	
-	public TextFile(String[] lines){
-		this.lines=lines;
+	private int currentLine = 0;
+
+	public TextFile(String[] lines) {
+		this.lines = lines;
 	}
-	
-	public String[] getLines(){
+
+	public String[] getLines() {
 		return lines;
 	}
-	
+
 	public String getNextLine() {
-		if(lines.length > currentLine) {
+		if (lines.length > currentLine) {
 			String currentString = lines[currentLine];
 			currentLine++;
 			return currentString;
@@ -21,20 +21,20 @@ public class TextFile {
 			return null;
 		}
 	}
-	
-	public void skipLine(){
+
+	public void skipLine() {
 		currentLine++;
 	}
-	
-	public void skipLines(int lines){
-		currentLine+=lines;
+
+	public void skipLines(int lines) {
+		currentLine += lines;
 	}
-	
-	public void backLine(){
+
+	public void backLine() {
 		currentLine--;
 	}
-	
-	public void backLines(int lines){
-		currentLine-=lines;
+
+	public void backLines(int lines) {
+		currentLine -= lines;
 	}
 }
