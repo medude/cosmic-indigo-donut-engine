@@ -1,0 +1,3 @@
+Because LWJGL comes bundled with software other that LWJGL, there need to be more than one licence file. Thus:
+The "LICENCE" file has the licence for only LWJGL.
+The "LICENCE-project-name" files contain the licences for the projects refrenced.
