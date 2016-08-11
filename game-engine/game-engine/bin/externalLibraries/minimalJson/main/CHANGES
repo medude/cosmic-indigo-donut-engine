@@ -1,0 +1,11 @@
+minimal-json was changed for use in Cosmic-Indigo-Game-Engine
+
+The original source code is online at https://github.com/ralfstx/minimal-json
+
+Changes:
+-Removed of the testing classes
+-Changed the directory structure, and thus
+-Changed package declarations and imports
+-Made the ParseException class extend IOException instead of RuntimeException
+-Modified the JsonParser class to have more methods throw different exceptions, and integrated the Cosmic Indigo error handler.
+-Auto code formating

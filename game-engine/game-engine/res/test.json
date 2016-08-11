@@ -1,25 +1,14 @@
-{"name": "ROOT",
- "children": [
-        {"name": "Hemiptera",
-         "children": [
-             {"name": "Miridae",
-              "children": [
-                  {"name": "Kanakamiris", "children":[]},
-                  {"name": "Neophloeobia",
-                   "children": [
-                       {"name": "incisa", "children":[] }
-                   ]}
-              ]}
-         ]},
-        {"name": "Lepidoptera",
-         "children": [
-             {"name": "Nymphalidae",
-              "children": [
-                  {"name": "Ephinephile",
-                   "children": [
-                       {"name": "rawnsleyi", "children":[] }
-                   ]}
-              ]}
-         ]}
-    ]}
+{
+	"name":"Test",
+	"type":"scene",
+	"childCount":1,
+	"childNumber":0,
+	"children":[
+		{
+		"type":"area",
+		"childCount":0,
+		"childNumber":0,
+		"children":[]
+		}
+	]
 }

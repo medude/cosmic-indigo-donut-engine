@@ -5,6 +5,8 @@ import dataTypes.ModelData;
 import dataTypes.TextFile;
 import dataTypes.Texture;
 import exceptions.MalformedFileException;
+import externalLibraries.minimalJson.main.JsonObject;
+import scene.Scene;
 
 public class Loader {
 	private static LoaderType loaderObject = ApiHandler.getLoader();
@@ -25,7 +27,11 @@ public class Loader {
 		return loaderObject.loadOBJ(filename);
 	}
 
-	public static void processJSON(String filename) throws MalformedFileException {
-		loaderObject.processJSON(filename);
+	public static JsonObject loadJSON(String filename) throws MalformedFileException {
+		return loaderObject.loadJSON(filename);
+	}
+	
+	public static Scene loadScene(String filename) throws MalformedFileException {
+		return loaderObject.loadScene(filename);
 	}
 }

@@ -19,18 +19,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  ******************************************************************************/
-package com.eclipsesource.json;
+package externalLibraries.minimalJson.main;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Reader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import com.eclipsesource.json.JsonObject.Member;
-
+import externalLibraries.minimalJson.main.JsonObject.Member;
 
 /**
  * Represents a JSON object, a set of name/value pairs, where the names are strings and the values

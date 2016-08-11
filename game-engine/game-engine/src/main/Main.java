@@ -24,7 +24,6 @@ import math.Vector3;
 import scene.Area;
 import scene.Group;
 import scene.Scene;
-import scene.SceneManager;
 import scene.Thing;
 
 public class Main {
@@ -87,14 +86,14 @@ public class Main {
 
 			Console.log("Loaded all resources");
 
-			Loader.processJSON("test.json");
+
 
 			//////////////////////////////////
-			// Setup scene graph //
+			// Setup scene graphs
 			//////////////////////////////////
 
 			// Thing thing
-			Thing thing = SceneManager.makeThing(); // Create thing
+			Thing thing = new Thing(); // Create thing
 			thing.addComponent(new TextureComponent(textures.get(0))); // Assign
 																		// texture
 			thing.addComponent(new ModelComponent(models.get(0))); // Assign
@@ -103,7 +102,7 @@ public class Main {
 																		// shader
 
 			// Thing thing2
-			Thing thing2 = SceneManager.makeThing(); // Create thing2
+			Thing thing2 = new Thing(); // Create thing2
 			thing2.addComponent(new TextureComponent(textures.get(0))); // Assign
 																		// texture
 			thing2.addComponent(new ModelComponent(models.get(0))); // Assign
@@ -112,7 +111,7 @@ public class Main {
 																		// shader
 
 			// Thing thing3
-			Thing thing3 = SceneManager.makeThing(); // Create thing3
+			Thing thing3 = new Thing(); // Create thing3
 			thing3.addComponent(new TextureComponent(textures.get(0))); // Assign
 																		// texture
 			thing3.addComponent(new ModelComponent(models.get(0))); // Assign
@@ -149,11 +148,14 @@ public class Main {
 			Scene scene = new Scene(new Area[] { area, area2 }, // Assign area
 																// and area2 as
 																// children
-					null // Assign no area map
+					null, // Assign no area map
+					"Scene"
 			);
 
+			Scene scene2 = Loader.loadScene("test.json");
+
 			// Add the scene to the renderer
-			Renderer.add(scene);
+			Renderer.add(scene2);
 
 			Console.log("Created scene graph");
 

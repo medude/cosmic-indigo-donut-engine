@@ -22,15 +22,19 @@ import org.lwjgl.opengl.GL30;
 
 import apis.errorHandle.ErrorHandle;
 import apis.loader.json.JavaJSONLoader;
+import apis.loader.scene.JavaSceneLoader;
 import dataTypes.ModelData;
 import dataTypes.TextFile;
 import dataTypes.Texture;
 import exceptions.MalformedFileException;
+import externalLibraries.minimalJson.main.JsonObject;
 import math.Vector2;
 import math.Vector3;
+import scene.Scene;
 
 public class JavaFileLoader implements LoaderType {
 	private JavaJSONLoader jsonLoader = new JavaJSONLoader();
+	private JavaSceneLoader sceneLoader = new JavaSceneLoader();
 	
 	public List<Integer> images = new ArrayList<Integer>();
 
@@ -224,7 +228,12 @@ public class JavaFileLoader implements LoaderType {
 	}
 
 	@Override
-	public void processJSON(String filename) throws MalformedFileException {
-		jsonLoader.processJSON(filename);
+	public JsonObject loadJSON(String filename) throws MalformedFileException {
+		return jsonLoader.processJSON(filename);
+	}
+
+	@Override
+	public Scene loadScene(String filename) throws MalformedFileException {
+		return sceneLoader.loadScene(filename);
 	}
 }
