@@ -19,6 +19,8 @@ import dataTypes.ModelData;
 import dataTypes.Shader;
 import math.Matrix4;
 import math.ProjectionMatrix;
+import math.TransformationMatrix;
+import math.Vector3;
 import scene.Node;
 import scene.Scene;
 import scene.Thing;
@@ -50,7 +52,17 @@ public class OpenGLRenderer implements RendererType {
 
 	private void iterateChildren(Node[] children) {
 		for (Node child : children) {
-			if (child.isType("thing")) {
+			if (child.hasComponent("RenderComponent")) {
+				if (!child.hasComponent("GlobalTransformComponent")) {
+					child.addComponent(
+							"GlobalTransformComponent",
+							new TransformComponent(TransformationMatrix.create(new Vector3(0), new Vector3(0), 1)));
+				}
+
+				if (!child.hasComponent("ShaderComponent")) {
+					child.addComponent(new ShaderComponent(null));
+				}
+
 				things.add((Thing) child);
 			} else {
 				iterateChildren(child.children);

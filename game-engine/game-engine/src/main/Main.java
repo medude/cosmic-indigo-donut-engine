@@ -12,6 +12,7 @@ import apis.renderer.Renderer;
 import apis.shaderManager.ShaderManager;
 import apis.windowManager.WindowManager;
 import components.types.ModelComponent;
+import components.types.RenderComponent;
 import components.types.ShaderComponent;
 import components.types.TextureComponent;
 import components.types.TransformComponent;
@@ -100,6 +101,7 @@ public class Main {
 																	// model
 			thing.addComponent(new ShaderComponent(shaders.get(0))); // Assign
 																		// shader
+			thing.addComponent(new RenderComponent()); // Let it render
 
 			// Thing thing2
 			Thing thing2 = new Thing(); // Create thing2
@@ -109,6 +111,7 @@ public class Main {
 																	// model
 			thing2.addComponent(new ShaderComponent(shaders.get(0))); // Assign
 																		// shader
+			thing2.addComponent(new RenderComponent()); // Let it render
 
 			// Thing thing3
 			Thing thing3 = new Thing(); // Create thing3
@@ -118,6 +121,7 @@ public class Main {
 																	// model
 			thing3.addComponent(new ShaderComponent(shaders.get(0))); // Assign
 																		// shader
+			thing3.addComponent(new RenderComponent()); // Let it render
 
 			// Group group
 			Group group = new Group( // Create group
@@ -155,7 +159,7 @@ public class Main {
 			Scene scene2 = Loader.loadScene("test.json");
 
 			// Add the scene to the renderer
-			Renderer.add(scene2);
+			Renderer.add(scene);
 
 			Console.log("Created scene graph");
 

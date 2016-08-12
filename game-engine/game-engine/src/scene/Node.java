@@ -77,7 +77,7 @@ public abstract class Node {
 		return components.get(name);
 	}
 
-	public boolean isComponent(String name) {
+	public boolean hasComponent(String name) {
 		return components.containsKey(name);
 	}
 }
