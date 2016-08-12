@@ -164,7 +164,7 @@ public class Main {
 			Console.log("Created scene graph");
 
 			//////////////////////////////////
-			// Setup logic variables //
+			// Setup logic variables
 			//////////////////////////////////
 
 			double rot = 0; // Rotation
@@ -173,13 +173,13 @@ public class Main {
 			Console.log("Loading complete, game ready");
 
 			//////////////////////////////////
-			// Main Game Loop //
+			// Main Game Loop
 			//////////////////////////////////
 
 			while (WindowManager.testForClose(window)) {
 
 				//////////////////////////////////
-				// Logic //
+				// Logic
 				//////////////////////////////////
 
 				// Change direction
@@ -204,7 +204,7 @@ public class Main {
 				scene.calculateChildTransform(false);
 
 				//////////////////////////////////
-				// Render //
+				// Render
 				//////////////////////////////////
 
 				Renderer.render(); // Perform actual render

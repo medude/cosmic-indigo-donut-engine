@@ -63,6 +63,10 @@ public class OpenGLRenderer implements RendererType {
 					child.addComponent(new ShaderComponent(null));
 				}
 
+				if (!child.hasComponent("TextureComponent")) {
+					child.addComponent(new TextureComponent(null));
+				}
+
 				things.add((Thing) child);
 			} else {
 				iterateChildren(child.children);
