@@ -14,7 +14,7 @@
 		"componentCount":1,
 		"components":[
 			{
-			"type":"LocalTransformComponent",
+			"type":"TransformComponent",
 			"positionX":0,
 			"positionY":0,
 			"positionZ":0,
@@ -34,7 +34,7 @@
 			"componentCount":1,
 			"components":[
 				{
-				"type":"LocalTransformComponent",
+				"type":"TransformComponent",
 				"positionX":0,
 				"positionY":0,
 				"positionZ":0,
@@ -74,7 +74,7 @@
 					},
 					
 					{
-					"type":"LocalTransformComponent",
+					"type":"TransformComponent",
 					"positionX":0,
 					"positionY":0,
 					"positionZ":-5,

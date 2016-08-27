@@ -5,6 +5,7 @@ import java.util.HashMap;
 import apis.console.Console;
 import components.Component;
 import components.types.TransformComponent;
+import components.types.transformComponent.GlobalTransformComponent;
 import math.MatrixMath;
 
 public abstract class Node {
@@ -28,7 +29,7 @@ public abstract class Node {
 		Console.log(this.getType());
 		Console.log(child.getType());
 
-		TransformComponent transformation = new TransformComponent(MatrixMath.dotProduct(
+		GlobalTransformComponent transformation = new GlobalTransformComponent(MatrixMath.dotProduct(
 			((TransformComponent) this.getComponent("GlobalTransformComponent")).transform,
 			((TransformComponent) child.getComponent("LocalTransformComponent")).transform));
 

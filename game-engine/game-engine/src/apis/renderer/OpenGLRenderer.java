@@ -17,6 +17,8 @@ import components.types.ModelComponent;
 import components.types.ShaderComponent;
 import components.types.TextureComponent;
 import components.types.TransformComponent;
+import components.types.transformComponent.GlobalTransformComponent;
+import components.types.transformComponent.LocalTransformComponent;
 import dataTypes.ModelData;
 import dataTypes.Shader;
 import math.Matrix4;
@@ -49,8 +51,8 @@ public class OpenGLRenderer implements RendererType {
 
     @Override
     public void add(Scene scene) {
-	scene.addComponent("GlobalTransformComponent",
-		new TransformComponent(TransformationMatrix.create(new Vector3(0, 0, 0), new Vector3(0, 0, 0), 1)));
+	scene.addComponent(new GlobalTransformComponent(
+		TransformationMatrix.create(new Vector3(0, 0, 0), new Vector3(0, 0, 0), 1)));
 
 	currentScene = scene;
 
@@ -62,12 +64,12 @@ public class OpenGLRenderer implements RendererType {
 	    if (child.hasComponent("RenderComponent")) {
 		Console.log(child.getType());
 		if (!child.hasComponent("GlobalTransformComponent")) {
-		    child.addComponent("GlobalTransformComponent",
-			    new TransformComponent(TransformationMatrix.create(new Vector3(0), new Vector3(0), 1)));
+		    child.addComponent(new GlobalTransformComponent(
+			    TransformationMatrix.create(new Vector3(0), new Vector3(0), 1)));
 		}
 
 		if (!child.hasComponent("LocalTransformComponent")) {
-		    child.addComponent("LocalTransformComponent", null);
+		    child.addComponent(new LocalTransformComponent(null));
 		}
 
 		if (!child.hasComponent("ShaderComponent")) {

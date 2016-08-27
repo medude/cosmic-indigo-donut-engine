@@ -82,8 +82,8 @@ public class JavaSceneLoader {
 			    new TextureComponent(Loader.getTexture(currentComponent.get("textureIndex").asInt())));
 		break;
 	    
-	    // If it's a LocalTransformComponent
-	    case "LocalTransformComponent":
+	    // If it's a TransformComponent
+	    case "TransformComponent":
 		processedNode.addComponent(new LocalTransformComponent(TransformationMatrix
 				    .create(new Vector3(currentComponent.get("positionX").asDouble(),
 					    currentComponent.get("positionY").asDouble(),
@@ -92,6 +92,8 @@ public class JavaSceneLoader {
 						    currentComponent.get("rotY").asDouble(),
 						    currentComponent.get("rotZ").asDouble()),
 					    currentComponent.get("scale").asFloat())));
+
+		processedNode.addComponent(new GlobalTransformComponent(null));
 		break;
 	    }
 	}
