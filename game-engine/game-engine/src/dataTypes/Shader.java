@@ -1,13 +1,13 @@
 package dataTypes;
 
 public class Shader {
-	private int id;
+    private int id;
 
-	public Shader(int id) {
-		this.id = id;
-	}
+    public Shader(int id) {
+	this.id = id;
+    }
 
-	public int getID() {
-		return id;
-	}
+    public int getID() {
+	return id;
+    }
 }

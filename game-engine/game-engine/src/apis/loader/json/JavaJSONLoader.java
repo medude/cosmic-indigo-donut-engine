@@ -7,17 +7,17 @@ import externalLibraries.minimalJson.main.Json;
 import externalLibraries.minimalJson.main.JsonObject;
 
 public class JavaJSONLoader {
-	public JsonObject processJSON(String filename) throws MalformedFileException {
-		TextFile file = Loader.loadFile(filename);
+    public JsonObject processJSON(String filename) throws MalformedFileException {
+	TextFile file = Loader.loadFile(filename);
 
-		String json = "";
+	String json = "";
 
-		for (String line : file.getLines()) {
-			json += line + "\n";
-		}
-
-		JsonObject jsonObject = Json.parse(json).asObject();
-
-		return jsonObject;
+	for (String line : file.getLines()) {
+	    json += line + "\n";
 	}
+
+	JsonObject jsonObject = Json.parse(json).asObject();
+
+	return jsonObject;
+    }
 }

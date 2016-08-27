@@ -1,14 +1,98 @@
 {
 	"name":"Test",
 	"type":"scene",
+	
+	"componentCount":0,
+	"components":[],
+	
 	"childCount":1,
 	"childNumber":0,
 	"children":[
 		{
 		"type":"area",
-		"childCount":0,
+		
+		"componentCount":1,
+		"components":[
+			{
+			"type":"LocalTransformComponent",
+			"positionX":0,
+			"positionY":0,
+			"positionZ":0,
+			"rotX":0,
+			"rotY":0,
+			"rotZ":0,
+			"scale":1
+			}
+		],
+				
+		"childCount":1,
 		"childNumber":0,
-		"children":[]
+		"children":[
+			{
+			"type":"group",
+			
+			"componentCount":1,
+			"components":[
+				{
+				"type":"LocalTransformComponent",
+				"positionX":0,
+				"positionY":0,
+				"positionZ":0,
+				"rotX":0,
+				"rotY":0,
+				"rotZ":0,
+				"scale":1
+				}
+			],
+			
+			"childCount":1,
+			"childNumber":0,
+			
+			"children":[
+				{			
+				"type":"thing",
+				
+				"componentCount":5,
+				"components":[
+					{
+					"type":"RenderComponent"
+					},									
+					
+					{
+					"type":"ModelComponent",
+					"modelIndex":0
+					},
+					
+					{
+					"type":"ShaderComponent",
+					"shaderIndex":0
+					},
+					
+					{
+					"type":"TextureComponent",
+					"textureIndex":0
+					},
+					
+					{
+					"type":"LocalTransformComponent",
+					"positionX":0,
+					"positionY":0,
+					"positionZ":-5,
+					"rotX":0,
+					"rotY":0,
+					"rotZ":0,
+					"scale":1
+					}
+				],
+				
+				"childCount":0,
+				"childNumber":0,
+				
+				"children":[]
+				}
+			]
+			}
+		]
 		}
 	]
 }

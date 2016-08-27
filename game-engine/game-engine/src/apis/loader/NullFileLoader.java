@@ -1,38 +1,69 @@
 package apis.loader;
 
+import apis.config.ConfigData;
 import dataTypes.ModelData;
+import dataTypes.Shader;
 import dataTypes.TextFile;
 import dataTypes.Texture;
+import exceptions.MalformedFileException;
 import externalLibraries.minimalJson.main.JsonObject;
 import scene.Scene;
 
 public class NullFileLoader implements LoaderType {
-	@Override
-	public TextFile loadFile(String path) {
-		return null;
-	}
+    @Override
+    public TextFile loadFile(String path) {
+	return null;
+    }
 
-	@Override
-	public Texture loadImage(String filename) {
-		return null;
-	}
+    @Override
+    public Texture loadImage(String filename) {
+	return null;
+    }
 
-	@Override
-	public void cleanup() {
-	}
+    @Override
+    public void cleanup() {
+    }
 
-	@Override
-	public ModelData loadOBJ(String filename) {
-		return null;
-	}
+    @Override
+    public ModelData loadOBJ(String filename) {
+	return null;
+    }
 
-	@Override
-	public JsonObject loadJSON(String filename) {
-		return null;
-	}
+    @Override
+    public JsonObject loadJSON(String filename) {
+	return null;
+    }
 
-	@Override
-	public Scene loadScene(String filename) {
-		return null;
-	}
+    @Override
+    public Scene loadScene(String filename) {
+	return null;
+    }
+
+    @Override
+    public void loadTextures(ConfigData data) throws MalformedFileException {
+    }
+
+    @Override
+    public Texture getTexture(int textureIndex) {
+	return null;
+    }
+
+    @Override
+    public void loadShaders(ConfigData data) {
+
+    }
+
+    @Override
+    public Shader getShader(int shaderIndex) {
+	return null;
+    }
+
+    @Override
+    public void loadModels(ConfigData data) throws MalformedFileException {
+    }
+
+    @Override
+    public ModelData getModel(int modelIndex) {
+	return null;
+    }
 }

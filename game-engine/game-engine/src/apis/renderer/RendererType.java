@@ -3,9 +3,9 @@ package apis.renderer;
 import scene.Scene;
 
 public interface RendererType {
-	public void init();
+    public void init();
 
-	public void add(Scene scene);
+    public void add(Scene scene);
 
-	public void render();
+    public void render();
 }
