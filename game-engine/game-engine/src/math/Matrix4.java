@@ -138,10 +138,6 @@ public class Matrix4 {
 	return output;
     }
 
-    private void add(String a, double b) {
-	a += String.valueOf(b);
-    }
-
     public Matrix4(double m00, double m10, double m20, double m30, double m01, double m11, double m21, double m31,
 	    double m02, double m12, double m22, double m32, double m03, double m13, double m23, double m33) {
 	this.m[0][0] = m00;
