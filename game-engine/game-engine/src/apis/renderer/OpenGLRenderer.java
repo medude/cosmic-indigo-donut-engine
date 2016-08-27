@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import apis.console.Console;
+import apis.loader.Loader;
 import apis.shaderManager.ShaderManager;
 import apis.windowManager.WindowManager;
 import components.types.ModelComponent;
@@ -62,22 +63,26 @@ public class OpenGLRenderer implements RendererType {
     private void iterateChildren(Node[] children) {
 	for (Node child : children) {
 	    if (child.hasComponent("RenderComponent")) {
-		Console.log(child.getType());
 		if (!child.hasComponent("GlobalTransformComponent")) {
 		    child.addComponent(new GlobalTransformComponent(
 			    TransformationMatrix.create(new Vector3(0), new Vector3(0), 1)));
 		}
 
 		if (!child.hasComponent("LocalTransformComponent")) {
-		    child.addComponent(new LocalTransformComponent(null));
+		    child.addComponent(new LocalTransformComponent(
+			    TransformationMatrix.create(new Vector3(0), new Vector3(0), 1)));
 		}
 
 		if (!child.hasComponent("ShaderComponent")) {
-		    child.addComponent(new ShaderComponent(null));
+		    child.addComponent(new ShaderComponent(Loader.getShader(0)));
 		}
 
 		if (!child.hasComponent("TextureComponent")) {
-		    child.addComponent(new TextureComponent(null));
+		    child.addComponent(new TextureComponent(Loader.getTexture(0)));
+		}
+
+		if (!child.hasComponent("ModelComponent")) {
+		    child.addComponent(new ModelComponent(Loader.getModel(0)));
 		}
 
 		things.add((Thing) child);
@@ -90,6 +95,8 @@ public class OpenGLRenderer implements RendererType {
     @Override
     public void render() {
 	for (Thing thing : things) {
+	    Console.log(thing);
+
 	    ModelData data = ((ModelComponent) thing.getComponent("ModelComponent")).getModel();
 	    Shader shader = ((ShaderComponent) thing.getComponent("ShaderComponent")).getShader();
 
@@ -104,7 +111,7 @@ public class OpenGLRenderer implements RendererType {
 	    GL13.glActiveTexture(GL13.GL_TEXTURE0);
 	    GL11.glBindTexture(GL11.GL_TEXTURE_2D,
 		    ((TextureComponent) thing.getComponent("TextureComponent")).getTexture().getID());
-
+	    Console.log(thing);
 	    ShaderManager.loadVariable("transformation", shader,
 		    ((TransformComponent) thing.getComponent("GlobalTransformComponent")).transform);
 
