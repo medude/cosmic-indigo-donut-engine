@@ -1,4 +1,4 @@
-package apis.config;
+package dataTypes;
 
 import java.util.HashMap;
 

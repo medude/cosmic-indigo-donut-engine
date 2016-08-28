@@ -1,7 +1,6 @@
 package main;
 
 import apis.ApiHandler;
-import apis.config.ConfigData;
 import apis.console.Console;
 import apis.errorHandle.ErrorHandle;
 import apis.loader.Loader;
@@ -23,31 +22,31 @@ public class Main {
 	    // Set up backend               //
 	    //////////////////////////////////
 
-	    ConfigData data = ApiHandler.init("conf.conf"); // Init all APIs
+	    ApiHandler.init("config/conf.conf"); // Init all APIs
 
-	    Window window = WindowManager.create(data.data.get("window.title")); // Create
+	    Window window = WindowManager.create(Loader.getconfigData().data.get("window.title")); // Create
 										 // window
 	    Console.log("APIs inited and window created succsessfully");
 
 	    //////////////////////////////////
-	    // Load resources
+	    // Load resources               //
 	    //////////////////////////////////
 
 	    Console.log("Beginning to load resources");
 
 	    /// TEXTURES ///
-	    Loader.loadTextures(data);
+	    Loader.loadTextures();
 
 	    /// MODELS ///
-	    Loader.loadModels(data);
+	    Loader.loadModels();
 
 	    /// SHADERS ///
-	    Loader.loadShaders(data);
+	    Loader.loadShaders();
 
 	    Console.log("Loaded all resources");
 
 	    //////////////////////////////////
-	    // Setup scene graphs
+	    // Setup scene graphs           //
 	    //////////////////////////////////
 
 	    Scene scene = Loader.loadScene("test.json");
@@ -62,7 +61,7 @@ public class Main {
 	    Console.log("Loading complete, game ready");
 
 	    //////////////////////////////////
-	    // Main Game Loop
+	    // Main Game Loop               //
 	    //////////////////////////////////
 
 	    while (WindowManager.testForClose(window)) {

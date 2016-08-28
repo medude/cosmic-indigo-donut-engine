@@ -1,7 +1,7 @@
 package apis.loader;
 
 import apis.ApiHandler;
-import apis.config.ConfigData;
+import dataTypes.ConfigData;
 import dataTypes.ModelData;
 import dataTypes.Shader;
 import dataTypes.TextFile;
@@ -12,6 +12,7 @@ import scene.Scene;
 
 public class Loader {
     private static LoaderType loaderObject = ApiHandler.getLoader();
+    private static ConfigData data = null;
 
     public static TextFile loadFile(String filename) throws MalformedFileException {
 	return loaderObject.loadFile(filename);
@@ -37,27 +38,36 @@ public class Loader {
 	return loaderObject.loadScene(filename);
     }
 
-    public static void loadTextures(ConfigData data) throws MalformedFileException {
-	loaderObject.loadTextures(data);
+    public static void loadTextures() throws MalformedFileException {
+	loaderObject.loadTextures();
     }
 
     public static Texture getTexture(int textureIndex) {
 	return loaderObject.getTexture(textureIndex);
     }
 
-    public static void loadShaders(ConfigData data) {
-	loaderObject.loadShaders(data);
+    public static void loadShaders() {
+	loaderObject.loadShaders();
     }
 
     public static Shader getShader(int shaderIndex) {
 	return loaderObject.getShader(shaderIndex);
     }
 
-    public static void loadModels(ConfigData data) throws MalformedFileException {
-	loaderObject.loadModels(data);
+    public static void loadModels() throws MalformedFileException {
+	loaderObject.loadModels();
     }
 
     public static ModelData getModel(int modelIndex) {
 	return loaderObject.getModel(modelIndex);
+    }
+
+    public static ConfigData loadConfig(String url) {
+	data = loaderObject.loadConfig(url);
+	return data;
+    }
+    
+    public static ConfigData getconfigData() {
+	return data;
     }
 }

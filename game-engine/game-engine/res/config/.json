@@ -1,0 +1,1 @@
+{"version":"v2.0.0","textures":["test.png"],"models":["Plane.obj","Plane.mtl"],"shaders":["shader"],"windowTitle":"Test \"Game\""}

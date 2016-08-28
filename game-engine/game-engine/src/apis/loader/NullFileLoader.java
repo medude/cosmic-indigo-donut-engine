@@ -1,6 +1,5 @@
 package apis.loader;
 
-import apis.config.ConfigData;
 import dataTypes.ModelData;
 import dataTypes.Shader;
 import dataTypes.TextFile;
@@ -40,17 +39,8 @@ public class NullFileLoader implements LoaderType {
     }
 
     @Override
-    public void loadTextures(ConfigData data) throws MalformedFileException {
-    }
-
-    @Override
     public Texture getTexture(int textureIndex) {
 	return null;
-    }
-
-    @Override
-    public void loadShaders(ConfigData data) {
-
     }
 
     @Override
@@ -59,11 +49,24 @@ public class NullFileLoader implements LoaderType {
     }
 
     @Override
-    public void loadModels(ConfigData data) throws MalformedFileException {
+    public ModelData getModel(int modelIndex) {
+	return null;
     }
 
     @Override
-    public ModelData getModel(int modelIndex) {
+    public void loadTextures() throws MalformedFileException {
+    }
+
+    @Override
+    public void loadShaders() {
+    }
+
+    @Override
+    public void loadModels() throws MalformedFileException {
+    }
+
+    @Override
+    public dataTypes.ConfigData loadConfig(String url) {
 	return null;
     }
 }

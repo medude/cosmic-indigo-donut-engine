@@ -1,9 +1,5 @@
 package apis;
 
-import apis.config.Config;
-import apis.config.ConfigData;
-import apis.config.ConfigType;
-import apis.config.JavaConfig;
 import apis.console.ConsoleType;
 import apis.console.JavaConsole;
 import apis.console.NullConsole;
@@ -11,6 +7,7 @@ import apis.errorHandle.ErrorHandleType;
 import apis.errorHandle.JavaErrorHandler;
 import apis.errorHandle.NullErrorHandler;
 import apis.loader.JavaFileLoader;
+import apis.loader.Loader;
 import apis.loader.LoaderType;
 import apis.loader.NullFileLoader;
 import apis.renderer.NullRenderer;
@@ -25,7 +22,7 @@ import apis.windowManager.WindowType;
 import dataTypes.ModelData;
 
 public class ApiHandler {
-    public static ConfigData init(String configFile) {
+    public static void init(String configFile) {
 	consoles[0] = new JavaConsole();
 	consoles[1] = new NullConsole();
 
@@ -35,9 +32,7 @@ public class ApiHandler {
 	loaders[0] = new JavaFileLoader();
 	loaders[1] = new NullFileLoader();
 
-	configs[0] = new JavaConfig();
-
-	ConfigData data = Config.readFile("conf.conf");
+	Loader.loadConfig(configFile);
 
 	shaders[0] = new GLSLShader();
 	shaders[1] = new NullShader();
@@ -51,8 +46,6 @@ public class ApiHandler {
 	renderers[1] = new NullRenderer();
 
 	// Renderer is inited in the create window method (ensures that GL capabilities have been created)
-
-	return data;
     }
 
     public static void cleanup() {
@@ -115,14 +108,5 @@ public class ApiHandler {
 
     public static ShaderType getShader() {
 	return shaders[0];
-    }
-
-    //////////////////////////////////
-    // Config //
-    //////////////////////////////////
-    private static ConfigType[] configs = new ConfigType[2];
-
-    public static ConfigType getConfig() {
-	return configs[0];
     }
 }

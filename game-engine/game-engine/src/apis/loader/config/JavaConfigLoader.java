@@ -1,15 +1,15 @@
-package apis.config;
+package apis.loader.config;
 
 import apis.errorHandle.ErrorHandle;
 import apis.loader.Loader;
+import dataTypes.ConfigData;
 import dataTypes.TextFile;
 
-public class JavaConfig implements ConfigType {
-    @Override
-    public ConfigData readFile(String location) {
+public class JavaConfigLoader {
+    public static ConfigData loadConfig(String url) {
 	TextFile configFile = null;
 	try {
-	    configFile = Loader.loadFile("config/" + location);
+	    configFile = Loader.loadFile(url);
 	} catch (Throwable e) {
 	    ErrorHandle.handle(e);
 	}

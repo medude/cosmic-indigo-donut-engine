@@ -21,12 +21,13 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL30;
 
-import apis.config.ConfigData;
 import apis.console.Console;
 import apis.errorHandle.ErrorHandle;
+import apis.loader.config.JavaConfigLoader;
 import apis.loader.json.JavaJSONLoader;
 import apis.loader.scene.JavaSceneLoader;
 import apis.shaderManager.ShaderManager;
+import dataTypes.ConfigData;
 import dataTypes.ModelData;
 import dataTypes.Shader;
 import dataTypes.TextFile;
@@ -54,10 +55,10 @@ public class JavaFileLoader implements LoaderType {
 
     // Loop loads in all models
     @Override
-    public void loadModels(ConfigData data) throws MalformedFileException {
-	for (int i = 0; i < Integer.parseInt(data.data.get("model.total")); i++) {
-	    models.put(i, Loader.loadOBJ(data.data.get("model." + i)));
-	    Console.log("Loaded model " + (i + 1) + "/" + data.data.get("model.total"));
+    public void loadModels() throws MalformedFileException {
+	for (int i = 0; i < Integer.parseInt(Loader.getconfigData().data.get("model.total")); i++) {
+	    models.put(i, Loader.loadOBJ(Loader.getconfigData().data.get("model." + i)));
+	    Console.log("Loaded model " + (i + 1) + "/" + Loader.getconfigData().data.get("model.total"));
 	}
     }
 
@@ -68,10 +69,10 @@ public class JavaFileLoader implements LoaderType {
 
     // Loop loads in all shaders
     @Override
-    public void loadShaders(ConfigData data) {
-	for (int i = 0; i < Integer.parseInt(data.data.get("shader.total")); i++) {
-	    shaders.put(i, ShaderManager.load(data.data.get("shader." + i)));
-	    Console.log("Loaded shader " + (i + 1) + "/" + data.data.get("shader.total"));
+    public void loadShaders() {
+	for (int i = 0; i < Integer.parseInt(Loader.getconfigData().data.get("shader.total")); i++) {
+	    shaders.put(i, ShaderManager.load(Loader.getconfigData().data.get("shader." + i)));
+	    Console.log("Loaded shader " + (i + 1) + "/" + Loader.getconfigData().data.get("shader.total"));
 	}
     }
 
@@ -81,11 +82,11 @@ public class JavaFileLoader implements LoaderType {
     }
 
     @Override
-    public void loadTextures(ConfigData data) throws MalformedFileException {
+    public void loadTextures() throws MalformedFileException {
 	// Loop loads in all textures
-	for (int i = 0; i < Integer.parseInt(data.data.get("texture.total")); i++) {
-	    textures.put(i, Loader.loadImage(data.data.get("texture." + i)));
-	    Console.log("Loaded texture " + (i + 1) + "/" + data.data.get("texture.total"));
+	for (int i = 0; i < Integer.parseInt(Loader.getconfigData().data.get("texture.total")); i++) {
+	    textures.put(i, Loader.loadImage(Loader.getconfigData().data.get("texture." + i)));
+	    Console.log("Loaded texture " + (i + 1) + "/" + Loader.getconfigData().data.get("texture.total"));
 	}
     }
 
@@ -291,5 +292,10 @@ public class JavaFileLoader implements LoaderType {
     @Override
     public Scene loadScene(String filename) throws MalformedFileException {
 	return sceneLoader.loadScene(filename);
+    }
+
+    @Override
+    public ConfigData loadConfig(String url) {
+	return JavaConfigLoader.loadConfig(url);
     }
 }

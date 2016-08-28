@@ -1,6 +1,6 @@
 package apis.loader;
 
-import apis.config.ConfigData;
+import dataTypes.ConfigData;
 import dataTypes.ModelData;
 import dataTypes.Shader;
 import dataTypes.TextFile;
@@ -22,15 +22,17 @@ public interface LoaderType {
 
     public Scene loadScene(String filename) throws MalformedFileException;
 
-    public void loadTextures(ConfigData data) throws MalformedFileException;
+    public void loadTextures() throws MalformedFileException;
 
     public Texture getTexture(int textureIndex);
 
-    public void loadShaders(ConfigData data);
+    public void loadShaders();
 
     public Shader getShader(int shaderIndex);
 
-    public void loadModels(ConfigData data) throws MalformedFileException;
+    public void loadModels() throws MalformedFileException;
 
     public ModelData getModel(int modelIndex);
+
+    public ConfigData loadConfig(String url);
 }
