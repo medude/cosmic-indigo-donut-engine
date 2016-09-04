@@ -4,11 +4,14 @@ import scene.Scene;
 
 public class NullRenderer implements RendererType {
 	@Override
-	public void render(){}
+	public void render() {
+	}
 
 	@Override
-	public void add(Scene scene){}
+	public void add(Scene scene) {
+	}
 
 	@Override
-	public void init(){}
+	public void init() {
+	}
 }

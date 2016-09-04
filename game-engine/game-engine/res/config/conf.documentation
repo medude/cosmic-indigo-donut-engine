@@ -1,0 +1,29 @@
+# Version number
+v.1.0.0
+
+# Total number of textures
+texture.total
+1
+
+# Texture 0 is test.png
+texture.0
+test
+
+# Total number of models
+model.total
+1
+
+# Model 0 is Plane
+model.0
+Plane
+
+# Total number of shaders
+shader.total
+1
+
+# Shader 0 is Shader
+shader.0
+shader
+
+window.title
+Game Test

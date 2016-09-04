@@ -11,20 +11,20 @@ public class JavaErrorHandler implements ErrorHandleType {
 		StringWriter errorS = new StringWriter();
 		PrintWriter errorThing = new PrintWriter(errorS);
 		String error;
-		
+
 		throwable.printStackTrace(errorThing);
-		error=errorS.toString();
-		
-		if(message == null) {
+		error = errorS.toString();
+
+		if (message == null) {
 			message = throwable.getMessage();
 		}
-		
-		if(doShowError) {
+
+		if (doShowError) {
 			Console.error(message + "\n" + error);
 		} else {
 			Console.error(message);
 		}
-		
+
 		System.exit(0);
 	}
 }

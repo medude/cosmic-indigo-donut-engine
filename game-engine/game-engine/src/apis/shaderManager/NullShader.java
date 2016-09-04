@@ -5,14 +5,19 @@ import math.Matrix4;
 
 public class NullShader implements ShaderType {
 	@Override
-	public Shader load(String path){return null;}
+	public Shader load(String path) {
+		return null;
+	}
 
 	@Override
-	public void cleanup(){}
+	public void cleanup() {
+	}
 
 	@Override
-	public void loadVariable(String name, Shader shader, float value){}
-	
+	public void loadVariable(String name, Shader shader, float value) {
+	}
+
 	@Override
-	public void loadVariable(String name, Shader shader, Matrix4 value){}
+	public void loadVariable(String name, Shader shader, Matrix4 value) {
+	}
 }
