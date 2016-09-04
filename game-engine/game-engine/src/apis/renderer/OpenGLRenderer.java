@@ -95,8 +95,6 @@ public class OpenGLRenderer implements RendererType {
 	@Override
 	public void render() {
 		for (Thing thing : things) {
-			Console.log(thing);
-
 			ModelData data = ((ModelComponent) thing.getComponent("ModelComponent")).getModel();
 			Shader shader = ((ShaderComponent) thing.getComponent("ShaderComponent")).getShader();
 

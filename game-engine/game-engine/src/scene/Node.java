@@ -2,7 +2,6 @@ package scene;
 
 import java.util.HashMap;
 
-import apis.console.Console;
 import components.Component;
 import components.types.TransformComponent;
 import components.types.transformComponent.GlobalTransformComponent;
@@ -26,9 +25,6 @@ public abstract class Node {
 			boolean flag = false;
 
 			if (child.dirtyFlag || forceTrue) {
-				Console.log(this.getType());
-				Console.log(child.getType());
-
 				GlobalTransformComponent transformation = new GlobalTransformComponent(MatrixMath.dotProduct(
 						((TransformComponent) this.getComponent("GlobalTransformComponent")).transform,
 						((TransformComponent) child.getComponent("LocalTransformComponent")).transform));
