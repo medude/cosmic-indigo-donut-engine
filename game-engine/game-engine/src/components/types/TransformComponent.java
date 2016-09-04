@@ -6,16 +6,16 @@ import math.TransformationMatrix;
 import math.Vector3;
 
 public abstract class TransformComponent extends Component {
-    public Matrix4 transform;
+	public Matrix4 transform;
 
-    public TransformComponent(Matrix4 transform, String name) {
-	super(name);
+	public TransformComponent(Matrix4 transform, String name) {
+		super(name);
 
-	if (transform == null) {
-	    this.transform = TransformationMatrix.create(new Vector3(0), new Vector3(0), 1);
-	} else {
-	    this.transform = transform;
+		if (transform == null) {
+			this.transform = TransformationMatrix.create(new Vector3(0), new Vector3(0), 1);
+		} else {
+			this.transform = transform;
+		}
 	}
-    }
 
 }

@@ -1,4 +1,6 @@
-/math/
 /apis/
-/main/
+/components/
 /dataTypes/
+/exceptions/
+/externalLibraries/
+/main/

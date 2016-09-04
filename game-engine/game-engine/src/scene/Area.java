@@ -1,9 +1,9 @@
 package scene;
 
 public class Area extends Node {
-    public Area(Node[] children) {
-	super("area");
+	public Area(Node[] children) {
+		super("area");
 
-	this.children = children;
-    }
+		this.children = children;
+	}
 }

@@ -2,10 +2,12 @@ package dataTypes;
 
 import java.util.HashMap;
 
-public class ConfigData {
-    public int bigVersion;
-    public int midVersion;
-    public int lilVersion;
+import dataTypes.anyType.AnyType;
 
-    public HashMap<String, String> data = new HashMap<String, String>();
+public class ConfigData {
+	public int bigVersion;
+	public int midVersion;
+	public int lilVersion;
+
+	public HashMap<String, AnyType> data = new HashMap<String, AnyType>();
 }

@@ -1,50 +1,92 @@
 package apis.loader.config;
 
+import apis.console.Console;
 import apis.errorHandle.ErrorHandle;
 import apis.loader.Loader;
 import dataTypes.ConfigData;
 import dataTypes.TextFile;
+import dataTypes.anyType.AnyArray;
+import dataTypes.anyType.AnyBool;
+import dataTypes.anyType.AnyDouble;
+import dataTypes.anyType.AnyString;
+import dataTypes.anyType.AnyType;
+import externalLibraries.minimalJson.main.Json;
+import externalLibraries.minimalJson.main.JsonArray;
+import externalLibraries.minimalJson.main.JsonObject;
+import externalLibraries.minimalJson.main.JsonValue;
 
 public class JavaConfigLoader {
-    public static ConfigData loadConfig(String url) {
-	TextFile configFile = null;
-	try {
-	    configFile = Loader.loadFile(url);
-	} catch (Throwable e) {
-	    ErrorHandle.handle(e);
+	public ConfigData loadConfig(String url) {
+		TextFile configFile = null;
+		try {
+			configFile = Loader.loadFile(url);
+		} catch (Throwable e) {
+			ErrorHandle.handle(e);
+		}
+
+		String jsonText = "";
+
+		for (String line : configFile.getLines()) {
+			jsonText += line + "\n";
+		}
+
+		JsonObject json = Json.parse(jsonText).asObject();
+
+		ConfigData data = jsonObject(json);
+
+		String[] version = json.get("version").asString().substring(1).split("\\.");
+		data.bigVersion = Integer.parseInt(version[0]);
+		data.midVersion = Integer.parseInt(version[1]);
+		data.lilVersion = Integer.parseInt(version[2]);
+
+		return data;
+
 	}
 
-	ConfigData data = new ConfigData();
+	private ConfigData jsonObject(JsonObject jsonObject) {
+		ConfigData data = new ConfigData();
 
-	while (true) {
-	    String line = configFile.getNextLine();
+		for (String line : jsonObject.getAllNames()) {
+			Console.log(line);
+			if (line == "version") {
+				break;
+			}
+			
+			JsonValue jsonValue = jsonObject.get(line);
+			AnyType anyType = null;
+			anyType = jsonValue(jsonValue);
 
-	    if (line == null) {
-		break;
+			data.data.put(line, anyType);
+		}
 
-	    } else if (line.startsWith("#")) {
-		continue;
-
-	    } else if (line.startsWith("v.")) {
-		String[] version = line.split("\\.");
-
-		data.bigVersion = Integer.parseInt(version[1]);
-		data.midVersion = Integer.parseInt(version[2]);
-		data.lilVersion = Integer.parseInt(version[3]);
-
-	    } else if (line.length() == 0) {
-
-	    } else {
-		String[] pair = new String[2];
-
-		pair[0] = line;
-		line = configFile.getNextLine();
-		pair[1] = line;
-
-		data.data.put(pair[0], pair[1]);
-	    }
+		return data;
 	}
 
-	return data;
-    }
+	private AnyType jsonValue(JsonValue jsonValue) {
+		AnyType anyType = null;
+
+		if (jsonValue.isBoolean()) {
+			anyType = new AnyBool(jsonValue.asBoolean());
+		} else if (jsonValue.isNumber()) {
+			anyType = new AnyDouble(jsonValue.asDouble());
+		} else if (jsonValue.isString()) {
+			anyType = new AnyString(jsonValue.asString());
+		} else if (jsonValue.isArray()) {
+			anyType = jsonArray(jsonValue);
+		}
+
+		return anyType;
+	}
+
+	private AnyArray jsonArray(JsonValue jsonValue) {
+		JsonArray jsonArray = jsonValue.asArray();
+
+		AnyType[] array = new AnyType[jsonArray.size()];
+
+		for (int i = 0; i < jsonArray.size(); i++) {
+			array[i] = jsonValue(jsonArray.get(i));
+		}
+
+		return new AnyArray(array);
+	}
 }

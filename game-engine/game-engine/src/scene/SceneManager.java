@@ -1,9 +1,9 @@
 package scene;
 
 public class SceneManager {
-    private static int componentID = -1;
+	private static int componentID = -1;
 
-    public static int getComponentID() {
-	return componentID++;
-    }
+	public static int getComponentID() {
+		return componentID++;
+	}
 }

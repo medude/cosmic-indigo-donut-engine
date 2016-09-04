@@ -3,21 +3,21 @@ package apis.windowManager;
 import dataTypes.Window;
 
 public interface WindowType {
-    public Window create(String title, int width, int height);
+	public Window create(String title, int width, int height);
 
-    public void close(Window window);
+	public void close(Window window);
 
-    public boolean testForClose(Window window);
+	public boolean testForClose(Window window);
 
-    public void update(Window window);
+	public void update(Window window);
 
-    public void init();
+	public void init();
 
-    public int getScreenWidth();
+	public int getScreenWidth();
 
-    public int getScreenHeight();
+	public int getScreenHeight();
 
-    public int getWidth();
+	public int getWidth();
 
-    public int getHeight();
+	public int getHeight();
 }
