@@ -1,1 +1,7 @@
-{"name":"Game-engine","tagline":"Useless game engine. That's about it.","body":"# What is Game Engine?\r\nGame Engine is a useless, half broken, game engine that could use a good name.\r\n\r\n# Roadmap?\r\nMaking it work, other stuff.\r\n\r\n# Seriously?\r\nYep.","google":"","note":"Don't delete this file! It's used internally to help with page regeneration."}
+{
+  "name": "Cosmic Indigo Game Engine",
+  "tagline": "Very basic game engine.",
+  "body": "# Cosmic Indigo Game Engine\r\nThis OpenGL game engine is really not currently meant for use. However, that makes development a high priority! If you know Java/OpenGL/GLSL, stick around and develop or at least help debug all of my countless errors (i.e. I broke the renderer at least twice in one day).\r\n",
+  "google": "",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
