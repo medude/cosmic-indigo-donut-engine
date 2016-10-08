@@ -1,21 +1,42 @@
 package components;
 
-import scene.SceneManager;
+import dataTypes.AnyType;
 
-public abstract class Component {
-	private int id;
-	private String name;
+public class Component {
+	private AnyType<Object>[] data;
+	private ComponentType type;
 
-	public Component(String name) {
-		this.id = SceneManager.getComponentID();
-		this.name = name;
+	public Component(AnyType<Object>[] data, ComponentType type) {
+		this.data = data;
+		this.type = type;
 	}
 
-	public int getID() {
-		return id;
+	@SuppressWarnings("unchecked")
+	public Component(AnyType<Object> data, ComponentType type) {
+		this.data = new AnyType[] { data };
+		this.type = type;
 	}
 
-	public String getName() {
-		return name;
+	public Component(ComponentType type) {
+		this.data = null;
+		this.type = type;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Component(Object data, ComponentType type) {
+		this.data = new AnyType[] { new AnyType<Object>(data) };
+		this.type = type;
+	}
+
+	public AnyType<Object>[] getData() {
+		return data;
+	}
+
+	public AnyType<Object> getData(int i) {
+		return data[i];
+	}
+
+	public ComponentType getType() {
+		return type;
 	}
 }

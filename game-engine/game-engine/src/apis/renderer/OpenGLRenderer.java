@@ -10,16 +10,11 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-import apis.console.Console;
 import apis.loader.Loader;
 import apis.shaderManager.ShaderManager;
 import apis.windowManager.WindowManager;
-import components.types.ModelComponent;
-import components.types.ShaderComponent;
-import components.types.TextureComponent;
-import components.types.TransformComponent;
-import components.types.transformComponent.GlobalTransformComponent;
-import components.types.transformComponent.LocalTransformComponent;
+import components.Component;
+import components.ComponentType;
 import dataTypes.ModelData;
 import dataTypes.Shader;
 import math.Matrix4;
@@ -52,8 +47,9 @@ public class OpenGLRenderer implements RendererType {
 
 	@Override
 	public void add(Scene scene) {
-		scene.addComponent(new GlobalTransformComponent(
-				TransformationMatrix.create(new Vector3(0, 0, 0), new Vector3(0, 0, 0), 1)));
+		scene.addComponent(new Component(
+				TransformationMatrix.create(new Vector3(0, 0, 0), new Vector3(0, 0, 0), 1),
+				ComponentType.GLOBAL_TRANSFORM));
 
 		currentScene = scene;
 
@@ -62,31 +58,36 @@ public class OpenGLRenderer implements RendererType {
 
 	private void iterateChildren(Node[] children) {
 		for (Node child : children) {
-			if (child.hasComponent("RenderComponent")) {
-				if (!child.hasComponent("GlobalTransformComponent")) {
-					child.addComponent(new GlobalTransformComponent(
-							TransformationMatrix.create(new Vector3(0), new Vector3(0), 1)));
+			if (child == null) {
+				continue;
+			}
+			if (child.hasComponent(ComponentType.RENDER)) {
+				if (!child.hasComponent(ComponentType.GLOBAL_TRANSFORM)) {
+					child.addComponent(new Component(
+							TransformationMatrix.create(new Vector3(0), new Vector3(0), 1),
+							ComponentType.GLOBAL_TRANSFORM));
 				}
 
-				if (!child.hasComponent("LocalTransformComponent")) {
-					child.addComponent(new LocalTransformComponent(
-							TransformationMatrix.create(new Vector3(0), new Vector3(0), 1)));
+				if (!child.hasComponent(ComponentType.LOCAL_TRANSFORM)) {
+					child.addComponent(new Component(
+							TransformationMatrix.create(new Vector3(0), new Vector3(0), 1),
+							ComponentType.LOCAL_TRANSFORM));
 				}
 
-				if (!child.hasComponent("ShaderComponent")) {
-					child.addComponent(new ShaderComponent(Loader.getShader(0)));
+				if (!child.hasComponent(ComponentType.SHADER)) {
+					child.addComponent(new Component(Loader.getShader(0), ComponentType.SHADER));
 				}
 
-				if (!child.hasComponent("TextureComponent")) {
-					child.addComponent(new TextureComponent(Loader.getTexture(0)));
+				if (!child.hasComponent(ComponentType.TEXTURE)) {
+					child.addComponent(new Component(Loader.getTexture(0), ComponentType.TEXTURE));
 				}
 
-				if (!child.hasComponent("ModelComponent")) {
-					child.addComponent(new ModelComponent(Loader.getModel(0)));
+				if (!child.hasComponent(ComponentType.MODEL)) {
+					child.addComponent(new Component(Loader.getModel(0), ComponentType.MODEL));
 				}
 
 				things.add((Thing) child);
-			} else {
+			} else if (child.children.length != 0) {
 				iterateChildren(child.children);
 			}
 		}
@@ -95,8 +96,8 @@ public class OpenGLRenderer implements RendererType {
 	@Override
 	public void render() {
 		for (Thing thing : things) {
-			ModelData data = ((ModelComponent) thing.getComponent("ModelComponent")).getModel();
-			Shader shader = ((ShaderComponent) thing.getComponent("ShaderComponent")).getShader();
+			ModelData data = (ModelData) thing.getComponent(ComponentType.MODEL).getData(0).data();
+			Shader shader = (Shader) thing.getComponent(ComponentType.SHADER).getData(0).data();
 
 			GL20.glUseProgram(shader.getID());
 
@@ -108,10 +109,9 @@ public class OpenGLRenderer implements RendererType {
 
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D,
-					((TextureComponent) thing.getComponent("TextureComponent")).getTexture().getID());
-			Console.log(thing);
+					((Shader) thing.getComponent(ComponentType.TEXTURE).getData(0).data()).getID());
 			ShaderManager.loadVariable("transformation", shader,
-					((TransformComponent) thing.getComponent("GlobalTransformComponent")).transform);
+					((Matrix4) thing.getComponent(ComponentType.GLOBAL_TRANSFORM).getData(0).data()));
 
 			GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, data.getIndiciesID());
 

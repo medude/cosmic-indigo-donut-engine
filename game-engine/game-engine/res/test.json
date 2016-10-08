@@ -24,8 +24,7 @@
 			"scale":1
 			}
 		],
-				
-		"childCount":1,
+		
 		"childNumber":0,
 		"children":[
 			{
@@ -45,9 +44,7 @@
 				}
 			],
 			
-			"childCount":1,
 			"childNumber":0,
-			
 			"children":[
 				{			
 				"type":"thing",

@@ -26,12 +26,12 @@ import apis.errorHandle.ErrorHandle;
 import apis.loader.config.JavaConfigLoader;
 import apis.loader.scene.JavaSceneLoader;
 import apis.shaderManager.ShaderManager;
+import dataTypes.AnyType;
 import dataTypes.ConfigData;
 import dataTypes.ModelData;
 import dataTypes.Shader;
 import dataTypes.TextFile;
 import dataTypes.Texture;
-import dataTypes.anyType.AnyType;
 import exceptions.MalformedFileException;
 import math.Vector2;
 import math.Vector3;
@@ -55,10 +55,11 @@ public class JavaFileLoader implements LoaderType {
 	// Loop loads in all models
 	@Override
 	public void loadModels() throws MalformedFileException {
-		AnyType[] array = Loader.getconfigData().data.get("models").getArray();
+		@SuppressWarnings("unchecked")
+		AnyType<Object>[] array = (AnyType<Object>[]) Loader.getconfigData().data.get("models").data();
 
 		for (int i = 0; i < array.length; i++) {
-			models.put(i, Loader.loadOBJ(array[i].getString()));
+			models.put(i, Loader.loadOBJ((String) array[i].data()));
 			Console.log("Loaded model " + (i + 1) + "/" + array.length);
 		}
 	}
@@ -71,10 +72,11 @@ public class JavaFileLoader implements LoaderType {
 	// Loop loads in all shaders
 	@Override
 	public void loadShaders() {
-		AnyType[] array = Loader.getconfigData().data.get("shaders").getArray();
+		@SuppressWarnings("unchecked")
+		AnyType<Object>[] array = (AnyType<Object>[]) Loader.getconfigData().data.get("shaders").data();
 
 		for (int i = 0; i < array.length; i++) {
-			shaders.put(i, ShaderManager.load(array[i].getString()));
+			shaders.put(i, ShaderManager.load((String) array[i].data()));
 			Console.log("Loaded shader " + (i + 1) + "/" + array.length);
 		}
 	}
@@ -88,10 +90,11 @@ public class JavaFileLoader implements LoaderType {
 	public void loadTextures() throws MalformedFileException {
 		// Loop loads in all textures
 		//              Config data from loader-  find "textures"-  use as array
-		AnyType[] array = Loader.getconfigData().data.get("textures").getArray();
+		@SuppressWarnings("unchecked")
+		AnyType<Object>[] array = (AnyType<Object>[]) Loader.getconfigData().data.get("textures").data();
 
 		for (int i = 0; i < array.length; i++) {
-			textures.put(i, Loader.loadImage(array[i].getString()));
+			textures.put(i, Loader.loadImage((String) array[i].data()));
 			Console.log(
 					"Loaded texture " + (i + 1) + "/" + array.length);
 		}

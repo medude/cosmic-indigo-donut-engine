@@ -7,24 +7,38 @@ import apis.loader.Loader;
 import apis.renderer.Renderer;
 import apis.windowManager.WindowManager;
 import dataTypes.Window;
-import scene.Scene;
+import scene.Node;
 
+/**
+ * This class contains the only application entry point, and the only other method, run, contains the entirety of the
+ * program.
+ * 
+ * @author medude
+ */
 public class Main {
+	/**
+	 * This method is the game engine entry point and executes the {@link Main#run() run()} method.
+	 * 
+	 * @param args
+	 *            The arguments passed to the JVM
+	 */
 	public static void main(String[] args) {
 		Main game = new Main();
 		game.run();
 	}
 
-	public void run() {
+	/**
+	 * This method is called by {@link Main#main(String[]) main()} and acts as the init and game loop threads.
+	 */
+	private void run() {
 		try {
-
 			//////////////////////////////////
 			// Set up backend               //
 			//////////////////////////////////
 
 			ApiHandler.init("config/config.json"); // Init all APIs
 
-			Window window = WindowManager.create(Loader.getconfigData().data.get("windowTitle").getString()); // Create
+			Window window = WindowManager.create((String) Loader.getconfigData().data.get("windowTitle").data()); // Create
 			// window
 			Console.log("APIs inited and window created succsessfully");
 
@@ -49,7 +63,7 @@ public class Main {
 			// Setup scene graphs           //
 			//////////////////////////////////
 
-			Scene scene = Loader.loadScene("test.json");
+			Node scene = Loader.loadScene("test.json");
 
 			// Add the scene to the renderer
 			Renderer.add(scene);
