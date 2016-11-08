@@ -2,6 +2,7 @@ package apis.loader.scene;
 
 import java.util.HashMap;
 
+import apis.console.Console;
 import apis.loader.Loader;
 import components.Component;
 import components.ComponentHelper;
@@ -128,12 +129,10 @@ public class JavaSceneLoader {
 		}
 		
 		workingNode.addData("components", new AnyType<HashMap<ComponentType, Component>>(components));
+		workingNode.addData("children", new AnyType(new SceneNode[jsonNode.get("children").asArray().size()]));
 
 		// Add children
-		if (jsonNode.get("children").asArray().size() != 0 && lastNode != null) {
-			if (!lastNode.hasData("children")) {
-				lastNode.addData("children", new AnyType(new SceneNode[jsonNode.get("children").asArray().size()]));
-			}
+		if (lastNode != null) {
 			SceneNode[] children = (SceneNode[]) lastNode.getData("children").getData();
 			children[jsonNode.get("childNumber").asInt()] = workingNode;
 			lastNode.updateData("children", new AnyType(children));
@@ -143,6 +142,7 @@ public class JavaSceneLoader {
 			JsonObject child = jsonNode.get("children").asArray().get(i).asObject();
 
 			processNode(child, workingNode);
+			Console.log(i);
 		}
 
 		return workingNode;

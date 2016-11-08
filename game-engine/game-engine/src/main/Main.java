@@ -63,7 +63,7 @@ public class Main {
 			// Setup scene graphs           //
 			//////////////////////////////////
 
-			SceneNode scene = Loader.loadScene("test.json");
+			SceneNode scene = Loader.loadScene("scene.json");
 
 			// Add the scene to the renderer
 			Renderer.add(scene);

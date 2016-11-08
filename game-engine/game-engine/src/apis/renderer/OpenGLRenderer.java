@@ -17,6 +17,7 @@ import components.Component;
 import components.ComponentType;
 import dataTypes.ModelData;
 import dataTypes.Shader;
+import dataTypes.Texture;
 import math.Matrix4;
 import math.ProjectionMatrix;
 import scene.SceneNode;
@@ -44,7 +45,6 @@ public class OpenGLRenderer implements RendererType {
 	@Override
 	public void add(SceneNode scene) {
 		currentScene = scene;
-
 		iterateChildren((SceneNode[]) currentScene.getData("children").getData());
 	}
 
@@ -83,7 +83,7 @@ public class OpenGLRenderer implements RendererType {
 
 			GL13.glActiveTexture(GL13.GL_TEXTURE0);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D,
-					((Shader) ((HashMap<ComponentType, Component>) thing.getData("components").getData())
+					((Texture) ((HashMap<ComponentType, Component>) thing.getData("components").getData())
 							.get(ComponentType.TEXTURE).getData()[0].getData()).getID());
 			ShaderManager.loadVariable("transformation", shader,
 					((Matrix4) ((HashMap<ComponentType, Component>) thing.getData("components").getData())
