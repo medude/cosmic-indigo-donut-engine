@@ -1,5 +1,7 @@
 {
 	"name":"Test",
+	"id":"scene",
+	"class":"non-rendered",
 	
 	"componentCount":1,
 	"components":[

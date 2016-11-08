@@ -1,5 +1,6 @@
 package apis.loader.scene;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import apis.console.Console;
@@ -128,6 +129,26 @@ public class JavaSceneLoader {
 			}
 		}
 		
+		// Get classes, name, id
+		if (jsonNode.get("id") != null) {
+			workingNode.setId(jsonNode.get("id").asString());
+		}
+
+		if (jsonNode.get("name") != null) {
+			workingNode.setId(jsonNode.get("name").asString());
+		}
+
+		if (jsonNode.get("classes") != null) {
+			ArrayList<String> classes = new ArrayList<String>();
+			String[] stringClasses = jsonNode.get("classes").asString().split(" ");
+			
+			for (String classString : stringClasses) {
+				classes.add(classString);
+			}
+			
+			workingNode.setClasses(classes);
+		}
+
 		workingNode.addData("components", new AnyType<HashMap<ComponentType, Component>>(components));
 		workingNode.addData("children", new AnyType(new SceneNode[jsonNode.get("children").asArray().size()]));
 

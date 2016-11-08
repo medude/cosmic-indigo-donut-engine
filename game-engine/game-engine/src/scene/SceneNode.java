@@ -1,5 +1,6 @@
 package scene;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import apis.errorHandler.ErrorHandler;
@@ -33,6 +34,21 @@ public class SceneNode {
 	public boolean dirtyFlag = true;
 
 	/**
+	 * This is the optional Node id
+	 */
+	private String id = null;
+
+	/**
+	 * This is the optional Node name
+	 */
+	private String name = null;
+
+	/**
+	 * These are the optional classes
+	 */
+	private ArrayList<String> classes = null;
+
+	/**
 	 * Node constructor- creates Node...
 	 * 
 	 * @param nodeData
@@ -40,6 +56,51 @@ public class SceneNode {
 	 */
 	public SceneNode(HashMap<String, AnyType<?>> nodeData) {
 		this.nodeData = nodeData;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the classes
+	 */
+	public ArrayList<String> getClasses() {
+		return classes;
+	}
+
+	/**
+	 * @param classes
+	 *            the classes to set
+	 */
+	public void setClasses(ArrayList<String> classes) {
+		this.classes = classes;
 	}
 
 	/**
