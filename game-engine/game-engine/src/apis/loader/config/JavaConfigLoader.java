@@ -1,15 +1,11 @@
 package apis.loader.config;
 
 import apis.console.Console;
-import apis.errorHandle.ErrorHandle;
+import apis.errorHandler.ErrorHandler;
 import apis.loader.Loader;
+import dataTypes.AnyType;
 import dataTypes.ConfigData;
 import dataTypes.TextFile;
-import dataTypes.anyType.AnyArray;
-import dataTypes.anyType.AnyBool;
-import dataTypes.anyType.AnyDouble;
-import dataTypes.anyType.AnyString;
-import dataTypes.anyType.AnyType;
 import externalLibraries.minimalJson.main.Json;
 import externalLibraries.minimalJson.main.JsonArray;
 import externalLibraries.minimalJson.main.JsonObject;
@@ -21,7 +17,7 @@ public class JavaConfigLoader {
 		try {
 			configFile = Loader.loadFile(url);
 		} catch (Throwable e) {
-			ErrorHandle.handle(e);
+			ErrorHandler.handle(e);
 		}
 
 		String jsonText = "";
@@ -53,7 +49,7 @@ public class JavaConfigLoader {
 			}
 			
 			JsonValue jsonValue = jsonObject.get(line);
-			AnyType anyType = null;
+			AnyType<Object> anyType = null;
 			anyType = jsonValue(jsonValue);
 
 			data.data.put(line, anyType);
@@ -62,15 +58,16 @@ public class JavaConfigLoader {
 		return data;
 	}
 
-	private AnyType jsonValue(JsonValue jsonValue) {
-		AnyType anyType = null;
+	private AnyType<Object> jsonValue(JsonValue jsonValue) {
+		AnyType<Object> anyType = null;
 
+		// We need this annoying if structure because of the way JsonValue works- don't remove unless library changes!
 		if (jsonValue.isBoolean()) {
-			anyType = new AnyBool(jsonValue.asBoolean());
+			anyType = new AnyType<Object>(jsonValue.asBoolean());
 		} else if (jsonValue.isNumber()) {
-			anyType = new AnyDouble(jsonValue.asDouble());
+			anyType = new AnyType<Object>(jsonValue.asDouble());
 		} else if (jsonValue.isString()) {
-			anyType = new AnyString(jsonValue.asString());
+			anyType = new AnyType<Object>(jsonValue.asString());
 		} else if (jsonValue.isArray()) {
 			anyType = jsonArray(jsonValue);
 		}
@@ -78,15 +75,16 @@ public class JavaConfigLoader {
 		return anyType;
 	}
 
-	private AnyArray jsonArray(JsonValue jsonValue) {
+	private AnyType<Object> jsonArray(JsonValue jsonValue) {
 		JsonArray jsonArray = jsonValue.asArray();
 
-		AnyType[] array = new AnyType[jsonArray.size()];
+		@SuppressWarnings("unchecked")
+		AnyType<Object>[] array = new AnyType[jsonArray.size()];
 
 		for (int i = 0; i < jsonArray.size(); i++) {
 			array[i] = jsonValue(jsonArray.get(i));
 		}
 
-		return new AnyArray(array);
+		return new AnyType<Object>(array);
 	}
 }

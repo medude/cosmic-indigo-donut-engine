@@ -1,119 +1,171 @@
 package apis.loader.scene;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import apis.console.Console;
 import apis.loader.Loader;
-import components.types.ModelComponent;
-import components.types.RenderComponent;
-import components.types.ShaderComponent;
-import components.types.TextureComponent;
-import components.types.transformComponent.GlobalTransformComponent;
-import components.types.transformComponent.LocalTransformComponent;
+import components.Component;
+import components.ComponentHelper;
+import components.ComponentType;
+import dataTypes.AnyType;
 import dataTypes.TextFile;
 import exceptions.MalformedFileException;
 import externalLibraries.minimalJson.main.Json;
 import externalLibraries.minimalJson.main.JsonObject;
 import math.TransformationMatrix;
 import math.Vector3;
-import scene.Area;
-import scene.Group;
-import scene.Node;
-import scene.Scene;
-import scene.Thing;
+import scene.SceneNode;
 
+/**
+ * This class is in charge of loading scenes from native java methods and MinimalJson
+ * 
+ * @author medude
+ */
 public class JavaSceneLoader {
-	public Scene loadScene(String filename) throws MalformedFileException {
-		TextFile file = Loader.loadFile(filename);
+	/**
+	 * This method is called to create and populate a scene.
+	 * 
+	 * @param filename
+	 *            This is the filename relative to the /res directory
+	 * @return Returns parent node containing all elements of the specified scene
+	 * @throws MalformedFileException
+	 *             If the scene file is malformed and cannot be understood, this is thrown
+	 */
+	public SceneNode loadScene(String filename) throws MalformedFileException {
+		TextFile sceneFile = Loader.loadFile(filename);
+		String sceneFileContents = "";
 
-		String jsonText = "";
-
-		for (String line : file.getLines()) {
-			jsonText += line + "\n";
+		for (String line : sceneFile.getLines()) {
+			sceneFileContents += line + "\n";
 		}
 
-		JsonObject json = Json.parse(jsonText).asObject();
-		JsonObject node = json;
+		JsonObject sceneAsJson = Json.parse(sceneFileContents).asObject();
+		JsonObject currJsonSceneNode = sceneAsJson;
 
-		Scene scene = new Scene(new Area[node.get("childCount").asInt()], null, node.get("name").asString());
+		SceneNode gameScene = new SceneNode();
 
-		scene.addComponent(
-				new GlobalTransformComponent(TransformationMatrix.create(new Vector3(0), new Vector3(0), 1)));
+		// This is the element name- it can be used to identify elements- and scenes
+		//gameScene.addData("name", new AnyType<String>(currJsonSceneNode.get("name").asString()));
 
-		processNode(node, null, scene);
+		// These are the components- at the end, they go into the scene's data
+		//HashMap<ComponentType, Component> components = new HashMap<ComponentType, Component>();
+		
+		//components.put(ComponentType.GLOBAL_TRANSFORM,
+		//		new Component(new AnyType<Object>(TransformationMatrix.create(new Vector3(0), new Vector3(0), 1)),
+		//				ComponentType.GLOBAL_TRANSFORM));
+		
+		//gameScene.addData("components", new AnyType<HashMap<ComponentType, Component>>(components));
 
-		return scene;
+		//Console.log(((HashMap<ComponentType, Component>) gameScene.getData("components").getData()).keySet());
+
+		gameScene = processNode(currJsonSceneNode, null);
+
+		return gameScene;
 	}
 
-	private void processNode(JsonObject node, Node lastNode, Scene scene) {
-		if (lastNode == null) {
-			lastNode = scene;
-		}
-
-		Node processedNode = null;
-
-		// Get the type
-		switch (node.get("type").asString()) {
-		case "area":
-			processedNode = new Area(new Group[node.get("childCount").asInt()]);
-			break;
-		case "group":
-			processedNode = new Group(new Node[node.get("childCount").asInt()]);
-			break;
-		case "thing":
-			processedNode = new Thing();
-		case "scene":
-			break;
-		}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	/**
+	 * This method processes each node in the scene graph, adding components, children, and self-calls to add process
+	 * children nodes.
+	 * 
+	 * @param node
+	 *            The node to begin processing.
+	 * @param lastNode
+	 *            The node that was just processed, used to add children, if null it's okay.
+	 */
+	private SceneNode processNode(JsonObject jsonNode, SceneNode lastNode) {
+		SceneNode workingNode = new SceneNode();
+		HashMap components = ComponentHelper.createHashMap();
 
 		// Get the components
-		for (int i = 0; i < node.get("componentCount").asInt(); i++) {
-			JsonObject currentComponent = node.get("components").asArray().get(i).asObject();
+		for (int i = 0; i < jsonNode.get("components").asArray().size(); i++) {
+			JsonObject currentComponent = jsonNode.get("components").asArray().get(i).asObject();
 
 			switch (currentComponent.get("type").asString()) {
 
 			// If it's a RenderComponent
 			case "RenderComponent":
-				processedNode.addComponent(new RenderComponent());
+				components.put(ComponentType.RENDER, new Component(ComponentType.RENDER));
 				break;
 
 			// If it's a ModelComponent
 			case "ModelComponent":
-				processedNode
-						.addComponent(new ModelComponent(Loader.getModel(currentComponent.get("modelIndex").asInt())));
+				components.put(ComponentType.MODEL, new Component(Loader.getModel(currentComponent.get("modelIndex").asInt()),
+						ComponentType.MODEL));
+						
 				break;
 
 			// If it's a ShaderComponent
 			case "ShaderComponent":
-				processedNode.addComponent(
-						new ShaderComponent(Loader.getShader(currentComponent.get("shaderIndex").asInt())));
+				components.put(ComponentType.SHADER, new Component(
+						Loader.getShader(currentComponent.get("shaderIndex").asInt()), ComponentType.SHADER));
 				break;
 
 			// If it's a TextureComponent
 			case "TextureComponent":
-				processedNode.addComponent(
-						new TextureComponent(Loader.getTexture(currentComponent.get("textureIndex").asInt())));
+				components.put(ComponentType.TEXTURE, new Component(
+						Loader.getTexture(currentComponent.get("textureIndex").asInt()), ComponentType.TEXTURE));
 				break;
 
 			// If it's a TransformComponent
 			case "TransformComponent":
-				processedNode.addComponent(new LocalTransformComponent(TransformationMatrix.create(
-						new Vector3(currentComponent.get("positionX").asDouble(), currentComponent.get("positionY")
-								.asDouble(), currentComponent.get("positionZ").asDouble()),
-						new Vector3(currentComponent.get("rotX").asDouble(), currentComponent.get("rotY").asDouble(),
-								currentComponent.get("rotZ").asDouble()),
-						currentComponent.get("scale").asFloat())));
+				Vector3 position = new Vector3(currentComponent.get("positionX").asDouble(),
+						currentComponent.get("positionY").asDouble(), currentComponent.get("positionZ").asDouble());
+				
+				Vector3 rotation = new Vector3(currentComponent.get("rotX").asDouble(), currentComponent.get("rotY").asDouble(),
+						currentComponent.get("rotZ").asDouble());
+				
+				Float scale = currentComponent.get("scale").asFloat();
 
-				processedNode.addComponent(new GlobalTransformComponent(null));
+				components.put(ComponentType.LOCAL_TRANSFORM, new Component(
+						(TransformationMatrix.create(position, rotation, scale)), ComponentType.LOCAL_TRANSFORM));
+
+				components.put(ComponentType.GLOBAL_TRANSFORM,
+						new Component(TransformationMatrix.create(new Vector3(0), new Vector3(0), 1),
+								ComponentType.GLOBAL_TRANSFORM));
 				break;
+
 			}
 		}
-
-		lastNode.children[node.get("childNumber").asInt()] = processedNode;
-
-		lastNode = processedNode;
-
-		for (int i = 0; i < node.get("childCount").asInt(); i++) {
-			JsonObject child = node.get("children").asArray().get(i).asObject();
-
-			processNode(child, lastNode, scene);
+		
+		// Get classes, name, id
+		if (jsonNode.get("id") != null) {
+			workingNode.setId(jsonNode.get("id").asString());
 		}
+
+		if (jsonNode.get("name") != null) {
+			workingNode.setId(jsonNode.get("name").asString());
+		}
+
+		if (jsonNode.get("classes") != null) {
+			ArrayList<String> classes = new ArrayList<String>();
+			String[] stringClasses = jsonNode.get("classes").asString().split(" ");
+			
+			for (String classString : stringClasses) {
+				classes.add(classString);
+			}
+			
+			workingNode.setClasses(classes);
+		}
+
+		workingNode.addData("components", new AnyType<HashMap<ComponentType, Component>>(components));
+		workingNode.addData("children", new AnyType(new SceneNode[jsonNode.get("children").asArray().size()]));
+
+		// Add children
+		if (lastNode != null) {
+			SceneNode[] children = (SceneNode[]) lastNode.getData("children").getData();
+			children[jsonNode.get("childNumber").asInt()] = workingNode;
+			lastNode.updateData("children", new AnyType(children));
+		}
+
+		for (int i = 0; i < jsonNode.get("children").asArray().size(); i++) {
+			JsonObject child = jsonNode.get("children").asArray().get(i).asObject();
+
+			processNode(child, workingNode);
+			Console.log(i);
+		}
+
+		return workingNode;
 	}
 }

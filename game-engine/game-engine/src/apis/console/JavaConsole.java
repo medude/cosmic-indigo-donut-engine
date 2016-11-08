@@ -3,6 +3,11 @@ package apis.console;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * This class implements the console functionality through native Java functions.
+ * 
+ * @author medude
+ */
 public class JavaConsole implements ConsoleType {
 	@Override
 	public void log(String message) {

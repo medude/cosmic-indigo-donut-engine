@@ -1,5 +1,5 @@
-package apis.errorHandle;
+package apis.errorHandler;
 
-public interface ErrorHandleType {
+public interface ErrorHandlerType {
 	public void handle(Throwable throwable, String message, boolean showError);
 }

@@ -1,9 +1,15 @@
-package apis.errorHandle;
+package apis.errorHandler;
 
 import apis.ApiHandler;
 
-public class ErrorHandle {
-	private static ErrorHandleType errorObject = ApiHandler.getErrorHandler();
+/**
+ * This class acts as the access point to the ErrorType functionality. Use this to handle basic errors.
+ * 
+ * @author medude
+ */
+public class ErrorHandler {
+	// This is the actual functionality of the ErrorHandler
+	private static ErrorHandlerType errorObject = ApiHandler.getErrorHandler();
 
 	public static void handle(Throwable throwable) {
 		errorObject.handle(throwable, null, true);
