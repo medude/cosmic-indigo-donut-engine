@@ -20,10 +20,11 @@ import dataTypes.Shader;
 import dataTypes.Texture;
 import math.Matrix4;
 import math.ProjectionMatrix;
+import scene.Scene;
 import scene.SceneNode;
 
 public class OpenGLRenderer implements RendererType {
-	private SceneNode currentScene;
+	private Scene currentScene;
 	private List<SceneNode> renderedThings = new ArrayList<SceneNode>();
 	private Matrix4 projectionMatrix;
 
@@ -43,9 +44,9 @@ public class OpenGLRenderer implements RendererType {
 	}
 
 	@Override
-	public void add(SceneNode scene) {
+	public void add(Scene scene) {
 		currentScene = scene;
-		iterateChildren((SceneNode[]) currentScene.getData("children").getData());
+		iterateChildren((SceneNode[]) currentScene.getSceneGraph().getData("children").getData());
 	}
 
 	@SuppressWarnings("unchecked")

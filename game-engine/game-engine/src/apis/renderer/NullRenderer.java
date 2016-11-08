@@ -1,6 +1,6 @@
 package apis.renderer;
 
-import scene.SceneNode;
+import scene.Scene;
 
 public class NullRenderer implements RendererType {
 	@Override
@@ -8,7 +8,7 @@ public class NullRenderer implements RendererType {
 	}
 
 	@Override
-	public void add(SceneNode scene) {
+	public void add(Scene scene) {
 	}
 
 	@Override

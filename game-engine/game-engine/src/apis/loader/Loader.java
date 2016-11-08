@@ -7,7 +7,7 @@ import dataTypes.Shader;
 import dataTypes.TextFile;
 import dataTypes.Texture;
 import exceptions.MalformedFileException;
-import scene.SceneNode;
+import scene.Scene;
 
 public class Loader {
 	private static LoaderType loaderObject = ApiHandler.getLoader();
@@ -29,8 +29,8 @@ public class Loader {
 		return loaderObject.loadOBJ(filename);
 	}
 
-	public static SceneNode loadScene(String filename) throws MalformedFileException {
-		return loaderObject.loadScene(filename);
+	public static Scene loadScene(String filename) throws MalformedFileException {
+		return new Scene(loaderObject.loadScene(filename));
 	}
 
 	public static void loadTextures() throws MalformedFileException {

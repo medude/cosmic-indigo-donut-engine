@@ -7,7 +7,7 @@ import apis.loader.Loader;
 import apis.renderer.Renderer;
 import apis.windowManager.WindowManager;
 import dataTypes.Window;
-import scene.SceneNode;
+import scene.Scene;
 
 /**
  * This class contains the only application entry point, and the only other method, run, contains the entirety of the
@@ -63,7 +63,7 @@ public class Main {
 			// Setup scene graphs           //
 			//////////////////////////////////
 
-			SceneNode scene = Loader.loadScene("scene.json");
+			Scene scene = Loader.loadScene("scene.json");
 
 			// Add the scene to the renderer
 			Renderer.add(scene);
@@ -85,7 +85,7 @@ public class Main {
 				//////////////////////////////////
 
 				// Apply any movements
-				scene.calculateChildTransform(false);
+				scene.getSceneGraph().calculateChildTransform(false);
 
 				//////////////////////////////////
 				// Render
@@ -93,6 +93,8 @@ public class Main {
 
 				Renderer.render(); // Perform actual render
 				WindowManager.update(window); // Show render
+
+				Console.log(scene.getNodeById("square"));
 			}
 
 		} catch (Throwable e) {

@@ -1,11 +1,11 @@
 package apis.renderer;
 
-import scene.SceneNode;
+import scene.Scene;
 
 public interface RendererType {
 	public void init();
 
-	public void add(SceneNode scene);
+	public void add(Scene scene);
 
 	public void render();
 }
