@@ -1,4 +1,4 @@
-package apis.errorHandle;
+package apis.errorHandler;
 
 import apis.ApiHandler;
 
@@ -7,9 +7,9 @@ import apis.ApiHandler;
  * 
  * @author medude
  */
-public class ErrorHandle {
+public class ErrorHandler {
 	// This is the actual functionality of the ErrorHandler
-	private static ErrorHandleType errorObject = ApiHandler.getErrorHandler();
+	private static ErrorHandlerType errorObject = ApiHandler.getErrorHandler();
 
 	public static void handle(Throwable throwable) {
 		errorObject.handle(throwable, null, true);

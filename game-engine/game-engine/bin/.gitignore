@@ -1,2 +1,8 @@
-/scene/
 /apis/
+/components/
+/dataTypes/
+/exceptions/
+/externalLibraries/
+/main/
+/math/
+/scene/

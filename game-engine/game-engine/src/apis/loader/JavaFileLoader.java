@@ -22,7 +22,7 @@ import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL30;
 
 import apis.console.Console;
-import apis.errorHandle.ErrorHandle;
+import apis.errorHandler.ErrorHandler;
 import apis.loader.config.JavaConfigLoader;
 import apis.loader.scene.JavaSceneLoader;
 import apis.shaderManager.ShaderManager;
@@ -35,7 +35,7 @@ import dataTypes.Texture;
 import exceptions.MalformedFileException;
 import math.Vector2;
 import math.Vector3;
-import scene.Scene;
+import scene.SceneNode;
 
 public class JavaFileLoader implements LoaderType {
 	private JavaSceneLoader sceneLoader = new JavaSceneLoader();
@@ -56,10 +56,10 @@ public class JavaFileLoader implements LoaderType {
 	@Override
 	public void loadModels() throws MalformedFileException {
 		@SuppressWarnings("unchecked")
-		AnyType<Object>[] array = (AnyType<Object>[]) Loader.getconfigData().data.get("models").data();
+		AnyType<Object>[] array = (AnyType<Object>[]) Loader.getconfigData().data.get("models").getData();
 
 		for (int i = 0; i < array.length; i++) {
-			models.put(i, Loader.loadOBJ((String) array[i].data()));
+			models.put(i, Loader.loadOBJ((String) array[i].getData()));
 			Console.log("Loaded model " + (i + 1) + "/" + array.length);
 		}
 	}
@@ -73,10 +73,10 @@ public class JavaFileLoader implements LoaderType {
 	@Override
 	public void loadShaders() {
 		@SuppressWarnings("unchecked")
-		AnyType<Object>[] array = (AnyType<Object>[]) Loader.getconfigData().data.get("shaders").data();
+		AnyType<Object>[] array = (AnyType<Object>[]) Loader.getconfigData().data.get("shaders").getData();
 
 		for (int i = 0; i < array.length; i++) {
-			shaders.put(i, ShaderManager.load((String) array[i].data()));
+			shaders.put(i, ShaderManager.load((String) array[i].getData()));
 			Console.log("Loaded shader " + (i + 1) + "/" + array.length);
 		}
 	}
@@ -91,10 +91,10 @@ public class JavaFileLoader implements LoaderType {
 		// Loop loads in all textures
 		//              Config data from loader-  find "textures"-  use as array
 		@SuppressWarnings("unchecked")
-		AnyType<Object>[] array = (AnyType<Object>[]) Loader.getconfigData().data.get("textures").data();
+		AnyType<Object>[] array = (AnyType<Object>[]) Loader.getconfigData().data.get("textures").getData();
 
 		for (int i = 0; i < array.length; i++) {
-			textures.put(i, Loader.loadImage((String) array[i].data()));
+			textures.put(i, Loader.loadImage((String) array[i].getData()));
 			Console.log(
 					"Loaded texture " + (i + 1) + "/" + array.length);
 		}
@@ -134,7 +134,7 @@ public class JavaFileLoader implements LoaderType {
 			return new TextFile(lineList);
 
 		} catch (IOException e) {
-			ErrorHandle.handle(e);
+			ErrorHandler.handle(e);
 		}
 
 		return null;
@@ -148,7 +148,7 @@ public class JavaFileLoader implements LoaderType {
 		try {
 			image = ImageIO.read(new File("res/images/" + filename));
 		} catch (IOException e) {
-			ErrorHandle.handle(e);
+			ErrorHandler.handle(e);
 		}
 
 		int[] pixels = new int[image.getWidth() * image.getHeight()];
@@ -203,7 +203,7 @@ public class JavaFileLoader implements LoaderType {
 		try {
 			fr = new FileReader(new File("res/models/" + filename));
 		} catch (FileNotFoundException e) {
-			ErrorHandle.handle(e, "File " + filename + " was not found in the res/models directory.", false);
+			ErrorHandler.handle(e, "File " + filename + " was not found in the res/models directory.", false);
 		}
 
 		BufferedReader reader = new BufferedReader(fr);
@@ -295,7 +295,7 @@ public class JavaFileLoader implements LoaderType {
 	}
 
 	@Override
-	public Scene loadScene(String filename) throws MalformedFileException {
+	public SceneNode loadScene(String filename) throws MalformedFileException {
 		return sceneLoader.loadScene(filename);
 	}
 

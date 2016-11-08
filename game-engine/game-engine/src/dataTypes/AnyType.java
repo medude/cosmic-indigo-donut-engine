@@ -15,11 +15,11 @@ public class AnyType<T> {
 		return data.getClass() == type.getClass();
 	}
 
-	public T data() {
+	public T getData() {
 		return data;
 	}
 
-	public void data(T newData) {
+	public void setData(T newData) {
 		data = newData;
 	}
 }

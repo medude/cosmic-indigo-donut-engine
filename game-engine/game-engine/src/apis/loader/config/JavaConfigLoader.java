@@ -1,7 +1,7 @@
 package apis.loader.config;
 
 import apis.console.Console;
-import apis.errorHandle.ErrorHandle;
+import apis.errorHandler.ErrorHandler;
 import apis.loader.Loader;
 import dataTypes.AnyType;
 import dataTypes.ConfigData;
@@ -17,7 +17,7 @@ public class JavaConfigLoader {
 		try {
 			configFile = Loader.loadFile(url);
 		} catch (Throwable e) {
-			ErrorHandle.handle(e);
+			ErrorHandler.handle(e);
 		}
 
 		String jsonText = "";

@@ -6,7 +6,7 @@ import dataTypes.Shader;
 import dataTypes.TextFile;
 import dataTypes.Texture;
 import exceptions.MalformedFileException;
-import scene.Scene;
+import scene.SceneNode;
 
 public interface LoaderType {
 	public TextFile loadFile(String filename) throws MalformedFileException;
@@ -17,7 +17,7 @@ public interface LoaderType {
 
 	public ModelData loadOBJ(String filename) throws MalformedFileException;
 
-	public Scene loadScene(String filename) throws MalformedFileException;
+	public SceneNode loadScene(String filename) throws MalformedFileException;
 
 	public void loadTextures() throws MalformedFileException;
 

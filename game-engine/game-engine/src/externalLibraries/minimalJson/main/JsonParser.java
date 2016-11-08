@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 
-import apis.errorHandle.ErrorHandle;
+import apis.errorHandler.ErrorHandler;
 
 /**
  * A streaming parser for JSON text. The parser reports all events to a given handler.
@@ -85,7 +85,7 @@ public class JsonParser {
 		try {
 			parse(new StringReader(string), bufferSize);
 		} catch (IOException e) {
-			ErrorHandle.handle(e);
+			ErrorHandler.handle(e);
 		}
 	}
 

@@ -5,7 +5,7 @@ import dataTypes.Shader;
 import dataTypes.TextFile;
 import dataTypes.Texture;
 import exceptions.MalformedFileException;
-import scene.Scene;
+import scene.SceneNode;
 
 public class NullFileLoader implements LoaderType {
 	@Override
@@ -28,7 +28,7 @@ public class NullFileLoader implements LoaderType {
 	}
 
 	@Override
-	public Scene loadScene(String filename) {
+	public SceneNode loadScene(String filename) {
 		return null;
 	}
 

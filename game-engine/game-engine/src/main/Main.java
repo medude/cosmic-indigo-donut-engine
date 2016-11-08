@@ -2,12 +2,12 @@ package main;
 
 import apis.ApiHandler;
 import apis.console.Console;
-import apis.errorHandle.ErrorHandle;
+import apis.errorHandler.ErrorHandler;
 import apis.loader.Loader;
 import apis.renderer.Renderer;
 import apis.windowManager.WindowManager;
 import dataTypes.Window;
-import scene.Node;
+import scene.SceneNode;
 
 /**
  * This class contains the only application entry point, and the only other method, run, contains the entirety of the
@@ -38,7 +38,7 @@ public class Main {
 
 			ApiHandler.init("config/config.json"); // Init all APIs
 
-			Window window = WindowManager.create((String) Loader.getconfigData().data.get("windowTitle").data()); // Create
+			Window window = WindowManager.create((String) Loader.getconfigData().data.get("windowTitle").getData()); // Create
 			// window
 			Console.log("APIs inited and window created succsessfully");
 
@@ -63,7 +63,7 @@ public class Main {
 			// Setup scene graphs           //
 			//////////////////////////////////
 
-			Node scene = Loader.loadScene("test.json");
+			SceneNode scene = Loader.loadScene("test.json");
 
 			// Add the scene to the renderer
 			Renderer.add(scene);
@@ -96,7 +96,7 @@ public class Main {
 			}
 
 		} catch (Throwable e) {
-			ErrorHandle.handle(e); // Handle any errors
+			ErrorHandler.handle(e); // Handle any errors
 
 		} finally {
 			Console.log("About to cleanup, game closing");

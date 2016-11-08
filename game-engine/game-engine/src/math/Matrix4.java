@@ -6,7 +6,7 @@ public class Matrix4 {
 
 	public double[][] m = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
 
-	public Vector3 position = new Vector3(0);
+	public Vector3 position = new Vector3();
 
 	public void translate(Vector3 vec) {
 		this.m[3][0] += this.m[0][0] * vec.x + this.m[1][0] * vec.y + this.m[2][0] * vec.z;

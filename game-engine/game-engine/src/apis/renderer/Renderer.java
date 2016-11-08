@@ -1,7 +1,7 @@
 package apis.renderer;
 
 import apis.ApiHandler;
-import scene.Scene;
+import scene.SceneNode;
 
 public class Renderer {
 	private static RendererType rendererObject = ApiHandler.getRenderer();
@@ -10,7 +10,7 @@ public class Renderer {
 		rendererObject.init();
 	}
 
-	public static void add(Scene scene) {
+	public static void add(SceneNode scene) {
 		rendererObject.add(scene);
 	}
 
