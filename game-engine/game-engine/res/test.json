@@ -1,15 +1,24 @@
 {
 	"name":"Test",
-	"type":"scene",
 	
-	"componentCount":0,
-	"components":[],
+	"componentCount":1,
+	"components":[
+		{
+		"type":"TransformComponent",
+		"positionX":0,
+		"positionY":0,
+		"positionZ":0,
+		"rotX":0,
+		"rotY":0,
+		"rotZ":0,
+		"scale":1
+		}
+	],
 	
 	"childCount":1,
 	"childNumber":0,
 	"children":[
 		{
-		"type":"area",
 		
 		"componentCount":1,
 		"components":[
@@ -24,12 +33,10 @@
 			"scale":1
 			}
 		],
-				
-		"childCount":1,
+		
 		"childNumber":0,
 		"children":[
 			{
-			"type":"group",
 			
 			"componentCount":1,
 			"components":[
@@ -45,12 +52,9 @@
 				}
 			],
 			
-			"childCount":1,
 			"childNumber":0,
-			
 			"children":[
-				{			
-				"type":"thing",
+				{
 				
 				"componentCount":5,
 				"components":[

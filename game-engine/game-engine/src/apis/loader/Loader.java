@@ -30,7 +30,7 @@ public class Loader {
 	}
 
 	public static Scene loadScene(String filename) throws MalformedFileException {
-		return loaderObject.loadScene(filename);
+		return new Scene(loaderObject.loadScene(filename));
 	}
 
 	public static void loadTextures() throws MalformedFileException {

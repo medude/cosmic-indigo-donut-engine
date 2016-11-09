@@ -3,9 +3,9 @@ package apis;
 import apis.console.ConsoleType;
 import apis.console.JavaConsole;
 import apis.console.NullConsole;
-import apis.errorHandle.ErrorHandleType;
-import apis.errorHandle.JavaErrorHandler;
-import apis.errorHandle.NullErrorHandler;
+import apis.errorHandler.ErrorHandlerType;
+import apis.errorHandler.JavaErrorHandler;
+import apis.errorHandler.NullErrorHandler;
 import apis.loader.JavaFileLoader;
 import apis.loader.Loader;
 import apis.loader.LoaderType;
@@ -59,9 +59,9 @@ public class ApiHandler {
 	//////////////////////////////////
 	// Error Handlers //
 	//////////////////////////////////
-	private static ErrorHandleType[] errorHandlers = new ErrorHandleType[2];
+	private static ErrorHandlerType[] errorHandlers = new ErrorHandlerType[2];
 
-	public static ErrorHandleType getErrorHandler() {
+	public static ErrorHandlerType getErrorHandler() {
 		return errorHandlers[0];
 	}
 

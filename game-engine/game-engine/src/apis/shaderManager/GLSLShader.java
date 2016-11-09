@@ -11,7 +11,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
-import apis.errorHandle.ErrorHandle;
+import apis.errorHandler.ErrorHandler;
 import dataTypes.Shader;
 import math.Matrix4;
 
@@ -96,7 +96,7 @@ public class GLSLShader implements ShaderType {
 			reader.close();
 
 		} catch (IOException e) {
-			ErrorHandle.handle(e);
+			ErrorHandler.handle(e);
 		}
 
 		int shader = GL20.glCreateShader(type);
@@ -104,7 +104,7 @@ public class GLSLShader implements ShaderType {
 		GL20.glCompileShader(shader);
 
 		if (GL20.glGetShaderi(shader, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
-			ErrorHandle.handle(GL20.glGetShaderInfoLog(shader));
+			ErrorHandler.handle(GL20.glGetShaderInfoLog(shader));
 		}
 
 		shaders.add(shader);

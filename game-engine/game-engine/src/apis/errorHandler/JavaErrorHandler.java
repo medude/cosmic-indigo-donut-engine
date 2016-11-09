@@ -1,11 +1,11 @@
-package apis.errorHandle;
+package apis.errorHandler;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import apis.console.Console;
 
-public class JavaErrorHandler implements ErrorHandleType {
+public class JavaErrorHandler implements ErrorHandlerType {
 	@Override
 	public void handle(Throwable throwable, String message, boolean doShowError) {
 		StringWriter errorS = new StringWriter();
